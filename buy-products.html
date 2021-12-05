@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+  <title>
+    Buy Products
+  </title>
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <!-- Nucleo Icons -->
+  <link href="./assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <link href="./assets/css/font-awesome.css" rel="stylesheet" />
+  <link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link href="./assets/css/argon-design-system.css?v=1.2.2" rel="stylesheet" />
+</head>
+
+<body class="index-page">
+  <!-- Navbar -->
+  <nav id="navbar-main" class="navbar navbar-main navbar-expand-lg bg-white navbar-light position-sticky top-0 shadow py-2">
+    <div class="container">
+      <a class="navbar-brand mr-lg-5" href="./index.html">
+        <img src="./assets/logo-300x167.png">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse" id="navbar_global">
+        <div class="navbar-collapse-header">
+          <div class="row">
+            <div class="col-6 collapse-brand">
+              <a href="./index.html">
+                <img src="./assets/logo-300x167.png">
+              </a>
+            </div>
+            <div class="col-6 collapse-close">
+              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" href="./checkout.html">
+              <i class="fas fa-shopping-cart fa-lg"></i>
+              <span class="nav-link-inner--text">Checkout</span>
+            </a>
+          </li>
+          <br>
+          <li class="nav-item dropdown">
+            <a href="#" class="nav-link" data-toggle="dropdown" href="#" role="button">
+              <i class="fas fa-user fa-lg"></i>
+              <span class="nav-link-inner--text">Profil</span>
+            </a>
+            <div class="dropdown-menu">
+              <a href="./profile.html" class="dropdown-item">Akun Saya</a>
+              <a href="./my-purchases.html" class="dropdown-item">Pesanan Saya</a>
+              <a href="./index.html" class="dropdown-item">Keluar</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- End Navbar -->
+<!-- Content -->
+<div class="section">
+  <div class="container">
+    <div class="container-1">
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <span class="alert-inner--icon"><i class="fas fa-info"></i></span>
+        <span class="alert-inner--text"><strong>Info!</strong> Silahkan pilih produk yang anda inginkan dengan klik form dibawah ini</span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+    </div>
+  <div class="card">
+    <div class="card-body bg-pink" style="color: white;">
+      <label for="pilih-produk">Pesan Produk</label>
+      <select class="form-control" id="product">
+        <option selected>Pilih produk yang anda inginkan</option>
+        <option value="1">Cleanser Whitening</option>
+        <option value="2">Handbody UV Protection SPF 50</option>
+        <option value="3">Lip Care</option>
+        <option value="4">Lip Treatment</option>
+        <option value="5">Loose Powder</option>
+        <option value="6">Moizturizer Whitening – Krim Pagi MW</option>
+        <option value="7">Stretch Mark Cream</option>
+        <option value="8">Suncare UV Protection SPF 50 Gold</option>
+        <option value="9">Sunscreen Normal Skin</option>
+        <option value="10">White + Powder</option>
+        <option value="11">Whitening Daily Glow Serum</option>
+      </select>
+    </div>
+  </div>
+  <br>
+  <div class="container">
+    <div class="row align-items-center bg-secondary">
+      <div class="col-sm-6">
+        <h5>Loose Powder</h5>
+      </div>
+      <div class="col-4 col-md-1">
+        <select class="form-control-sm" id="qty1">
+          <option selected>1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+        </select>
+      </div>
+      <div class="col-6 col-md-4">
+        <h5 style="text-align: right;">Rp. XXXXXXX</h5>
+      </div>
+      <div class="col-1 col-md-1">
+        <div style="text-align: right;">
+        <i class="fa fa-trash"></i>
+      </div>
+      </div>
+    </div>
+    <br>
+    <div class="row align-items-center bg-secondary">
+      <div class="col-sm-6">
+        <h5>Whitening Daily Glow Serum</h5>
+      </div>
+      <div class="col-4 col-md-1">
+        <select class="form-control-sm" id="qty1">
+          <option selected>1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+        </select>
+      </div>
+      <div class="col-6 col-md-4">
+        <h5 style="text-align: right;">Rp. XXXXXXX</h5>
+      </div>
+      <div class="col-1 col-md-1">
+        <div style="text-align: right;">
+        <i class="fa fa-trash"></i>
+      </div>
+      </div>
+    </div>
+    <br>
+    <div class="row align-items-center bg-secondary">
+      <div class="col-sm-6">
+        <h5>Moizturizer Whitening – Krim Pagi MW</h5>
+      </div>
+      <div class="col-4 col-md-1">
+        <select class="form-control-sm" id="qty1">
+          <option selected>1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+        </select>
+      </div>
+      <div class="col-6 col-md-4">
+        <h5 style="text-align: right;">Rp. XXXXXXX</h5>
+      </div>
+      <div class="col-1 col-md-1">
+        <div style="text-align: right;">
+        <i class="fa fa-trash"></i>
+      </div>
+      </div>
+    </div>
+    <br>
+    <div class="row align-items-center bg-secondary">
+      <div class="col-sm-6">
+        <h5>Suncare UV Protection SPF 50 Gold</h5>
+      </div>
+      <div class="col-4 col-md-1">
+        <select class="form-control-sm" id="qty1">
+          <option selected>1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+        </select>
+      </div>
+      <div class="col-6 col-md-4">
+        <h5 style="text-align: right;">Rp. XXXXXXX</h5>
+      </div>
+      <div class="col-1 col-md-1">
+        <div style="text-align: right;">
+        <i class="fa fa-trash"></i>
+      </div>
+      </div>
+    </div>
+    <br>
+    <div style="text-align: right;"><a href="./checkout.html" button type="button" class="btn btn-outline-danger btn-round">Checkout</a></div>  
+    <hr>
+    <h6 style="text-align: center;">Produk yang mungkin anda sukai</h6>
+    <br>
+    <!-- Produk Andalan-->
+    <div class="row">
+      <div class="col-sm-3 col-6">
+        <img src="./assets/img/products/produk-pilihan-1.jpg" alt="Rounded image" class="img-fluid rounded" style="width: 150px;">
+        <br>
+        <small class="d-block text-uppercase font-weight-bold mb-4">Produk Alt 1
+        <br>
+        Rp. xxxxx
+        </small>
+      </div>
+      <div class="col-sm-3 col-6">
+        <img src="./assets/img/products/produk-pilihan-1.jpg" alt="Rounded image" class="img-fluid rounded" style="width: 150px;">
+        <br>
+        <small class="d-block text-uppercase font-weight-bold mb-4">Produk Alt 2
+        <br>
+        Rp. xxxxx
+        </small>
+      </div>
+      <div class="col-sm-3 col-6">
+        <img src="./assets/img/products/produk-pilihan-1.jpg" alt="Rounded image" class="img-fluid rounded" style="width: 150px;">
+        <br>
+        <small class="d-block text-uppercase font-weight-bold mb-4">Produk Alt 3
+        <br>
+        Rp. xxxxx
+        </small>
+      </div>
+      <div class="col-sm-3 col-6">
+        <img src="./assets/img/products/produk-pilihan-1.jpg" alt="Rounded image" class="img-fluid rounded" style="width: 150px;">
+        <br>
+        <small class="d-block text-uppercase font-weight-bold mb-4">Produk Alt 4
+        <br>
+        Rp. xxxxx
+        </small>
+      </div>
+    </div>
+  </div>
+</div>
+</div>  
+<!-- End Content-->
+<!-- Footer-->
+  <footer class="footer">
+    <div class="container">
+      <div class="row row-grid align-items-center my-md">
+        <div class="col-lg-6">
+          <h3 class="text-primary font-weight-light mb-2">Thank you for supporting us!</h3>
+          <h4 class="mb-0 font-weight-light">Let's get in touch on any of these platforms.</h4>
+        </div>
+        <div class="col-lg-6 text-lg-center btn-wrapper">
+          <button target="_blank" href="#" rel="nofollow" class="btn btn-icon-only btn-twitter rounded-circle" data-toggle="tooltip" data-original-title="Follow us">
+            <span class="btn-inner--icon"><i class="fa fa-instagram"></i></span>
+          </button>
+          <button target="_blank" href="#" rel="nofollow" class="btn-icon-only rounded-circle btn btn-facebook" data-toggle="tooltip" data-original-title="Like us">
+            <span class="btn-inner--icon"><i class="fab fa-facebook"></i></span>
+          </button>
+        </div>
+      </div>
+      <hr>
+      <div class="row align-items-center justify-content-md-between">
+        <div class="col-md-6">
+          <div class="copyright">
+            &copy; 2021 <a href="" target="_blank">Reta Beauty Clinic</a>.
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- End Footer-->
+  </div>
+  <!--   Core JS Files   -->
+  <script src="./assets/js/core/jquery.min.js" type="text/javascript"></script>
+  <script src="./assets/js/core/popper.min.js" type="text/javascript"></script>
+  <script src="./assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+  <script src="./assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+  <script src="./assets/js/plugins/bootstrap-switch.js"></script>
+  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+  <script src="./assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+  <script src="./assets/js/plugins/moment.min.js"></script>
+  <script src="./assets/js/plugins/datetimepicker.js" type="text/javascript"></script>
+  <script src="./assets/js/plugins/bootstrap-datepicker.min.js"></script>
+  <!-- Control Center for Argon UI Kit: parallax effects, scripts for the example pages etc -->
+  <!--  Google Maps Plugin    -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+  <script src="./assets/js/argon-design-system.min.js?v=1.2.2" type="text/javascript"></script>
+  <script>
+    function scrollToDownload() {
+
+      if ($('.section-download').length != 0) {
+        $("html, body").animate({
+          scrollTop: $('.section-download').offset().top
+        }, 1000);
+      }
+    }
+  </script>
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS &&
+      TrackJS.install({
+        token: "ee6fab19c5a04ac1a32a645abde4613a",
+        application: "argon-design-system-pro"
+      });
+  </script>
+</body>
+
+</html>

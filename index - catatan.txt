@@ -1,0 +1,11 @@
+Catatan halaman index
+
+- tampilan produk nantinya meniru seperti di link ini: https://erha.co.id/crm/klinik/CL0001
+  produk hanya tampil dalam bentuk opsi pada dropdown, dan bila member memilih option pada form, 
+  makan akan muncul otomatis pada row produk di bawahnya beserta qty nya.
+- produk yang tertera hanya produk yang pernah dibeli sebelumnya oleh member, + produk general
+- ada 4 slot produk unggulan di bawah tombol checkout dan disertai gambar yang nantinya bisa
+  di isi oleh admin melalui dashboard. ketika di klik maka akan keluar popup mengenai detail produk
+  unggulan dan ada 2 tombol: tombol kembali, dan tombol beli (nantinya otomatis nambah row kalau 
+  tombol beli di klik sama seperti produk yang di menu dropdown
+
