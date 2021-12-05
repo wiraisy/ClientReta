@@ -76,53 +76,60 @@
   <div class="container">
     <div class="alert alert-success alert-dismissible fade show" role="alert">
       <span class="alert-inner--icon"><i class="fas fa-info"></i></span>
-      <span class="alert-inner--text"><strong>Info!</strong> Click the button below to edit Delivery Adress</span>
+      <span class="alert-inner--text"><strong>Info!</strong> Klik tombol edit dibawah ini untuk merubah alamat pengiriman</span>
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">×</span>
       </button>
     </div>
     <div class="card">
       <div class="card-body">
-        <div class = "text-center">
-        <h6>Alamat Pengiriman</h6>
-        <button type="button" class="btn btn-outline-danger btn-round btn-icon" data-toggle="modal" data-target="#modal-form">
-          <span class="btn-inner--icon">
-          <i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>
-          </span>
-          Edit Alamat Pengiriman</button>
-      </div>
-    </div>
-      <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-          <div class="modal-content">
-            <div class="modal-body p-0">
-                <div class="card-header bg-white pb-5">
-                  <form>
-                    <div class="col-md-12"><label class="labels">Nama Penerima</label><input type="text" class="form-control" required="true" placeholder="name" value=""></div>
-                    <div class="col-md-12"><label class="labels">Nomer Ponsel</label><input type="text" class="form-control" required="true" placeholder="mobile number" value=""></div>
-                    <div class="col-md-12"><label class="labels">Provinsi</label><input type="text" class="form-control" required="true" placeholder="provinsi" value=""></div>
-                    <div class="col-md-12"><label class="labels">Kabupaten</label><input type="text" class="form-control" required="true" placeholder="kabupaten" value=""></div>
-                    <div class="col-md-12"><label class="labels">Kecamatan</label><input type="text" class="form-control" required="true" placeholder="kecamatan" value=""></div>
-                    <div class="col-md-12"><label class="labels">Alamat</label><input type="text" class="form-control" required="true" placeholder="alamat" value=""></div>
-                    <div class="col-md-12"><label class="labels">Kode Pos</label><input type="text" class="form-control" required="true" placeholder="kode pos" value=""></div>
-                    <div class="col-md-12"><label class="labels">Catatan Tambahan</label><input type="text" class="form-control" required="true" placeholder="catatan tambahan" value=""></div>
-                    <br>
-                    <!-- Checkbox -->
-                    <div class="custom-control custom-checkbox mb-3">
-                      <input class="custom-control-input" id="customCheck2" type="checkbox" checked="">
-                      <label class="custom-control-label" for="customCheck2">
-                        <span>Simpan untuk transaksi selanjutnya</span>
-                      </label>
-                    </div>
-                  </form>
-                  <div class="text-center">
-                    <button type="button" class="btn btn-secondary my-4">Batal</button><button type="button" class="btn btn-primary my-4">Simpan</button>
-                  </div>
-              </div>
+        <div>
+          <div class="row">
+            <div class="col-8">Alamat Pengiriman:
+              <br>
+              Arya Stark, 085777666555, Jl. Masjid No. 1 Kanding, Somagede, Kabupaten Banyumas
+            </div>
+            <div class="col-4" style="text-align: center;">
+              <button type="button" class="btn btn-outline-danger btn-round btn-icon" data-toggle="modal" data-target="#modal-form">
+                <span class="btn-inner--icon">
+                <i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>
+                </span>
+                Edit</button>
             </div>
           </div>
-        </div>
-      </div>
+            <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true" style="display: none;">
+              <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                  <div class="modal-body p-0">
+                      <div class="card-header bg-white pb-5">
+                        <form>
+                          <div class="col-md-12"><label class="labels">Nama Penerima</label><input type="text" class="form-control" required="true" placeholder="name" value=""></div>
+                          <div class="col-md-12"><label class="labels">Nomer Ponsel</label><input type="text" class="form-control" required="true" placeholder="mobile number" value=""></div>
+                          <div class="col-md-12"><label class="labels">Provinsi</label><input type="text" class="form-control" required="true" placeholder="provinsi" value=""></div>
+                          <div class="col-md-12"><label class="labels">Kabupaten</label><input type="text" class="form-control" required="true" placeholder="kabupaten" value=""></div>
+                          <div class="col-md-12"><label class="labels">Kecamatan</label><input type="text" class="form-control" required="true" placeholder="kecamatan" value=""></div>
+                          <div class="col-md-12"><label class="labels">Alamat</label><input type="text" class="form-control" required="true" placeholder="alamat" value=""></div>
+                          <div class="col-md-12"><label class="labels">Kode Pos</label><input type="text" class="form-control" required="true" placeholder="kode pos" value=""></div>
+                          <div class="col-md-12"><label class="labels">Catatan Tambahan</label><input type="text" class="form-control" required="true" placeholder="catatan tambahan" value=""></div>
+                          <br>
+                          <!-- Checkbox -->
+                          <div class="custom-control custom-checkbox mb-3">
+                            <input class="custom-control-input" id="customCheck2" type="checkbox" checked="">
+                            <label class="custom-control-label" for="customCheck2">
+                              <span>Simpan untuk transaksi selanjutnya</span>
+                            </label>
+                          </div>
+                        </form>
+                        <div class="text-center">
+                          <button type="button" class="btn btn-secondary my-4">Batal</button><button type="button" class="btn btn-primary my-4">Simpan</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
     </div>
     <br>
     <div class="container">
@@ -274,6 +281,7 @@
         </div>
       </div>
     </div>
+    <div style="text-align: center;"><h5>Rincian Biaya</h5></div>
       <table class="table table-borderless">
         <thead>
           <tr>
@@ -283,23 +291,20 @@
         </thead>
         <tbody>
           <tr>
-            <td><p class="text-right">Product Subtotal</p></td>
+            <td><p class="text-right">Subtotal Produk</p></td>
             <td>Rp. XXXXXX</td>
           </tr>
           <tr>
-            <td><p class="text-right">Shipping Subtotal</p></td>
+            <td><p class="text-right">Biaya Pengiriman</p></td>
             <td>Rp. XXXXXX</td>
           </tr>
-          <tr>
-            <td><p class="text-right">Handling Fee</p></td>
-            <td>Rp. XXXXXX</td>
-          </tr>
+
         </tbody>
       </table>
       <nav class="navbar fixed-bottom navbar-light bg-white">
         <div class="container">
           <h4>Rp. XXXXXX</h4>
-          <a href="./payment.html"button type="button" class="btn btn-warning btn-round">Place Order</a>
+          <a href="./payment.html"button type="button" class="btn btn-warning btn-round">Lanjut Bayar</a>
         </div>
       </nav>
     </div> 
