@@ -56,7 +56,7 @@
                   <br>
                   <a href="<?= site_url('login') ?>" button class="btn btn-danger btn-block active " type="button">MEMBER</a>
                   <br>
-                  <a href="<?= base_url() ?>AdminReta" button class="btn btn-danger btn-block active " type="button">ADMIN</a>
+                  <a href="<?= base_url() ?>admin" button class="btn btn-danger btn-block active " type="button">ADMIN</a>
                 </div>
               </div>
             </div>
