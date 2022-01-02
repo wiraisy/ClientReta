@@ -16,27 +16,31 @@
             </div>
         <div class="card">
             <div class="card-body bg-gradient-pink" style="color: white;">
+                <label for="pilih-produk">Pesan Produk Anda Sebelumnya</label>
                 <select class="form-control" id="selectPesananSebelum">
                     <option selected disabled>Pilih produk yang anda inginkan</option>
-                    <option value="option1">Produk A</option>
+                    <option value="optionSebelum1">Produk A</option>
+                    <option value="optionSebelum2">Produk B</option>
                 </select>
             </div>
         </div>  
-        <div class="card">
+        <div class="card mt-2">
             <div class="card-body bg-gradient-pink" style="color: white;">
                 <label for="pilih-produk">Pesan Produk Umum</label>
-                <select class="form-control" id="product">
+                <select class="form-control" id="selectPesananUmum">
                     <option selected disabled>Pilih produk yang anda inginkan</option>
-                    <option value="1">Cleanser Whitening</option>
+                    <option value="optionUmum1">Cleanser Whitening</option>
+                    <option value="optionUmum2">Cleanser Blueing</option>
                 </select>
             </div>
         </div> 
-        <div class="card">
+        <div class="card mt-2">
             <div class="card-body bg-gradient-pink" style="color: white;">
                 <label for="pilih-produk">Pesan Produk Andalan</label>
-                <select class="form-control" id="product">
+                <select class="form-control" id="selectPesananAndalan">
                     <option selected disabled>Pilih produk yang anda inginkan</option>
-                    <option value="1">Cleanser Whitening</option>
+                    <option value="optionAndalan1">Scarlet Johanson</option>
+                    <option value="optionAndalan2">Scarlet Witch</option>
                 </select>
             </div>
         </div>
@@ -45,46 +49,7 @@
             <!-- List Pesanan -->
             <form action="<?= base_url('checkout-product') ?>" enctype="multipart/form-data" method="POST">
                 <div class="list-pesanan">
-                    <div class="form-group" id="test1">
-                        <div class="row align-items-center bg-secondary mt-2">
-                            <div class="col-md-4">
-                                <h5>Loose Powder</h5>
-                                <input type="hidden" value="Loose Powder" name="nama_product[]"/>
-                            </div>
-                            <div class="col-md-2">
-                                <input type="number" class="form-control-sm text-center" />
-                            </div>
-                            <div class="col-md-3">
-                                <h5 style="text-align: right;">Rp. 250.000</h5>
-                                <input type="hidden" value="250000" name="harga_product[]"/>
-                            </div>
-                            <div class="col-md-3">
-                                <div style="text-align: right;">
-                                    <i id="" class="fa fa-trash btn-remove" ></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group" id="test2">
-                        <div class="row align-items-center bg-secondary mt-2">
-                            <div class="col-md-4">
-                                <h5>Loose Serum</h5>
-                                <input type="hidden" value="Loose Serum" name="nama_product[]"/>
-                            </div>
-                            <div class="col-md-2">
-                                <input type="number" class="form-control-sm text-center" />
-                            </div>
-                            <div class="col-md-3">
-                                <h5 style="text-align: right;">Rp. 450.000</h5>
-                                <input type="hidden" value="450000" name="harga_product[]"/>
-                            </div>
-                            <div class="col-md-3">
-                                <div style="text-align: right;">
-                                    <i id="" class="fa fa-trash btn-remove" ></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- List Pesanan -->
                 </div>
                 <br>
                 <br>
@@ -130,8 +95,7 @@
             </div>
             </div>
         </div>
-    </div> 
-
+    </div>
     
     <!-- Custom JS -->
     <script src="<?= base_url() ?>assets/js/custom/select-option-pesanan.js"></script>
