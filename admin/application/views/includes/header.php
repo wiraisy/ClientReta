@@ -23,6 +23,9 @@
   <!-- Chat CSS & Links -->
   <link rel="stylesheet" href="<?= base_url() ?>assets/css/chat.css" type="text/css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" />
+
+  
+  <script src="<?= base_url() ?>assets/js/core/jquery.min.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -57,15 +60,21 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= site_url('produklink') ?>">
+                    <a class="nav-link" href="<?= site_url('produk-link') ?>">
                     <i class="fa fa-link text-pink"></i>
                     <span class="nav-link-text">Produk Link</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= site_url('produkandalan') ?>">
+                    <a class="nav-link" href="<?= site_url('produk-andalan') ?>">
                     <i class="fa fa-star text-pink"></i>
                     <span class="nav-link-text">Produk Andalan</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= site_url('ordey-by-admin') ?>">
+                    <i class="fa fa-cart-plus text-pink"></i>
+                    <span class="nav-link-text">Order By Admin</span>
                     </a>
                 </li>
                 </ul>

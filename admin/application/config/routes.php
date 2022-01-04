@@ -56,11 +56,19 @@ $route['translate_uri_dashes'] = FALSE;
 // Pemesanan
 $route['pemesanan'] = 'pemesanan';
 
+// Order By Admin
+$route['ordey-by-admin'] = 'pemesanan/orderByAdmin';
+$route['checkout-product'] = 'pemesanan/checkout';
+
 // Chat
 $route['chat'] = 'chat';
 
 // Produk Link
-$route['produklink'] = 'produklink';
+$route['produk-link'] = 'produklink';
+
+// Produk Andalan
+$route['produk-andalan'] = 'produkandalan';
+
 
 // Auth
 $route['login'] = 'auth/login';

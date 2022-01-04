@@ -8,7 +8,17 @@ class Pemesanan extends CI_Controller {
 		$data['title'] = "Pemesanan";
 
 		$this->load->view('includes/header');
-		$this->load->view('pemesanan', $data);
+		$this->load->view('v_pemesanan', $data);
+		$this->load->view('includes/footer');
+	}
+
+	
+	public function orderByAdmin()
+	{
+		$data['title'] = "Pemesanan Oleh Admin";
+
+		$this->load->view('includes/header');
+		$this->load->view('v_orderbyadmin', $data);
 		$this->load->view('includes/footer');
 	}
 }

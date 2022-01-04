@@ -8,7 +8,7 @@ class Produkandalan extends CI_Controller {
 		$data['title'] = "Produk Andalan";
 
 		$this->load->view('includes/header');
-		$this->load->view('produkandalan', $data);
+		$this->load->view('v_produkandalan', $data);
 		$this->load->view('includes/footer');
 	}
 }

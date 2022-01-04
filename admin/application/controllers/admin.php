@@ -8,7 +8,7 @@ class Admin extends CI_Controller {
 		$data['title'] = "Data Admin";
 
 		$this->load->view('includes/header');
-		$this->load->view('admin', $data);
+		$this->load->view('v_admin', $data);
 		$this->load->view('includes/footer');
 	}
 }

@@ -8,7 +8,7 @@ class Produklink extends CI_Controller {
 		$data['title'] = "Produk Link";
 
 		$this->load->view('includes/header');
-		$this->load->view('produklink', $data);
+		$this->load->view('v_produklink', $data);
 		$this->load->view('includes/footer');
 	}
 }

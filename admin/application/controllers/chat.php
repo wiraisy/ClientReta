@@ -8,7 +8,7 @@ class Chat extends CI_Controller {
 		$data['title'] = "Chat";
 
 		$this->load->view('includes/header');
-		$this->load->view('chat', $data);
+		$this->load->view('v_chat', $data);
 		$this->load->view('includes/footer');
 	}
 }
