@@ -22,6 +22,7 @@
                         Edit</button>
                     </div>
                 </div>
+                <!-- Modal Edit Alamat -->
                 <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true" style="display: none;">
                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content">
@@ -46,7 +47,7 @@
                                         </div>
                                     </form>
                                     <div class="text-center">
-                                        <button type="button" class="btn btn-secondary my-4">Batal</button><button type="button" class="btn btn-primary my-4">Simpan</button>
+                                        <button type="button" class="btn btn-secondary my-4" data-dismiss="modal">Batal</button><button type="button" class="btn btn-primary my-4">Simpan</button>
                                     </div>
                                 </div>
                             </div>

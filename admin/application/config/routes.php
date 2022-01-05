@@ -58,7 +58,9 @@ $route['pemesanan'] = 'pemesanan';
 
 // Order By Admin
 $route['ordey-by-admin'] = 'pemesanan/orderByAdmin';
-$route['checkout-product'] = 'pemesanan/checkout';
+$route['checkout-by-admin'] = 'pemesanan/checkout';
+$route['payment-by-admin'] = 'pemesanan/payment';
+$route['payment-expired'] = 'pemesanan/expired';
 
 // Chat
 $route['chat'] = 'chat';

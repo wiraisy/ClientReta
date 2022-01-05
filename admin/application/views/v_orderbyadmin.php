@@ -29,6 +29,7 @@
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
+                    <form action="<?= base_url('checkout-by-admin') ?>" enctype="multipart/form-data" method="POST">
                         <select class="form-control" id="member">
                             <option selected disabled>Pilih Member</option>
                             <option value="1">Arya Stark</option>
@@ -73,6 +74,7 @@
                         <br>
                         <br>
                         <div style="text-align: right;"><button type="submit" class="btn btn-outline-danger btn-round">Checkout</button></div>  
+                    </form>
                 </div>
             </div>
         </div>
