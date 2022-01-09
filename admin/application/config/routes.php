@@ -70,7 +70,7 @@ $route['produk-link'] = 'produklink';
 
 // Produk Andalan
 $route['produk-andalan'] = 'produkandalan';
-
+$route['update-produk/(:num)'] = 'produkandalan/update_produk/$1';
 
 // Auth
 $route['login'] = 'auth/login';

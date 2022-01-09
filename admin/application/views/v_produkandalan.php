@@ -30,102 +30,41 @@
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <!-- Produk Andalan 1-->
-                    <div class="row">
-                        <div class="col-sm-3 col-3">
-                            <img src="<?= base_url() ?>assets/img/products/produk-pilihan-1.jpg" alt="Rounded image" class="img-fluid rounded" style="width: auto;">
-                            <br>
-                            <small class="d-block text-uppercase font-weight-bold mb-4">Produk Alt 1
-                            <br>
-                            Rp. xxxxx
-                            </small>
-                        </div>
-                        <div class="col-sm-3 col-3">
-                            <label for="formFileLg" class="form-label">Status Produk Andalan 1</label>
-                            <label class="custom-toggle">
-                            <input type="checkbox" checked="">
-                            <span class="custom-toggle-slider rounded-circle"></span>
-                            </label>
-                            <br>
-                            <input class="form-control" id="formFileSm" type="file" />
-                            <br>
-                            <input type="text" placeholder="Nama Produk" class="form-control">
-                            <br>
-                            <input type="number" placeholder="Harga" class="form-control">
-                            <br>
-                            <button type="button" class="btn btn-warning">Update</button>
-                        </div>
-                        <div class="col-sm-3 col-3">
-                            <img src="<?= base_url() ?>assets/img/products/produk-pilihan-1.jpg" alt="Rounded image" class="img-fluid rounded" style="width: auto;">
-                            <br>
-                            <small class="d-block text-uppercase font-weight-bold mb-4">Produk Alt 2
-                            <br>
-                            Rp. xxxxx
-                            </small>
-                        </div>
-                        <div class="col-sm-3 col-3">
-                            <label for="formFileLg" class="form-label">Status Produk Andalan 2</label>
-                            <label class="custom-toggle">
-                            <input type="checkbox" checked="">
-                            <span class="custom-toggle-slider rounded-circle"></span>
-                            </label>
-                            <br>
-                            <input class="form-control" id="formFileSm" type="file" />
-                            <br>
-                            <input type="text" placeholder="Nama Produk" class="form-control">
-                            <br>
-                            <input type="number" placeholder="Harga" class="form-control">
-                            <br>
-                            <button type="button" class="btn btn-warning">Update</button>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-sm-3 col-3">
-                            <img src="<?= base_url() ?>assets/img/products/produk-pilihan-1.jpg" alt="Rounded image" class="img-fluid rounded" style="width: auto;">
-                            <br>
-                            <small class="d-block text-uppercase font-weight-bold mb-4">Produk Alt 3
-                            <br>
-                            Rp. xxxxx
-                            </small>
-                        </div>
-                        <div class="col-sm-3 col-3">
-                            <label for="formFileLg" class="form-label">Status Produk Andalan 3</label>
-                            <label class="custom-toggle">
-                            <input type="checkbox" checked="">
-                            <span class="custom-toggle-slider rounded-circle"></span>
-                            </label>
-                            <br>
-                            <input class="form-control" id="formFileSm" type="file" />
-                            <br>
-                            <input type="text" placeholder="Nama Produk" class="form-control">
-                            <br>
-                            <input type="number" placeholder="Harga" class="form-control">
-                            <br>
-                            <button type="button" class="btn btn-warning">Update</button>
-                        </div>
-                        <div class="col-sm-3 col-3">
-                            <img src="<?= base_url() ?>assets/img/products/produk-pilihan-1.jpg" alt="Rounded image" class="img-fluid rounded" style="width: auto;">
-                            <br>
-                            <small class="d-block text-uppercase font-weight-bold mb-4">Produk Alt 4
-                            <br>
-                            Rp. xxxxx
-                            </small>
-                        </div>
-                        <div class="col-sm-3 col-3">
-                            <label for="formFileLg" class="form-label">Status Produk Andalan 4</label>
-                            <label class="custom-toggle">
-                            <input type="checkbox">
-                            <span class="custom-toggle-slider rounded-circle"></span>
-                            </label>
-                            <br>
-                            <input class="form-control" id="formFileSm" type="file" />
-                            <br>
-                            <input type="text" placeholder="Nama Produk" class="form-control">
-                            <br>
-                            <input type="number" placeholder="Harga" class="form-control">
-                            <br>
-                            <button type="button" class="btn btn-warning">Update</button>
+                    <!-- Produk -->
+                    <div class="container">
+                        <div class="row">
+                            <?php 
+                                $i = 0;
+                                foreach($produk['content'] as $rows){ 
+                                    $i++;
+                                    ?>
+                                    <div class="col-md-6 row mt-4 py-4" style="border-bottom: 1px solid grey;">
+                                        <div class="col-md-6" >
+                                            <img src="<?= base_url() ?>assets/img/products/produk-pilihan-1.jpg" alt="Rounded image" class="img-fluid rounded" style="width: auto;">
+                                            <br>
+                                            <small class="d-block text-uppercase font-weight-bold mb-4"><?= $rows['namabarang'] ?>
+                                            <br>
+                                            Rp. <?= $rows['hargajual'] ?>
+                                            </small>
+                                        </div>
+                                        <div class="col-md-6" >
+                                            <form action="<?= base_url() ?>update-produk/<?= $rows['idproduk'] ?>" method="post" enctype="multipart/form-data">
+                                                <label for="formFileLg" class="form-label">Status Produk <?= $rows['namabarang'] ?></label>
+                                                <label class="custom-toggle">
+                                                    <input type="checkbox" checked="">
+                                                    <span class="custom-toggle-slider rounded-circle"></span>
+                                                </label>
+                                                <input class="form-control mt-1" id="formFileSm" type="file" />
+                                                <input type="text" placeholder="Nama Produk" class="form-control mt-1" name="namabarang" value="<?= $rows['namabarang'] ?>">
+                                                <input type="number" placeholder="Harga" class="form-control mt-1" name="hargajual" value="<?= $rows['hargajual'] ?>">
+                                                <button type="submit" class="btn btn-warning mt-1">Update</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                <?php if($i % 2 == 0): ?>
+                                    <br>
+                                <?php endif; ?>
+                                <?php } ?>
                         </div>
                     </div>
                 </div>
