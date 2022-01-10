@@ -24,7 +24,10 @@
 <script src="<?= base_url() ?>assets/vendor/chart.js/dist/Chart.extension.js"></script>
 <!-- Argon JS -->
 <script src="<?= base_url() ?>assets/js/argon.js?v=1.2.0"></script>
-
+<!-- Toast -->
+<script src="<?= base_url() ?>assets/js/toastr/toastr.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <!-- Active Menu on SideNav -->
 <script>
     $(function(){

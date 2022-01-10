@@ -24,8 +24,71 @@
   <link rel="stylesheet" href="<?= base_url() ?>assets/css/chat.css" type="text/css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" />
 
-  
+  <!-- Toast -->
+  <link rel="stylesheet" href="<?= base_url() ?>assets/js/toastr/toastr.min.css">
+
   <script src="<?= base_url() ?>assets/js/core/jquery.min.js" type="text/javascript"></script>
+
+  <style>
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888; 
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #444; 
+    }
+  </style>
+
+  <?php $error = $this->session->flashdata('errorMsg');
+    if ($error) { ?>
+      <script type="text/javascript">
+    //   console.log($error);
+        $(function() {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+          });
+
+          Toast.fire({
+            icon: 'error',
+            title: '&nbsp;<?php echo $error ?>'
+          })
+        });
+      </script>
+
+    <?php } ?>
+    <?php $success = $this->session->flashdata('successMsg');
+    if ($success) { ?>
+      <script type="text/javascript">
+        //   console.log($success);
+        $(function() {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+          });
+          Toast.fire({
+            icon: 'success',
+            title: '&nbsp;<?php echo $success ?>'
+          })
+          console.log('<?php echo $success ?>');
+        });
+      </script>
+    <?php } ?>
 </head>
 
 <body>

@@ -1,3 +1,11 @@
+<style>
+    .scrollable-content {
+        height: 600px;
+        overflow: scroll;
+        overflow-x: hidden;
+    }
+</style>    
+    
     <div class="header bg-pink pb-6">
         <div class="container-fluid">
             <div class="header-body">
@@ -31,7 +39,7 @@
                         </button>
                     </div>
                     <!-- Produk -->
-                    <div class="container">
+                    <div class="container scrollable-content">
                         <div class="row">
                             <?php 
                                 $i = 0;
@@ -49,14 +57,28 @@
                                         </div>
                                         <div class="col-md-6" >
                                             <form action="<?= base_url() ?>update-produk/<?= $rows['idproduk'] ?>" method="post" enctype="multipart/form-data">
-                                                <label for="formFileLg" class="form-label">Status Produk <?= $rows['namabarang'] ?></label>
+                                                <h3 class="mb-0">Status Produk :</h3>
+                                                <p class="mb-0"><?= $rows['namabarang'] ?></p>
                                                 <label class="custom-toggle">
                                                     <input type="checkbox" checked="">
                                                     <span class="custom-toggle-slider rounded-circle"></span>
                                                 </label>
+                                                <!-- Temporary Hidden Fill -->
+                                                <input type="hidden" name="satuan" value="<?= $rows['satuan'] ?>">
+                                                <input type="hidden" name="hargacorporate" value="<?= $rows['hargacorporate'] ?>">
+                                                <input type="hidden" name="hargamember" value="<?= $rows['hargamember'] ?>">
+                                                <input type="hidden" name="hargapromo" value="<?= $rows['hargapromo'] ?>">
+                                                <input type="hidden" name="hargapromo1" value="<?= $rows['hargapromo1'] ?>">
+                                                <input type="hidden" name="hargapromo2" value="<?= $rows['hargapromo2'] ?>">
+                                                <input type="hidden" name="hargapromo3" value="<?= $rows['hargapromo3'] ?>">
+                                                <input type="hidden" name="hargapromo4" value="<?= $rows['hargapromo4'] ?>">
+                                                <input type="hidden" name="kodeid" value="<?= $rows['kodeid'] ?>">
+                                                <!-- Showed Fill -->
                                                 <input class="form-control mt-1" id="formFileSm" type="file" />
                                                 <input type="text" placeholder="Nama Produk" class="form-control mt-1" name="namabarang" value="<?= $rows['namabarang'] ?>">
+                                                <input type="hidden" name="namabarangdefault" value="<?= $rows['namabarang'] ?>">
                                                 <input type="number" placeholder="Harga" class="form-control mt-1" name="hargajual" value="<?= $rows['hargajual'] ?>">
+                                                <input type="hidden" name="hargajualdefault" value="<?= $rows['hargajual'] ?>">
                                                 <button type="submit" class="btn btn-warning mt-1">Update</button>
                                             </form>
                                         </div>
@@ -71,3 +93,4 @@
             </div>
         </div>
     </div>
+    

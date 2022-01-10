@@ -19,49 +19,80 @@ class Produkandalan extends MY_Controller {
 	}
 
 	public function update_produk($id_produk){
-		$url = 'http://202.157.184.70:8080/reta-api/Produk/UpdateProduk/'.$id_produk;
-        $method = 'GET';
-        $produk = $this->SendRequest($url, $method);
 
 		// Update Produk From API
+		$hargacorporate = (int)$this->input->post('hargacorporate', true);
+		$hargajual = (int)$this->input->post('hargajual', true);
+		$hargajualdefault = (int)$this->input->post('hargajualdefault', true);
+		$hargamember = (int)$this->input->post('hargamember', true);
+		$hargapromo = (int)$this->input->post('hargapromo', true);
+		$hargapromo1 = (int)$this->input->post('hargapromo1', true);
+		$hargapromo2 = (int)$this->input->post('hargapromo2', true);
+		$hargapromo3 = (int)$this->input->post('hargapromo3', true);
+		$hargapromo4 = (int)$this->input->post('hargapromo4', true);
+		$kodeid = $this->input->post('kodeid', true);
 		$namabarang = $this->input->post('namabarang', true);
-		$hargajual = $this->input->post('hargajual', true);
+		$namabarangdefault = $this->input->post('namabarangdefault', true);
+		$satuan = $this->input->post('satuan', true);
 
-		// $curl = curl_init();
+		// If Fill Empty
+		if (empty($namabarang)) {
+			$namabarang = $namabarangdefault;
+		}
+		if (empty($hargajual)) {
+			$hargajual = $hargajualdefault;
+		}
+		
+		$formData = array(
+			"hargacorporate"=> $hargacorporate,
+			"hargajual"=> $hargajual,
+			"hargamember"=> $hargamember,
+			"hargapromo"=> $hargapromo,
+			"hargapromo1"=> $hargapromo1,
+			"hargapromo2"=> $hargapromo2,
+			"hargapromo3"=> $hargapromo3,
+			"hargapromo4"=> $hargapromo4,
+			"kodeid"=> $kodeid,
+			"namabarang"=> $namabarang,
+			"satuan"=> $satuan
+		);
 
-        // curl_setopt_array($curl, array(
-        //     CURLOPT_URL => 'http://202.157.184.70:8080/reta-api/Produk/UpdateProduk/'.$id_produk,
-        //     CURLOPT_RETURNTRANSFER => true,
-        //     CURLOPT_ENCODING => '',
-        //     CURLOPT_MAXREDIRS => 10,
-        //     CURLOPT_TIMEOUT => 0,
-        //     CURLOPT_FOLLOWLOCATION => true,
-        //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        //     CURLOPT_CUSTOMREQUEST => 'PUT',
-        //     CURLOPT_POSTFIELDS => array(
-        //         idproduk: 3,
-		// 		kodeid: test,
-		// 		namabarang: Bedak Dewasa,
-		// 		satuan: pcs,
-		// 		hargajual: 10000,
-		// 		hargamember: 5000,
-		// 		hargapromo: 5000,
-		// 		hargacorporate: 5000,
-		// 		hargapromo1: 5000,
-		// 		hargapromo2: 5000,
-		// 		hargapromo3: 5000,
-		// 		hargapromo4: 5000
-        //     ),
-        //     CURLOPT_HTTPHEADER => array(
-        //         'Accept: application/json',
-        //         'Authorization: Bearer ' . $session
-        //     ),
-        // ));
+		$dataString = json_encode($formData);
 
-        // $response = curl_exec($curl);
-        // curl_close($curl);
-        // $response = json_decode($response, true);
+		$curl = curl_init();
 
-		redirect(base_url('produkandalan'));
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'http://202.157.184.70:8080/reta-api/Produk/UpdateProduk/'.$id_produk,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'PUT',
+            CURLOPT_POSTFIELDS => $dataString,
+            CURLOPT_HTTPHEADER => array(
+                'Accept: */*',
+				'Content-Type: application/json',
+				'Authorization: Basic YWtiYXI6d2lyYWlzeQ=='
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        $response = json_decode($response, true);
+
+		if (isset($response['status'])) {
+			$this->session->set_flashdata('errorMsg', 'Produk Gagal Diperbarui');
+			redirect('produkandalan');
+        } else {
+			$this->session->set_flashdata('successMsg', 'Produk Berhasil Diperbarui');
+			redirect('produkandalan');
+		}
+
+		
 	}
 }
+
+
