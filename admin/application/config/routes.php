@@ -68,9 +68,16 @@ $route['chat'] = 'chat';
 // Produk Link
 $route['produk-link'] = 'produklink';
 
+// Produk Umum
+$route['produk-umum'] = 'produkumum';
+$route['update-produk-umum/(:num)'] = 'produkumum/update_produk/$1';
+
 // Produk Andalan
 $route['produk-andalan'] = 'produkandalan';
-$route['update-produk/(:num)'] = 'produkandalan/update_produk/$1';
+$route['update-produk-andalan/(:num)'] = 'produkandalan/update_produk/$1';
+
+// Import Data
+$route['import-data'] = 'import';
 
 // Auth
 $route['login'] = 'auth/login';

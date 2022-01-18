@@ -24,9 +24,16 @@
   <link rel="stylesheet" href="<?= base_url() ?>assets/css/chat.css" type="text/css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" />
 
+  <!-- Select2 -->
+  <link rel="stylesheet" href="<?= base_url(); ?>/assets/js/select2/css/select2.min.css">
+
+  <!-- Select -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.0/css/bootstrap-select.css" rel="stylesheet"/>
+
   <!-- Toast -->
   <link rel="stylesheet" href="<?= base_url() ?>assets/js/toastr/toastr.min.css">
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <script src="<?= base_url() ?>assets/js/core/jquery.min.js" type="text/javascript"></script>
 
   <style>
@@ -85,7 +92,6 @@
             icon: 'success',
             title: '&nbsp;<?php echo $success ?>'
           })
-          console.log('<?php echo $success ?>');
         });
       </script>
     <?php } ?>
@@ -129,6 +135,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="<?= site_url('produk-umum') ?>">
+                    <i class="fas fa-boxes text-pink"></i>
+                    <span class="nav-link-text">Produk Umum</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="<?= site_url('produk-andalan') ?>">
                     <i class="fa fa-star text-pink"></i>
                     <span class="nav-link-text">Produk Andalan</span>
@@ -159,11 +171,16 @@
                 </ul>
                 <hr>
                 <div style="text-align: center;">
-                    <button type="button" class="btn btn-outline-danger">Sync Data</button>
+                    <button type="button" class="btn btn-outline-danger" onClick="reloadPage()">Sync Data</button>
+                    <script>
+                        function reloadPage(){
+                            window.location.reload();
+                        };
+                    </script>
                 </div>
                 <br>
                 <div style="text-align: center;">
-                    <button type="button" class="btn btn-outline-warning">Export Data</button>
+                    <a href="<?= site_url('import-data') ?>" class="btn btn-outline-warning">Import Data</a>
                 </div>
             </div>
         </div>

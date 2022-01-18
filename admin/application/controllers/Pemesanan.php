@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Pemesanan extends CI_Controller {
+class Pemesanan extends MY_Controller {
 
 	public function index()
 	{
@@ -15,7 +15,23 @@ class Pemesanan extends CI_Controller {
 	
 	public function orderByAdmin()
 	{
+		// Get Data From API
+		$url = 'http://202.157.184.70:8080/reta-api/PasienAPI/listfilterpasien';
+        $method = 'GET';
+        $datamember = $this->SendRequest($url, $method);
+
+		$url = 'http://202.157.184.70:8080/reta-api/Produk/getallprodukbykategori/UMUM';
+        $method = 'GET';
+        $produkumum = $this->SendRequest($url, $method);
+
+		$url = 'http://202.157.184.70:8080/reta-api/Produk/getallprodukbykategori/ANDALAN';
+        $method = 'GET';
+        $produkandalan = $this->SendRequest($url, $method);
+
 		$data['title'] = "Pemesanan Oleh Admin";
+		$data['produkumum'] = $produkumum;
+		$data['produkandalan'] = $produkandalan;
+		$data['datamember'] = $datamember;
 
 		$this->load->view('includes/header');
 		$this->load->view('v_orderbyadmin', $data);

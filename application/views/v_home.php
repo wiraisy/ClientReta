@@ -32,12 +32,12 @@
                     <label for="pilih-produk">Pesan Produk Umum</label>
                     <select class="form-control selectpicker" id="selectPesananUmum" data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;">
                         <option selected disabled>Pilih produk yang anda inginkan</option>
-                        <?php if(isset($produkumum['content'])){ ?>
-                            <?php foreach ($produkumum['content'] as $row_produkumum) { ?>
+                        <?php if(isset($produkumum)){ ?>
+                            <?php foreach ($produkumum as $row_produkumum) { ?>
                                 <option value="<?= $row_produkumum['idproduk'] ?>"><?= $row_produkumum['namabarang'] ?></option>
                             <?php } ?>
                         <?php }else{?>
-                                <option disabled>Data Produk Tidak Tersedia</option>
+                                <option disabled>Data Produk Umum Tidak Tersedia</option>
                         <?php } ?>
                     </select>
                 </div>
@@ -45,12 +45,25 @@
             <div class="card mt-2">
                 <div class="card-body bg-gradient-pink" style="color: white;">
                     <label for="pilih-produk">Pesan Produk Andalan</label>
-                    <select class="form-control" id="selectPesananAndalan" data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;">
-                        <option selected disabled>Fitur ini belum tersedia</option>
+                    <select class="form-control selectpicker" id="selectPesananAndalan" data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;">
+                        <option disabled>Pilih produk yang anda inginkan</option>
+                        <?php if(isset($produkandalan)){ ?>
+                            <?php foreach ($produkumum as $row_produkumum) { ?>
+                                <option value="<?= $row_produkumum['idproduk'] ?>"><?= $row_produkumum['namabarang'] ?></option>
+                            <?php } ?>
+                        <?php }else{?>
+                                <option disabled>Data Produk Andalan Tidak Tersedia</option>
+                        <?php } ?>
                     </select>
                 </div>
             </div>
             <br>
+            <!-- <select class="selectpicker">
+                <option>Mustard</option>
+                <option>Ketchup</option>
+                <option>Barbecue</option>
+            </select> -->
+
             <div class="container">
                 <!-- List Pesanan -->
                 <form action="<?= base_url('checkout-product') ?>" enctype="multipart/form-data" method="POST">
@@ -108,8 +121,28 @@
 
     <script>
         $(function () {
-            $('#selectPesananSebelum').selectpicker();
-            $('#selectPesananUmum').selectpicker();
-            $('#selectPesananAndalan').selectpicker();
+            // $('#selectPesananSebelum').selectpicker();
+            // $('#selectPesananUmum').selectpicker();
+            // $('#selectPesananAndalan').selectpicker();
+            $('select').selectpicker();
         });
     </script>
+
+    <script>
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        xhr.addEventListener("readystatechange", function() {
+        if(this.readyState === 4) {
+            console.log(this.responseText);
+        }
+        });
+
+        xhr.open("GET", "http://202.157.184.70:8080/reta-api/Produk/GetProdukbyId-nre/89");
+        xhr.setRequestHeader("Authorization", "Basic YWtiYXI6d2lyYWlzeQ==");
+
+        xhr.send();
+    </script>
+    
+    
+$('select').selectpicker();

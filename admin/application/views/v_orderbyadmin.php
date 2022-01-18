@@ -1,3 +1,13 @@
+<style>
+    .btn-remove:hover{
+        cursor: pointer;
+    }
+    .bootstrap-select button{
+        background: white!important;
+        text-transform: inherit!important;
+        font-weight: normal!important;
+    }
+</style>
 <div class="header bg-pink pb-6">
     <div class="container-fluid">
         <div class="header-body">
@@ -30,41 +40,52 @@
                         </button>
                     </div>
                     <form action="<?= base_url('checkout-by-admin') ?>" enctype="multipart/form-data" method="POST">
-                        <select class="form-control" id="member">
-                            <option selected disabled>Pilih Member</option>
-                            <option value="1">Arya Stark</option>
-                            <option value="2">Missandei</option>
-                            <option value="3">Sansa Stark</option>
-                            <option value="4">John Snow</option>
+                        <select class="form-control selectpicker" id="selectMember" data-live-search="true" >
+                            <option data-hidden="true">Pilih Member</option>
+                            <?php if(isset($datamember['content'])){ ?>
+                                <?php foreach ($datamember['content'] as $row_member) { ?>
+                                    <option value="<?= $row_member['id_pasien'] ?>"><?= $row_member['custid'] ?> - <?= $row_member['custnama'] ?> - <?= $row_member['gender1'] ?> - <?= $row_member['kota'] ?></option>
+                                <?php } ?>
+                            <?php }else{?>
+                                    <option disabled>Data Pasien Tidak Tersedia</option>
+                            <?php } ?>
                         </select>
                         <hr>
                         <div class="card">
                             <div class="card-body bg-gradient-pink" style="color: white;">
-                                <label for="pilih-produk">Pesan Produk Member Sebelumnya</label>
-                                <select class="form-control" id="selectPesananSebelum">
-                                    <option selected disabled>Pilih produk pilihan member sebelumnya</option>
-                                    <option value="optionSebelum1">Produk A</option>
-                                    <option value="optionSebelum2">Produk B</option>
+                                <label for="pilih-produk">Pesan Produk Anda Sebelumnya</label>
+                                <select class="form-control selectpicker" id="selectPesananSebelum" data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;">
+                                    <option selected disabled>Fitur ini belum tersedia</option>
                                 </select>
                             </div>
                         </div>  
                         <div class="card mt-2">
                             <div class="card-body bg-gradient-pink" style="color: white;">
                                 <label for="pilih-produk">Pesan Produk Umum</label>
-                                <select class="form-control" id="selectPesananUmum">
-                                    <option selected disabled>Pilih produk umum</option>
-                                    <option value="optionUmum1">Cleanser Whitening</option>
-                                    <option value="optionUmum2">Cleanser Blueing</option>
+                                <select class="form-control selectpicker" id="selectPesananUmum" data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;">
+                                    <option selected disabled>Pilih produk yang anda inginkan</option>
+                                    <?php if(isset($produkumum)){ ?>
+                                        <?php foreach ($produkumum as $row_produkumum) { ?>
+                                            <option value="<?= $row_produkumum['idproduk'] ?>"><?= $row_produkumum['namabarang'] ?></option>
+                                        <?php } ?>
+                                    <?php }else{?>
+                                            <option disabled>Data Produk Umum Tidak Tersedia</option>
+                                    <?php } ?>
                                 </select>
                             </div>
-                        </div> 
+                        </div>
                         <div class="card mt-2">
                             <div class="card-body bg-gradient-pink" style="color: white;">
                                 <label for="pilih-produk">Pesan Produk Andalan</label>
-                                <select class="form-control" id="selectPesananAndalan">
-                                    <option selected disabled>Pilih produk andalan</option>
-                                    <option value="optionAndalan1">Scarlet Johanson</option>
-                                    <option value="optionAndalan2">Scarlet Witch</option>
+                                <select class="form-control selectpicker" id="selectPesananAndalan" data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;">
+                                    <option selected disabled>Pilih produk yang anda inginkan</option>
+                                    <?php if(isset($produkandalan)){ ?>
+                                        <?php foreach ($produkumum as $row_produkumum) { ?>
+                                            <option value="<?= $row_produkumum['idproduk'] ?>"><?= $row_produkumum['namabarang'] ?></option>
+                                        <?php } ?>
+                                    <?php }else{?>
+                                            <option disabled>Data Produk Andalan Tidak Tersedia</option>
+                                    <?php } ?>
                                 </select>
                             </div>
                         </div>
@@ -83,3 +104,12 @@
     
     <!-- Custom JS -->
     <script src="<?= base_url() ?>assets/js/custom/select-option-pesanan.js"></script>
+    
+    <script>
+        $(function () {
+            $('#selectPesananSebelum').selectpicker();
+            $('#selectMember').selectpicker();
+            $('#selectPesananUmum').selectpicker();
+            $('#selectPesananAndalan').selectpicker();
+        });
+    </script>

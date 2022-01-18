@@ -6,7 +6,7 @@ class Produkandalan extends MY_Controller {
 	public function index()
 	{
 		// Get Data From API
-		$url = 'http://202.157.184.70:8080/reta-api/Produk/GetAllProdukbyFilterandPagination';
+		$url = 'http://202.157.184.70:8080/reta-api/Produk/getallprodukbykategori/ANDALAN';
         $method = 'GET';
         $produk = $this->SendRequest($url, $method);
 
@@ -31,6 +31,7 @@ class Produkandalan extends MY_Controller {
 		$hargapromo3 = (int)$this->input->post('hargapromo3', true);
 		$hargapromo4 = (int)$this->input->post('hargapromo4', true);
 		$kodeid = $this->input->post('kodeid', true);
+		$kategori = $this->input->post('kategori', true);
 		$namabarang = $this->input->post('namabarang', true);
 		$namabarangdefault = $this->input->post('namabarangdefault', true);
 		$satuan = $this->input->post('satuan', true);
@@ -52,13 +53,13 @@ class Produkandalan extends MY_Controller {
 			"hargapromo2"=> $hargapromo2,
 			"hargapromo3"=> $hargapromo3,
 			"hargapromo4"=> $hargapromo4,
+			"kategori"=> $kategori,
 			"kodeid"=> $kodeid,
 			"namabarang"=> $namabarang,
 			"satuan"=> $satuan
 		);
 
 		$dataString = json_encode($formData);
-
 		$curl = curl_init();
 
         curl_setopt_array($curl, array(
@@ -89,9 +90,39 @@ class Produkandalan extends MY_Controller {
         } else {
 			$this->session->set_flashdata('successMsg', 'Produk Berhasil Diperbarui');
 			redirect('produkandalan');
-		}
+		}	
+	}
 
-		
+	public function hapus($id){
+		$curl = curl_init();
+
+		curl_setopt_array($curl, array(
+		CURLOPT_URL => '202.157.184.70:8080/reta-api/Produk/DeleteProdukbyId/'.$id,
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => '',
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 0,
+		CURLOPT_FOLLOWLOCATION => true,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => 'DELETE',
+		CURLOPT_HTTPHEADER => array(
+			'Authorization: Basic YWtiYXI6d2lyYWlzeQ==',
+			'Cookie: JSESSIONID=FD38B83E815FFB9CF9679BEDB65BAF71'
+		),
+		));
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        $response = json_decode($response, true);
+
+		if (isset($response['status'])) {
+			$this->session->set_flashdata('errorMsg', 'Produk Gagal Dihapus');
+			redirect('produkandalan');
+        } else {
+			$this->session->set_flashdata('successMsg', 'Produk Berhasil Dihapus');
+			redirect('produkandalan');
+		}	
 	}
 }
 
