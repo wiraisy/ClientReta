@@ -22,14 +22,17 @@
   <!-- Font Awesome Icons -->
   <link href="<?= base_url() ?>assets/css/font-awesome.css" rel="stylesheet" />
 
+  <!-- Bootstrap CSS -->  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
   <!-- Argon CSS Files -->
   <link href="<?= base_url() ?>assets/css/argon-design-system.css?v=1.2.2" rel="stylesheet" />
-
+  
   <!-- Select -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 
   <!--   JS Files   -->
-  <script src="<?= base_url() ?>assets/js/core/jquery.min.js" type="text/javascript"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 
 </head>
 

@@ -16,7 +16,10 @@
 
   <!-- FontAwesome -->
   <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
-  
+
+  <!-- Bootstrap CSS -->  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
   <!-- Argon CSS -->
   <link rel="stylesheet" href="<?= base_url() ?>assets/css/argon.css?v=1.2.0" type="text/css">
 
@@ -28,13 +31,12 @@
   <link rel="stylesheet" href="<?= base_url(); ?>/assets/js/select2/css/select2.min.css">
 
   <!-- Select -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.0/css/bootstrap-select.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 
   <!-- Toast -->
   <link rel="stylesheet" href="<?= base_url() ?>assets/js/toastr/toastr.min.css">
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-  <script src="<?= base_url() ?>assets/js/core/jquery.min.js" type="text/javascript"></script>
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 
   <style>
     ::-webkit-scrollbar {
@@ -147,7 +149,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= site_url('ordey-by-admin') ?>">
+                    <a class="nav-link" href="<?= site_url('order-by-admin') ?>">
                     <i class="fa fa-cart-plus text-pink"></i>
                     <span class="nav-link-text">Order By Admin</span>
                     </a>

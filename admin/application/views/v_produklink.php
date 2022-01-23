@@ -1,3 +1,10 @@
+<style>
+    .bootstrap-select button{
+        background: white!important;
+        text-transform: inherit!important;
+        font-weight: normal!important;
+    }
+</style>
 <div class="header bg-pink pb-6">
     <div class="container-fluid">
         <div class="header-body">
@@ -30,24 +37,38 @@
                         </button>
                     </div>
                     <div class="row">
-                        <div class="col-8"><select class="form-control" id="product">
-                            <option selected>Pilih produk</option>
-                            <option value="1">Cleanser Whitening</option>
-                            <option value="2">Handbody UV Protection SPF 50</option>
-                            <option value="3">Lip Care</option>
-                            <option value="4">Lip Treatment</option>
-                            <option value="5">Loose Powder</option>
-                            <option value="6">Moizturizer Whitening – Krim Pagi MW</option>
-                            <option value="7">Stretch Mark Cream</option>
-                            <option value="8">Suncare UV Protection SPF 50 Gold</option>
-                            <option value="9">Sunscreen Normal Skin</option>
-                            <option value="10">White + Powder</option>
-                            <option value="11">Whitening Daily Glow Serum</option>
-                        </select>
+                        <div class="col-8">
+                            <select class="form-control selectpicker" id="selectProduk" data-live-search="true">
+                                <option selected disabled>Pilih Produk</option>
+                                <?php if(isset($dataproduk['content'])){ ?>
+                                    <?php foreach ($dataproduk['content'] as $row_produk) { ?>
+                                        <option value="<?= $row_produk['idproduk'] ?>"><?= $row_produk['namabarang'] ?></option>
+                                    <?php } ?>
+                                <?php }else{?>
+                                        <option disabled>Data Produk Tidak Tersedia</option>
+                                <?php } ?>
+                            </select>
                         </div>
-                        <div class="col-4"><button type="button" class="btn btn-warning">Generate Link</button></div>
+                        <div class="col-4"><button type="button" class="btn btn-warning" onclick="generateLink()">Generate Link</button></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    
+    <script>
+        $(function () {
+            $('#selectProduk').selectpicker();
+        });
+        
+        function generateLink(){
+            var idproduk = $("#selectProduk").val();
+            if (idproduk) {
+                // GET BY IDPRODUK FROM API
+            } else {
+                alert('Silahkan isi field yang tersedia terlebih dahulu.');
+            }
+        }
+        
+    </script>

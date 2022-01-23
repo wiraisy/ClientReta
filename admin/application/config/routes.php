@@ -68,6 +68,9 @@ $route['chat'] = 'chat';
 // Produk Link
 $route['produk-link'] = 'produklink';
 
+// Order by Admin
+$route['order-by-admin'] = 'pemesanan/orderByAdmin';
+
 // Produk Umum
 $route['produk-umum'] = 'produkumum';
 $route['update-produk-umum/(:num)'] = 'produkumum/update_produk/$1';

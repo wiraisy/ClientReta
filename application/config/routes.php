@@ -69,3 +69,6 @@ $route['payment-expired'] = 'transaksi/expired';
 // Profil User
 $route['my-profile'] = 'profil/info_akun';
 $route['my-transaction'] = 'profil/info_pesanan';
+
+// Product
+$route['product-detail/(:num)/(:any)'] = 'product/detailProduct/$1/$2';

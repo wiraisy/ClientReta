@@ -41,7 +41,7 @@
                     </div>
                     <form action="<?= base_url('checkout-by-admin') ?>" enctype="multipart/form-data" method="POST">
                         <select class="form-control selectpicker" id="selectMember" data-live-search="true" >
-                            <option data-hidden="true">Pilih Member</option>
+                            <option selected disabled>Pilih Pasien</option>
                             <?php if(isset($datamember['content'])){ ?>
                                 <?php foreach ($datamember['content'] as $row_member) { ?>
                                     <option value="<?= $row_member['id_pasien'] ?>"><?= $row_member['custid'] ?> - <?= $row_member['custnama'] ?> - <?= $row_member['gender1'] ?> - <?= $row_member['kota'] ?></option>

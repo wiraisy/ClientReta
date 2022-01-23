@@ -10,14 +10,11 @@
 </style>
     <div class="section">
         <div class="container">
-            <div class="container-1">
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <span class="alert-inner--icon"><i class="fas fa-info"></i></span>
-                    <span class="alert-inner--text"><strong>Info!</strong> Silahkan pilih produk yang anda inginkan dengan klik form dibawah ini</span>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Info!</strong> Silahkan pilih produk yang anda inginkan dengan klik form dibawah ini
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="card">
                 <div class="card-body bg-gradient-pink" style="color: white;">
@@ -58,11 +55,6 @@
                 </div>
             </div>
             <br>
-            <!-- <select class="selectpicker">
-                <option>Mustard</option>
-                <option>Ketchup</option>
-                <option>Barbecue</option>
-            </select> -->
 
             <div class="container">
                 <!-- List Pesanan -->
@@ -121,9 +113,6 @@
 
     <script>
         $(function () {
-            // $('#selectPesananSebelum').selectpicker();
-            // $('#selectPesananUmum').selectpicker();
-            // $('#selectPesananAndalan').selectpicker();
             $('select').selectpicker();
         });
     </script>
@@ -143,6 +132,3 @@
 
         xhr.send();
     </script>
-    
-    
-$('select').selectpicker();
