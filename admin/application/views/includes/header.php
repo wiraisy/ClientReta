@@ -57,6 +57,9 @@
     ::-webkit-scrollbar-thumb:hover {
         background: #444; 
     }
+    .btn-light{
+        color: grey!important;
+    }
   </style>
 
   <?php $error = $this->session->flashdata('errorMsg');
@@ -164,12 +167,6 @@
                     <span class="nav-link-text">Tambah Admin</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                    <i class="fas fa-tags text-default"></i>
-                    <span class="nav-link-text">Harga Custom</span>
-                    </a>
-                </li>
                 </ul>
                 <hr>
                 <div style="text-align: center;">
@@ -183,6 +180,10 @@
                 <br>
                 <div style="text-align: center;">
                     <a href="<?= site_url('import-data') ?>" class="btn btn-outline-warning">Import Data</a>
+                </div>
+                <br>
+                <div style="text-align: center;">
+                    <a href="#" class="btn btn-outline-warning">Export Data</a>
                 </div>
             </div>
         </div>

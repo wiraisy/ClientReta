@@ -43,7 +43,7 @@
                 <div class="card-body bg-gradient-pink" style="color: white;">
                     <label for="pilih-produk">Pesan Produk Andalan</label>
                     <select class="form-control selectpicker" id="selectPesananAndalan" data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;">
-                        <option disabled>Pilih produk yang anda inginkan</option>
+                        <option selected disabled>Pilih produk yang anda inginkan</option>
                         <?php if(isset($produkandalan)){ ?>
                             <?php foreach ($produkumum as $row_produkumum) { ?>
                                 <option value="<?= $row_produkumum['idproduk'] ?>"><?= $row_produkumum['namabarang'] ?></option>
@@ -71,7 +71,7 @@
                 <br>
                 <!-- Produk Andalan-->
                 <div class="row">
-                    <div class="col-sm-3 col-6">
+                    <div class="col-md-3 text-center">
                         <img src="<?= base_url() ?>assets/img/products/produk-pilihan-1.jpg" alt="Rounded image" class="img-fluid rounded" style="width: 150px;">
                         <br>
                         <small class="d-block text-uppercase font-weight-bold mb-4">Produk Alt 1
@@ -79,7 +79,7 @@
                         Rp. xxxxx
                         </small>
                     </div>
-                    <div class="col-sm-3 col-6">
+                    <div class="col-md-3 text-center">
                         <img src="<?= base_url() ?>assets/img/products/produk-pilihan-1.jpg" alt="Rounded image" class="img-fluid rounded" style="width: 150px;">
                         <br>
                         <small class="d-block text-uppercase font-weight-bold mb-4">Produk Alt 2
@@ -87,7 +87,7 @@
                         Rp. xxxxx
                         </small>
                     </div>
-                    <div class="col-sm-3 col-6">
+                    <div class="col-md-3 text-center">
                         <img src="<?= base_url() ?>assets/img/products/produk-pilihan-1.jpg" alt="Rounded image" class="img-fluid rounded" style="width: 150px;">
                         <br>
                         <small class="d-block text-uppercase font-weight-bold mb-4">Produk Alt 3
@@ -95,7 +95,7 @@
                         Rp. xxxxx
                         </small>
                     </div>
-                    <div class="col-sm-3 col-6">
+                    <div class="col-md-3 text-center">
                         <img src="<?= base_url() ?>assets/img/products/produk-pilihan-1.jpg" alt="Rounded image" class="img-fluid rounded" style="width: 150px;">
                         <br>
                         <small class="d-block text-uppercase font-weight-bold mb-4">Produk Alt 4

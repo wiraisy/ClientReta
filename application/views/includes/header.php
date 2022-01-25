@@ -51,6 +51,29 @@
         background: white;
         border:solid #eb81c0 1px;
     }
+    
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888; 
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #444; 
+    }
+    
+    .btn-light{
+        color: grey!important;
+    }
 </style>
 
 <body class="index-page">

@@ -30,14 +30,13 @@
     <!--   JS Files   -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
     <script src="<?= base_url() ?>assets/js/plugins/bootstrap-switch.js"></script>
     <script src="<?= base_url() ?>assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
     <script src="<?= base_url() ?>assets/js/plugins/moment.min.js"></script>
     <script src="<?= base_url() ?>assets/js/plugins/datetimepicker.js" type="text/javascript"></script>
     <script src="<?= base_url() ?>assets/js/plugins/bootstrap-datepicker.min.js"></script>
 
-    <!-- Select -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 
 
 </body>
