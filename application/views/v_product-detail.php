@@ -13,10 +13,10 @@
                     <img class="img-fluid" src="<?= base_url() ?>assets/img/products/produk-pilihan-1.JPG" alt="">
                 </div>
                 <div class="col-md-6">
-                    <h1>Wardah Lotion</h1>
+                    <h1><?= $detailproduk['namabarang'] ?></h1>
                     <div class="row">
                         <div class="col-md-8">
-                            <p>Rp. 30.000</p>
+                            <p>Rp. <?= $detailproduk['hargajual'] ?></p>
                         </div>
                         <div class="col-md-4">
                             <button type="button" class="btn btn-success btn-sm">Andalan</button>
