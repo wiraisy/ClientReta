@@ -10,7 +10,7 @@
             <!-- Main Content -->
             <div class="row">
                 <div class="col-md-6">
-                    <img class="img-fluid" src="<?= base_url() ?>assets/img/products/produk-pilihan-1.JPG" alt="">
+                    <img class="img-fluid" src="<?= base_url() ?>assets/img/products/produk-pilihan-1.jpg" alt="">
                 </div>
                 <div class="col-md-6">
                     <h1><?= $detailproduk['namabarang'] ?></h1>
