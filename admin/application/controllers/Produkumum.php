@@ -6,7 +6,7 @@ class Produkumum extends MY_Controller {
 	public function index()
 	{
 		// Get Data From API
-		$url = 'http://202.157.184.70:8080/reta-api/Produk/getallprodukbykategori/UMUM';
+		$url = 'http://api-reta.id/reta-api/Produk/getallprodukbykategori/UMUM';
         $method = 'GET';
         $produk = $this->SendRequest($url, $method);
 
@@ -63,7 +63,7 @@ class Produkumum extends MY_Controller {
 		$curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://202.157.184.70:8080/reta-api/Produk/UpdateProduk/'.$id_produk,
+            CURLOPT_URL => 'http://api-reta.id/reta-api/Produk/UpdateProduk/'.$id_produk,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -97,7 +97,7 @@ class Produkumum extends MY_Controller {
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
-		CURLOPT_URL => '202.157.184.70:8080/reta-api/Produk/DeleteProdukbyId/'.$id,
+		CURLOPT_URL => 'http://api-reta.id/reta-api/Produk/DeleteProdukbyId/'.$id,
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_ENCODING => '',
 		CURLOPT_MAXREDIRS => 10,

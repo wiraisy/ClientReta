@@ -26,6 +26,9 @@
 <script src="<?= base_url() ?>assets/js/argon.js?v=1.2.0"></script>
 <!-- Toast -->
 <script src="<?= base_url() ?>assets/js/toastr/toastr.min.js"></script>
+<!-- DataTables -->
+<script src="<?= base_url() ?>assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="<?= base_url() ?>assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
 <!-- SweetAlert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <!-- Select2 -->
@@ -48,6 +51,13 @@
         });
 
     });
+</script>
+<script>
+$(document).ready(function() {
+    $('#datatable-basic').DataTable( {
+        "pagingType": "numbers"
+    } );
+} );
 </script>
 
 </body>

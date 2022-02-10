@@ -6,7 +6,7 @@ class Produklink extends MY_Controller {
 	public function index()
 	{
 		// Get Data From API
-		$url = 'http://202.157.184.70:8080/reta-api/Produk/GetAllProdukbyFilterandPagination';
+		$url = 'http://api-reta.id/reta-api/Produk/GetAllProdukbyFilterandPagination';
         $method = 'GET';
         $dataproduk = $this->SendRequest($url, $method);
 

@@ -130,17 +130,17 @@
     </script>
 
     <script>
-        var xhr = new XMLHttpRequest();
-        xhr.withCredentials = true;
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "Basic YWtiYXI6d2lyYWlzeQ==");
 
-        xhr.addEventListener("readystatechange", function() {
-        if(this.readyState === 4) {
-            console.log(this.responseText);
-        }
-        });
+        var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+        };
 
-        xhr.open("GET", "http://202.157.184.70:8080/reta-api/Produk/GetProdukbyId-nre/89");
-        xhr.setRequestHeader("Authorization", "Basic YWtiYXI6d2lyYWlzeQ==");
-
-        xhr.send();
+        fetch("https://api-reta.id/reta-api/Produk/GetAllProdukbyFilterandPagination", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
     </script>

@@ -19,7 +19,7 @@ class Import extends CI_Controller {
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-        CURLOPT_URL => '202.157.184.70:8080/reta-api/Produk/importcsvproduk',
+        CURLOPT_URL => 'http://api-reta.id/reta-api/Produk/importcsvproduk',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -55,7 +55,7 @@ class Import extends CI_Controller {
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-        CURLOPT_URL => '202.157.184.70:8080/reta-api/PasienAPI/importcsvpasien',
+        CURLOPT_URL => 'http://api-reta.id/reta-api/PasienAPI/importcsvpasien',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,

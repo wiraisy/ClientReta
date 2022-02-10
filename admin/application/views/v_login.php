@@ -23,7 +23,29 @@
   <!-- Chat CSS & Links -->
   <link rel="stylesheet" href="<?= base_url() ?>assets/css/chat.css" type="text/css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" />
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 </head>
+
+<style>
+    .field-icon {
+        position: relative;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        padding-right: 5%;
+        z-index: 2;
+    }
+    .toggle-password{
+        color: lightgrey;
+    }
+    .toggle-password-after{
+        color: grey;
+    }
+    .toggle-password:hover , .toggle-password-after:hover{
+        cursor: pointer;
+    }
+</style>
 
 <body class="bg-default">
 
@@ -60,12 +82,30 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                             </div>
-                            <input class="form-control" placeholder="Password" type="password">
+                            <input class="form-control" placeholder="Password" id="password" type="password">
+                            <span class="field-icon">
+                                <script>
+                                    function pswVisibilty(){
+                                        var x = document.getElementById("password");
+                                        var element = document.getElementById("togglePsw");
+                                        if (x.type === "password") {
+                                            x.type = "text";
+                                            element.classList.remove("toggle-password");
+                                            element.classList.add("toggle-password-after");
+                                        } else {
+                                            x.type = "password";
+                                            element.classList.remove("toggle-password-after");
+                                            element.classList.add("toggle-password");
+                                        }
+                                    }
+                                </script>
+                                <i class="fas fa-eye toggle-password" id="togglePsw" onclick="pswVisibilty()"></i>
+                            </span>
                             </div>
                         </div>
                         <div class="custom-control custom-control-alternative custom-checkbox">
-                            <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
-                            <label class="custom-control-label" for=" customCheckLogin">
+                            <input class="custom-control-input" id="rememberMe" type="checkbox" value="lsRememberMe">
+                            <label class="custom-control-label" for="rememberMe">
                             <span class="text-muted">Ingatkan saya?</span>
                             </label>
                         </div>
