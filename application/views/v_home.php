@@ -49,8 +49,8 @@
                     <label for="pilih-produk">Pesan Produk Umum</label>
                     <select class="form-control selectpicker" id="selectPesananUmum" data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;">
                         <option selected disabled>Pilih produk yang anda inginkan</option>
-                        <?php if(isset($produkumum)){ ?>
-                            <?php foreach ($produkumum as $row_produkumum) { ?>
+                        <?php if(isset($produkumum['content'])){ ?>
+                            <?php foreach ($produkumum['content'] as $row_produkumum) { ?>
                                 <option value="<?= $row_produkumum['idproduk'] ?>"><?= $row_produkumum['namabarang'] ?></option>
                             <?php } ?>
                         <?php }else{?>
@@ -64,8 +64,8 @@
                     <label for="pilih-produk">Pesan Produk Andalan</label>
                     <select class="form-control selectpicker" id="selectPesananAndalan" data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;">
                         <option selected disabled>Pilih produk yang anda inginkan</option>
-                        <?php if(isset($produkandalan)){ ?>
-                            <?php foreach ($produkandalan as $row_produkandalan) { ?>
+                        <?php if(isset($produkandalan['content'])){ ?>
+                            <?php foreach ($produkandalan['content'] as $row_produkandalan) { ?>
                                 <option value="<?= $row_produkandalan['idproduk'] ?>"><?= $row_produkandalan['namabarang'] ?></option>
                             <?php } ?>
                         <?php }else{?>
@@ -94,31 +94,41 @@
                         <?php
                             $numOfCols = 4;
                             $rowCount = 0;
-                            foreach ($produkandalan as $row_produkandalan){
-                                if($rowCount % $numOfCols == 0) { ?> <div class="carousel-item py-5 <?= ($rowCount == 0) ? 'active' : ''?>"> <div class="row"> <?php } 
-                                    $rowCount++; ?>  
-                                        <div class="col-md-3 col-6 text-center">
-                                            <img src="<?= base_url() ?>assets/img/products/produk-pilihan-1.jpg" onclick="window.open('<?= base_url() ?>product-detail/<?= $row_produkandalan['idproduk'] ?>/<?= str_replace(' ','',$row_produkandalan['namabarang']) ?>');" alt="Rounded image" class="img-fluid rounded img-produk-sebelum" style="width: 150px;">
-                                            <br>
-                                            <small class="d-block text-uppercase font-weight-bold mb-4 title-produk-sebelum"  onclick="window.open('<?= base_url() ?>product-detail/<?= $row_produkandalan['idproduk'] ?>/<?= str_replace(' ','',$row_produkandalan['namabarang']) ?>') ;"><?= $row_produkandalan['namabarang'] ?>
-                                            <br>
-                                            Rp. <?= $row_produkandalan['hargajual'] ?>
-                                            </small>
-                                        </div>
-                                <?php
-                                if($rowCount % $numOfCols == 0) { ?> </div></div> <?php } 
-                            } ?>
+                            if ($produkandalan) {
+                                foreach ($produkandalan as $row_produkandalan){
+                                    if($rowCount % $numOfCols == 0) { ?> 
+                                        <div class="carousel-item py-5 <?= ($rowCount == 0) ? 'active' : ''?>"> <div class="row"> <?php } 
+                                            $rowCount++; ?>  
+                                            <div class="col-md-3 col-6 text-center">
+                                                <img src="<?= base_url() ?>assets/img/products/produk-pilihan-1.jpg" onclick="window.open('<?= base_url() ?>product-detail/<?= $row_produkandalan['idproduk'] ?>/<?= str_replace(' ','',$row_produkandalan['namabarang']) ?>');" alt="Rounded image" class="img-fluid rounded img-produk-sebelum" style="width: 150px;">
+                                                <br>
+                                                <small class="d-block text-uppercase font-weight-bold mb-4 title-produk-sebelum"  onclick="window.open('<?= base_url() ?>product-detail/<?= $row_produkandalan['idproduk'] ?>/<?= str_replace(' ','',$row_produkandalan['namabarang']) ?>') ;"><?= $row_produkandalan['namabarang'] ?>
+                                                <br>
+                                                Rp. <?= $row_produkandalan['hargajual'] ?>
+                                                </small>
+                                            </div>
+                                    <?php
+                                    if($rowCount % $numOfCols == 0) { ?> </div></div> <?php } 
+                                }
+                            } else { ?>
+                                <div class="container text-center">
+                                    <h2>Data Tidak Tersedia</h2>
+                                </div>
+                            <?php } ?>
+                            
                         <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
                             <span aria-hidden="true"><i class="fas fa-chevron-left"></i></span>
                         </a>
                         <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
                             <span aria-hidden="true"><i class="fas fa-chevron-right"></i></span>
                         </a>
+                        
                     </div>
                 </div>
                 </div>
             </div>
         </div>
+    </div>
     
     <!-- Custom JS -->
     <script src="<?= base_url() ?>assets/js/custom/select-option-pesanan.js"></script>
@@ -130,17 +140,20 @@
     </script>
 
     <script>
-        var myHeaders = new Headers();
-        myHeaders.append("Authorization", "Basic YWtiYXI6d2lyYWlzeQ==");
-
-        var requestOptions = {
-        method: 'GET',
-        headers: myHeaders,
-        redirect: 'follow'
+        var settings = {
+            "url": "https://api-reta.id/reta-api/Produk/GetAllProdukbyFilterandPagination",
+            "method": "GET",
+            "timeout": 0,
+            "headers": {
+                "Authorization": "Basic YWtiYXI6d2lyYWlzeQ=="
+            }
         };
 
-        fetch("https://api-reta.id/reta-api/Produk/GetAllProdukbyFilterandPagination", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
+        $.ajax(settings).done(function (response) {
+            alert("error");
+        });
+
     </script>
+    
+    
+    

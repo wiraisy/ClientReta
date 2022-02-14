@@ -6,11 +6,11 @@ class Home extends MY_Controller {
 	public function index()
 	{
 		// Get Data From API
-		$url = 'http://202.157.184.70:8080/reta-api/Produk/getallprodukbykategori/UMUM';
+		$url = 'https://api-reta.id/reta-api/Produk/getallprodukbykategori/UMUM/true';
         $method = 'GET';
         $produkumum = $this->SendRequest($url, $method);
 
-		$url = 'http://202.157.184.70:8080/reta-api/Produk/getallprodukbykategori/ANDALAN';
+		$url = 'https://api-reta.id/reta-api/Produk/getallprodukbykategori/ANDALAN/true';
         $method = 'GET';
         $produkandalan = $this->SendRequest($url, $method);
 
