@@ -66,9 +66,36 @@
             var idproduk = $("#selectProduk").val();
             if (idproduk) {
                 // GET BY IDPRODUK FROM API
+                
+                var settings = {
+                    "url": "https://api-reta.id/reta-api/Produk/GetProdukbyId/"+idproduk,
+                    "method": "GET",
+                    "timeout": 0,
+                    "headers": {
+                        "Authorization": "Basic YWtiYXI6d2lyYWlzeQ=="
+                    }
+                };
+
+                $.ajax(settings).done(function (response) {
+                    if(response.status == true){
+                        // Promp alert
+                        var alert = prompt("Berikut link detail produk yang anda pilih", `https://shop.reta.co.id/product-detail/${response.idproduk}`);
+                    }else{
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+
+                        Toast.fire({
+                            icon: 'error',
+                            title: '&nbsp;Generate Link Produk Gagal!'
+                        })
+                    }
+                });
             } else {
                 alert('Silahkan isi field yang tersedia terlebih dahulu.');
             }
         }
-        
     </script>

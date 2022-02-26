@@ -10,7 +10,30 @@
             <!-- Main Content -->
             <div class="row">
                 <div class="col-md-6">
-                    <img class="img-fluid" src="<?= base_url() ?>assets/img/products/produk-pilihan-1.jpg" alt="">
+                    <?php 
+                        $curl = curl_init();
+
+                        curl_setopt_array($curl, array(
+                        CURLOPT_URL => 'https://api-reta.id/reta-api/Produk/getImagebykodeid/'.$detailproduk['kodeid'],
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_ENCODING => '',
+                        CURLOPT_MAXREDIRS => 10,
+                        CURLOPT_TIMEOUT => 0,
+                        CURLOPT_SSL_VERIFYHOST => 0,
+                        CURLOPT_SSL_VERIFYPEER => 0,
+                        CURLOPT_FOLLOWLOCATION => true,
+                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                        CURLOPT_CUSTOMREQUEST => 'GET',
+                        CURLOPT_HTTPHEADER => array(
+                            'Authorization: Basic YWtiYXI6d2lyYWlzeQ=='
+                        ),
+                        ));
+                        $response = curl_exec($curl);
+                        
+                        curl_close($curl);
+                        $src = 'data:image/png;base64,'.base64_encode($response).'';
+                    ?>
+                    <img class="img-fluid rounded" src="<?= $src; ?>" >
                 </div>
                 <div class="col-md-6">
                     <h1><?= $detailproduk['namabarang'] ?></h1>

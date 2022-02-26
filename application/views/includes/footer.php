@@ -37,7 +37,5 @@
     <script src="<?= base_url() ?>assets/js/plugins/datetimepicker.js" type="text/javascript"></script>
     <script src="<?= base_url() ?>assets/js/plugins/bootstrap-datepicker.min.js"></script>
 
-
-
 </body>
 </html>

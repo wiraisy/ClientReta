@@ -24,8 +24,33 @@
 
     <!-- Argon CSS Files -->
     <link href="<?= base_url() ?>assets/css/argon-design-system.css?v=1.2.2" rel="stylesheet" />
-</head>
 
+    <!-- Toast -->
+    <link rel="stylesheet" href="<?= base_url() ?>assets/js/toastr/toastr.min.css">
+    
+    <script src="<?= base_url() ?>assets/js/core/jquery.min.js" type="text/javascript"></script>
+</head>
+<?php
+  $error = $this->session->flashdata('error');
+  if ($error) {
+  ?>
+    <script type="text/javascript">
+        $(function() {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+          });
+
+          Toast.fire({
+            icon: 'error',
+            title: '&nbsp;<?php echo $error ?>'
+          })
+        });
+    </script>
+  <?php }
+  ?>
 <body>
   <!--pink-->
   <section class="section section-shaped section-xxl" style="height: 100vh">
@@ -50,13 +75,13 @@
                 <br>
                 <medium>Silahkan masukkan nomor Handphone anda yang terdaftar sebagai member di Reta Beauty Clinic</medium>
               </div>
-              <form role="form">
+              <form method="POST" action="<?= base_url() ?>auth/loginmember">
                 <div class="form-group mb-3">
                   <div class="input-group input-group-alternative">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-mobile-button"></i></span>
                     </div>
-                    <input class="form-control" placeholder="62xxxxxxxxx" type="number">
+                    <input class="form-control" placeholder="62xxxxxxxxx" name="hp1" type="number" required>
                   </div>
                 </div>
                 <div class="form-group mb-3">  
@@ -64,22 +89,22 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-key-25"></i></span>
                     </div>
-                    <input class="form-control" placeholder="password" type="text">
+                    <input class="form-control" name="password" placeholder="password" type="text" required>
                   </div>
                 </div>  
                 </div>
                 <div class="form-group focused">
-                <div class="text-center">
-                <a href="<?= site_url() ?>" button class="btn btn-warning btn-lg">Masuk</a>
-                <br>
-                <br>
-                <small><a href="<?= site_url('verifikasi-password'); ?>">Buat Password / Lupa Password</a></small>
-                
-                <br>
-                <br>
-                <small>Belum jadi member? <a href="<?= site_url('register') ?>">Daftar Sekarang</a></small>
-                <br>
-                </div>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-warning btn-lg">Masuk</button>
+                  <br>
+                  <br>
+                  <small><a href="<?= site_url('verifikasi-password'); ?>">Buat Password / Lupa Password</a></small>
+                  
+                  <br>
+                  <br>
+                  <small>Belum jadi member? <a href="<?= site_url('register') ?>">Daftar Sekarang</a></small>
+                  <br>
+                  </div>
               </div>
           </div>
         </div>
@@ -97,6 +122,10 @@
     <script src="<?= base_url() ?>assets/js/plugins/moment.min.js"></script>
     <script src="<?= base_url() ?>assets/js/plugins/datetimepicker.js" type="text/javascript"></script>
     <script src="<?= base_url() ?>assets/js/plugins/bootstrap-datepicker.min.js"></script>
+    <!-- Toast -->
+    <script src="<?= base_url() ?>assets/js/toastr/toastr.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </body>
 
 </html>

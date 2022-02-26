@@ -5,6 +5,11 @@ class Pemesanan extends MY_Controller {
 
 	public function index()
 	{
+		// Check Session
+		if (!$this->session->userdata('isLoggedIn_adminReta')) {
+			return redirect(base_url() . 'login');
+		}
+		
 		$data['title'] = "Pemesanan";
 
 		$this->load->view('includes/header');

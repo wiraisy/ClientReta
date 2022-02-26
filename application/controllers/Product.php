@@ -4,8 +4,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Product extends MY_Controller {
 
 	public function detailProduct($id_produk){
+		
+		// Check Session
+		if (!$this->session->userdata('isLoggedIn_userReta')) {
+			return redirect(base_url() . 'auth');
+		}
+		
 		// Get Data From API
-		$url = "http://202.157.184.70:8080/reta-api/Produk/GetProdukbyId/$id_produk";
+		$url = "https://api-reta.id/reta-api/Produk/GetProdukbyId/$id_produk";
         $method = 'GET';
         $detailproduk = $this->SendRequest($url, $method);	
 

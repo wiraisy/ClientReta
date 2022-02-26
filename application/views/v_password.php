@@ -24,8 +24,33 @@
 
     <!-- Argon CSS Files -->
     <link href="<?= base_url() ?>assets/css/argon-design-system.css?v=1.2.2" rel="stylesheet" />
-</head>
 
+    <!-- Toast -->
+    <link rel="stylesheet" href="<?= base_url() ?>assets/js/toastr/toastr.min.css">
+
+    <script src="<?= base_url() ?>assets/js/core/jquery.min.js" type="text/javascript"></script>
+</head>
+<?php
+$success = $this->session->flashdata('successMsg');
+if ($success) {
+?>
+  <script type="text/javascript">
+      $(function() {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000
+        });
+
+        Toast.fire({
+          icon: 'success',
+          title: '&nbsp;<?php echo $success ?>'
+        })
+      });
+  </script>
+<?php }
+?>
 <body>
   <section class="section section-shaped section-xxl" style="height: 100vh">
     <div class="shape shape-style-1 bg-gradient-pink">
@@ -48,7 +73,7 @@
                 <br>
                 <medium>Silahkan masukkan password baru anda pada kolom dibawah ini:</medium>
               </div>
-              <form role="form">
+              <form action="<?= base_url('auth/addNewPassword') ?>" method="POST">
                 <div class="form-group mb-3">
                   <div class="input-group input-group-alternative">
                     <div class="input-group-prepend">
@@ -60,7 +85,7 @@
                 </div>
                 <div class="form-group focused">
                 <div class="text-center">
-                <a href="<?= site_url('login') ?>" button class="btn btn-warning btn-lg">Konfirmasi</a>
+                <button type="submit" class="btn btn-warning btn-lg">Konfirmasi</button>
                 <br>
                 <br>
                 </div>
@@ -81,6 +106,10 @@
     <script src="<?= base_url() ?>assets/js/plugins/moment.min.js"></script>
     <script src="<?= base_url() ?>assets/js/plugins/datetimepicker.js" type="text/javascript"></script>
     <script src="<?= base_url() ?>assets/js/plugins/bootstrap-datepicker.min.js"></script>
+    <!-- Toast -->
+    <script src="<?= base_url() ?>assets/js/toastr/toastr.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </body>
 
 </html>

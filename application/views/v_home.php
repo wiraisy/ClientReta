@@ -27,6 +27,54 @@
         cursor: pointer;
         text-decoration: underline;
     }
+    .carousel-produk > img {
+        width: 200px; /* You can set the dimensions to whatever you want */
+        height: 200px;
+        object-fit: cover;
+    }
+    .product-img > img {
+        width: 200px; /* You can set the dimensions to whatever you want */
+        height: 200px;
+        object-fit: cover;
+    }
+    .input-counter{
+        display: flex;
+    }
+    .counter {
+        cursor:pointer; 
+    }
+    .product-detail > button{
+        text-transform: unset!important;
+        font-size: 14px;
+    }
+    .counter-minus, .counter-plus{
+        background:#f2f2f2;
+        border-radius:4px;
+        padding:10px;
+        border:1px solid #ddd;
+        display: inline-block;
+        vertical-align: middle;
+        text-align: center;
+	}
+    .number > input{
+        width: 100px;
+        text-align: center;
+        font-size: 26px;
+		border:1px solid #ddd;
+		border-radius:4px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    @media screen and (max-width: 768px) {
+        .carousel-produk > img {
+            width: 100px; /* You can set the dimensions to whatever you want */
+            height: 100px;
+        }
+        .product-img > img {
+            width: 100px; /* You can set the dimensions to whatever you want */
+            height: 100px;
+        }
+    }
 </style>
     <div class="section">
         <div class="container">
@@ -47,11 +95,11 @@
             <div class="card mt-2">
                 <div class="card-body bg-gradient-pink" style="color: white;">
                     <label for="pilih-produk">Pesan Produk Umum</label>
-                    <select class="form-control selectpicker" id="selectPesananUmum" data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;">
+                    <select class="form-control selectpicker" name="selectPesananUmum" id="selectPesananUmum" data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;">
                         <option selected disabled>Pilih produk yang anda inginkan</option>
-                        <?php if(isset($produkumum['content'])){ ?>
-                            <?php foreach ($produkumum['content'] as $row_produkumum) { ?>
-                                <option value="<?= $row_produkumum['idproduk'] ?>"><?= $row_produkumum['namabarang'] ?></option>
+                        <?php if($produkumum){ ?>
+                            <?php foreach ($produkumum as $row_produkumum) { ?>
+                                <option value="<?= $row_produkumum['kodeid'] ?>" class="<?= $this->session->userdata('data_user_reta')['data']['custid'] ?>"><?= $row_produkumum['namabarang'] ?></option>
                             <?php } ?>
                         <?php }else{?>
                                 <option disabled>Data Produk Umum Tidak Tersedia</option>
@@ -62,11 +110,11 @@
             <div class="card mt-2">
                 <div class="card-body bg-gradient-pink" style="color: white;">
                     <label for="pilih-produk">Pesan Produk Andalan</label>
-                    <select class="form-control selectpicker" id="selectPesananAndalan" data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;">
+                    <select class="form-control selectpicker" name="selectPesananAndalan" id="selectPesananAndalan" data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;">
                         <option selected disabled>Pilih produk yang anda inginkan</option>
-                        <?php if(isset($produkandalan['content'])){ ?>
-                            <?php foreach ($produkandalan['content'] as $row_produkandalan) { ?>
-                                <option value="<?= $row_produkandalan['idproduk'] ?>"><?= $row_produkandalan['namabarang'] ?></option>
+                        <?php if($produkandalan){ ?>
+                            <?php foreach ($produkandalan as $row_produkandalan) { ?>
+                                <option value="<?= $row_produkandalan['kodeid'] ?>" class="<?= $this->session->userdata('data_user_reta')['data']['custid'] ?>"><?= $row_produkandalan['namabarang'] ?></option>
                             <?php } ?>
                         <?php }else{?>
                                 <option disabled>Data Produk Andalan Tidak Tersedia</option>
@@ -80,11 +128,11 @@
                 <!-- List Pesanan -->
                 <form action="<?= base_url('checkout-product') ?>" enctype="multipart/form-data" method="POST">
                     <div class="list-pesanan">
-                        <!-- List Pesanan -->
+                        <!-- List Pesanan -->          
                     </div>
                     <br>
                     <br>
-                    <div style="text-align: right;"><button type="submit" class="btn btn-outline-danger btn-round">Checkout</button></div>  
+                    <div style="text-align: right;"><a href="<?= base_url('transaksi/checkout') ?>" class="btn btn-outline-danger btn-round">Checkout</a></div>  
                 </form>
                 <hr>
                 <h6 style="text-align: center;">Produk yang mungkin anda sukai</h6>
@@ -97,62 +145,69 @@
                             if ($produkandalan) {
                                 foreach ($produkandalan as $row_produkandalan){
                                     if($rowCount % $numOfCols == 0) { ?> 
-                                        <div class="carousel-item py-5 <?= ($rowCount == 0) ? 'active' : ''?>"> <div class="row"> <?php } 
-                                            $rowCount++; ?>  
-                                            <div class="col-md-3 col-6 text-center">
-                                                <img src="<?= base_url() ?>assets/img/products/produk-pilihan-1.jpg" onclick="window.open('<?= base_url() ?>product-detail/<?= $row_produkandalan['idproduk'] ?>/<?= str_replace(' ','',$row_produkandalan['namabarang']) ?>');" alt="Rounded image" class="img-fluid rounded img-produk-sebelum" style="width: 150px;">
-                                                <br>
-                                                <small class="d-block text-uppercase font-weight-bold mb-4 title-produk-sebelum"  onclick="window.open('<?= base_url() ?>product-detail/<?= $row_produkandalan['idproduk'] ?>/<?= str_replace(' ','',$row_produkandalan['namabarang']) ?>') ;"><?= $row_produkandalan['namabarang'] ?>
-                                                <br>
-                                                Rp. <?= $row_produkandalan['hargajual'] ?>
-                                                </small>
-                                            </div>
-                                    <?php
-                                    if($rowCount % $numOfCols == 0) { ?> </div></div> <?php } 
+                                        <div class="carousel-item py-5 <?= ($rowCount == 0) ? 'active' : ''?>">
+                                            <div class="row"> <?php } $rowCount++; ?>  
+                                                <div class="col-md-3 col-6 text-center carousel-produk">
+                                                    <?php 
+                                                        $curl = curl_init();
+
+                                                        curl_setopt_array($curl, array(
+                                                        CURLOPT_URL => 'https://api-reta.id/reta-api/Produk/getImagebykodeid/'.$row_produkandalan['kodeid'],
+                                                        CURLOPT_RETURNTRANSFER => true,
+                                                        CURLOPT_ENCODING => '',
+                                                        CURLOPT_MAXREDIRS => 10,
+                                                        CURLOPT_TIMEOUT => 0,
+                                                        CURLOPT_SSL_VERIFYHOST => 0,
+                                                        CURLOPT_SSL_VERIFYPEER => 0,
+                                                        CURLOPT_FOLLOWLOCATION => true,
+                                                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                                                        CURLOPT_CUSTOMREQUEST => 'GET',
+                                                        CURLOPT_HTTPHEADER => array(
+                                                            'Authorization: Basic YWtiYXI6d2lyYWlzeQ=='
+                                                        ),
+                                                        ));
+                                                        $response = curl_exec($curl);
+                                                        
+                                                        curl_close($curl);
+                                                        $src = 'data:image/png;base64,'.base64_encode($response).'';
+                                                    ?>
+                                                    <img src="<?= $src; ?>" onclick="window.open('<?= base_url() ?>product-detail/<?= $row_produkandalan['idproduk'] ?>');" alt="Rounded image" class="img-fluid rounded img-produk-sebelum">
+                                                    <br>
+                                                    <small class="d-block text-uppercase font-weight-bold mb-4 title-produk-sebelum"  onclick="window.open('<?= base_url() ?>product-detail/<?= $row_produkandalan['idproduk'] ?>') ;"><?= $row_produkandalan['namabarang'] ?>
+                                                    <br>
+                                                    Rp. <?= number_format($row_produkandalan['hargajual'],2,',','.') ?>
+                                                    </small>
+                                                </div>
+                                    <?php if($rowCount % $numOfCols == 0) { ?></div></div> <?php } 
                                 }
                             } else { ?>
                                 <div class="container text-center">
                                     <h2>Data Tidak Tersedia</h2>
                                 </div>
                             <?php } ?>
-                            
-                        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-                            <span aria-hidden="true"><i class="fas fa-chevron-left"></i></span>
-                        </a>
-                        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-                            <span aria-hidden="true"><i class="fas fa-chevron-right"></i></span>
-                        </a>
-                        
                     </div>
                 </div>
-                </div>
+                <?php if (count($produkandalan) > 4) { ?>
+                    <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+                        <span aria-hidden="true"><i class="fas fa-chevron-left"></i></span>
+                    </a>
+                    <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+                        <span aria-hidden="true"><i class="fas fa-chevron-right"></i></span>
+                    </a>
+                <?php } ?>
             </div>
         </div>
     </div>
+    </div>
     
-    <!-- Custom JS -->
+    <!-- Select Option Product -->
     <script src="<?= base_url() ?>assets/js/custom/select-option-pesanan.js"></script>
+    
 
     <script>
         $(function () {
             $('select').selectpicker();
         });
-    </script>
-
-    <script>
-        var settings = {
-            "url": "https://api-reta.id/reta-api/Produk/GetAllProdukbyFilterandPagination",
-            "method": "GET",
-            "timeout": 0,
-            "headers": {
-                "Authorization": "Basic YWtiYXI6d2lyYWlzeQ=="
-            }
-        };
-
-        $.ajax(settings).done(function (response) {
-            alert("error");
-        });
-
     </script>
     
     

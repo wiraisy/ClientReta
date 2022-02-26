@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 
   <!-- Fontawesome -->
-  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <link href="<?= base_url() ?>assets/css/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" >
 
   <!-- Nucleo Icons -->
   <link href="<?= base_url() ?>assets/css/nucleo-icons.css" rel="stylesheet" />
@@ -36,7 +36,6 @@
   <script src="<?= base_url() ?>assets/js/core/jquery.min.js"></script>
 
 </head>
-
 <style>
     .fa-shopping-cart[data-count]:after{
         position:absolute;
@@ -106,7 +105,23 @@
                 <ul class="navbar-nav align-items-lg-center ml-lg-auto">
                     <li class="nav-item">
                     <a class="nav-link nav-link-icon" href="<?= site_url('checkout') ?>">
-                        <i class="fas fa-shopping-cart fa-lg" style="margin-right: 0px!important;" data-count="<?= ($this->cart->total_items() > 0) ? $this->cart->total_items() : 0 ; ?>"></i>
+                        <i class="fas fa-shopping-cart fa-lg" id="cartProduct" style="margin-right: 0px!important;" data-count=""></i>
+                        <script>
+                            var settingscart = {
+                                "url": "https://api-reta.id/reta-api/Penjualan/lihatcart/<?= $this->session->userdata('data_user_reta')['data']['custid'] ?>",
+                                "method": "GET",
+                                "timeout": 0,
+                                "async": false,
+                                "headers": {
+                                    "Authorization": "Basic YWtiYXI6d2lyYWlzeQ=="
+                                },
+                            };
+
+                            var datacart = $.ajax(settingscart).done(function(response) {
+                                return response;
+                            }).responseJSON;
+                            document.getElementById('cartProduct').dataset.count = parseInt(datacart.length);
+                        </script>
                         <span class="nav-link-inner--text">Checkout</span>
                     </a>
                     </li>
@@ -119,7 +134,7 @@
                     <div class="dropdown-menu">
                         <a href="<?= site_url('my-profile') ?>" class="dropdown-item">Akun Saya</a>
                         <a href="<?= site_url('my-transaction') ?>" class="dropdown-item">Pesanan Saya</a>
-                        <a href="./index.html" class="dropdown-item">Keluar</a>
+                        <a href="<?= site_url('auth/logout') ?>" class="dropdown-item">Keluar</a>
                     </div>
                     </li>
                 </ul>

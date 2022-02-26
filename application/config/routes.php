@@ -71,4 +71,4 @@ $route['my-profile'] = 'profil/info_akun';
 $route['my-transaction'] = 'profil/info_pesanan';
 
 // Product
-$route['product-detail/(:num)/(:any)'] = 'product/detailProduct/$1/$2';
+$route['product-detail/(:num)'] = 'product/detailProduct/$1';

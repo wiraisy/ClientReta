@@ -24,8 +24,33 @@
 
     <!-- Argon CSS Files -->
     <link href="<?= base_url() ?>assets/css/argon-design-system.css?v=1.2.2" rel="stylesheet" />
-</head>
+    
+    <!-- Toast -->
+    <link rel="stylesheet" href="<?= base_url() ?>assets/js/toastr/toastr.min.css">
 
+    <script src="<?= base_url() ?>assets/js/core/jquery.min.js" type="text/javascript"></script>
+</head>
+<?php
+  $error = $this->session->flashdata('error');
+  if ($error) {
+  ?>
+    <script type="text/javascript">
+        $(function() {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+          });
+
+          Toast.fire({
+            icon: 'error',
+            title: '&nbsp;<?php echo $error ?>'
+          })
+        });
+    </script>
+  <?php }
+  ?>
 <body>
     <section class="section section-shaped section-xxl" style="height: 100vh">
         <div class="shape shape-style-1 bg-gradient-pink">
@@ -49,13 +74,13 @@
                     <br>
                     <medium>Sebelum memperbarui password silahkan isi kolom dibawah ini sesuai pada saat anda mendaftarkan diri menjadi Member Reta</medium>
                 </div>
-                <form role="form">
+                <form method="POST" action="<?= base_url('auth/checkpassword') ?>">
                     <div class="form-group mb-3">
                     <div class="input-group input-group-alternative">
                         <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-credit-card"></i></span>
                         </div>
-                        <input class="form-control" placeholder="Nomor KTP" type="number">
+                        <input class="form-control" placeholder="Nomor KTP" type="number" name="noktp" required>
                     </div>
                     </div>
                     <div class="form-group mb-3">  
@@ -63,13 +88,13 @@
                         <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-mobile-button"></i></span>
                         </div>
-                        <input class="form-control" placeholder="Nomor handphone" type="number">
+                        <input class="form-control" placeholder="Nomor handphone" type="number" name="hp1" required>
                     </div>
                     </div>  
                     </div>
                     <div class="form-group focused">
                     <div class="text-center">
-                    <a href="<?= site_url('make-password'); ?>" button class="btn btn-warning btn-lg">Buat Password</a>
+                    <button type="submit" button class="btn btn-warning btn-lg">Buat Password</button>
                     <br>
                     <br>                
                     <br>
@@ -93,6 +118,10 @@
     <script src="<?= base_url() ?>assets/js/plugins/moment.min.js"></script>
     <script src="<?= base_url() ?>assets/js/plugins/datetimepicker.js" type="text/javascript"></script>
     <script src="<?= base_url() ?>assets/js/plugins/bootstrap-datepicker.min.js"></script>
+    <!-- Toast -->
+    <script src="<?= base_url() ?>assets/js/toastr/toastr.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </body>
 
 </html>

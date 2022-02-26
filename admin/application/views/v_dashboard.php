@@ -23,7 +23,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <h5 class="card-title text-uppercase text-muted mb-0">Total kunjungan</h5>
-                                        <span class="h2 font-weight-bold mb-0">569</span>
+                                        <span class="h2 font-weight-bold mb-0">-</span>
                                     </div>
                                     <div class="col-auto">
                                         <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
@@ -31,8 +31,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p class="mt-3 mb-0 text-sm">
-                                    <span class="text-success mr-2"><i class="fa fa-arrow-down"></i> 3.555</span>
+                                <p class="mt-2 mb-0 text-sm">
                                     <span class="text-nowrap">total kunjungan hari kemarin</span>
                                 </p>
                             </div>
@@ -45,7 +44,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <h5 class="card-title text-uppercase text-muted mb-0">Pendaftaran member baru</h5>
-                                        <span class="h2 font-weight-bold mb-0">35</span>
+                                        <span class="h2 font-weight-bold mb-0">-</span>
                                     </div>
                                     <div class="col-auto">
                                         <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
@@ -53,8 +52,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p class="mt-3 mb-0 text-sm">
-                                    <span class="text-success mr-2"><i class="fas fa-user-plus"></i> </span>
+                                <p class="mt-2 mb-0 text-sm">
                                     <span class="text-nowrap">Membutuhkan persetujuan</span>
                                 </p>
                             </div>
@@ -67,7 +65,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <h5 class="card-title text-uppercase text-muted mb-0">Penjualan Hari Ini</h5>
-                                        <span class="h2 font-weight-bold mb-0">924</span>
+                                        <span class="h2 font-weight-bold mb-0">-</span>
                                     </div>
                                     <div class="col-auto">
                                         <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
@@ -75,8 +73,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p class="mt-3 mb-0 text-sm">
-                                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 800</span>
+                                <p class="mt-2 mb-0 text-sm">
                                     <span class="text-nowrap">Penjualan hari kemarin</span>
                                 </p>
                             </div>
@@ -89,7 +86,7 @@
                             <div class="row">
                                 <div class="col">
                                     <h5 class="card-title text-uppercase text-muted mb-0">Menunggu Pengiriman</h5>
-                                    <span class="h2 font-weight-bold mb-0">3</span>
+                                    <span class="h2 font-weight-bold mb-0">-</span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
@@ -97,8 +94,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <p class="mt-3 mb-0 text-sm">
-                                <span class="text-success mr-2"><i class="fa fa-arrow-up"></i></span>
+                            <p class="mt-2 mb-0 text-sm">
                                 <span class="text-nowrap">Produk yang belum terkirim</span>
                             </p>
                         </div>

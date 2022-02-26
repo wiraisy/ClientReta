@@ -5,8 +5,13 @@ class Produkandalan extends MY_Controller {
 
 	public function index()
 	{
+		// Check Session
+		if (!$this->session->userdata('isLoggedIn_adminReta')) {
+			return redirect(base_url() . 'login');
+		}
+
 		// Get Data From API
-		$url = 'http://api-reta.id/reta-api/Produk/getallprodukbykategori/ANDALAN';
+		$url = 'https://api-reta.id/reta-api/Produk/GetAllProdukbyFilterandPagination?kategori=ANDALAN';
         $method = 'GET';
         $produk = $this->SendRequest($url, $method);
 
@@ -19,6 +24,11 @@ class Produkandalan extends MY_Controller {
 	}
 
 	public function update_produk($id_produk){
+		
+		// Check Session
+		if (!$this->session->userdata('isLoggedIn_adminReta')) {
+			return redirect(base_url() . 'login');
+		}
 
 		// Update Produk From API
 		$hargacorporate = (int)$this->input->post('hargacorporate', true);
@@ -30,6 +40,7 @@ class Produkandalan extends MY_Controller {
 		$hargapromo2 = (int)$this->input->post('hargapromo2', true);
 		$hargapromo3 = (int)$this->input->post('hargapromo3', true);
 		$hargapromo4 = (int)$this->input->post('hargapromo4', true);
+		$status = (boolean)$this->input->post('status', true);
 		$kodeid = $this->input->post('kodeid', true);
 		$kategori = $this->input->post('kategori', true);
 		$namabarang = $this->input->post('namabarang', true);
@@ -56,19 +67,22 @@ class Produkandalan extends MY_Controller {
 			"kategori"=> $kategori,
 			"kodeid"=> $kodeid,
 			"namabarang"=> $namabarang,
-			"satuan"=> $satuan
+			"satuan"=> $satuan,
+			"status"=> $status
 		);
 
 		$dataString = json_encode($formData);
 		$curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://api-reta.id/reta-api/Produk/UpdateProduk/'.$id_produk,
+            CURLOPT_URL => 'https://api-reta.id/reta-api/Produk/UpdateProduk/'.$id_produk,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_TIMEOUT => 0,
             CURLOPT_FOLLOWLOCATION => true,
+			CURLOPT_SSL_VERIFYHOST => 0,
+			CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'PUT',
             CURLOPT_POSTFIELDS => $dataString,
@@ -84,7 +98,7 @@ class Produkandalan extends MY_Controller {
 
         $response = json_decode($response, true);
 
-		if (isset($response['status'])) {
+		if ($response['status'] === 400 ) {
 			$this->session->set_flashdata('errorMsg', 'Produk Gagal Diperbarui');
 			redirect('produkandalan');
         } else {
@@ -94,20 +108,27 @@ class Produkandalan extends MY_Controller {
 	}
 
 	public function hapus($id){
+		
+		// Check Session
+		if (!$this->session->userdata('isLoggedIn_adminReta')) {
+			return redirect(base_url() . 'login');
+		}
+
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
-		CURLOPT_URL => 'http://api-reta.id/reta-api/Produk/DeleteProdukbyId/'.$id,
+		CURLOPT_URL => 'https://api-reta.id/reta-api/Produk/DeleteProdukbyId/'.$id,
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_ENCODING => '',
 		CURLOPT_MAXREDIRS => 10,
 		CURLOPT_TIMEOUT => 0,
+		CURLOPT_SSL_VERIFYHOST => 0,
+		CURLOPT_SSL_VERIFYPEER => 0,
 		CURLOPT_FOLLOWLOCATION => true,
 		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 		CURLOPT_CUSTOMREQUEST => 'DELETE',
 		CURLOPT_HTTPHEADER => array(
-			'Authorization: Basic YWtiYXI6d2lyYWlzeQ==',
-			'Cookie: JSESSIONID=FD38B83E815FFB9CF9679BEDB65BAF71'
+			'Authorization: Basic YWtiYXI6d2lyYWlzeQ=='
 		),
 		));
 
@@ -116,7 +137,7 @@ class Produkandalan extends MY_Controller {
 
         $response = json_decode($response, true);
 
-		if (isset($response['status'])) {
+		if ($response['status'] === 500) {
 			$this->session->set_flashdata('errorMsg', 'Produk Gagal Dihapus');
 			redirect('produkandalan');
         } else {
@@ -124,6 +145,53 @@ class Produkandalan extends MY_Controller {
 			redirect('produkandalan');
 		}	
 	}
+
+	public function tambahimg(){
+		$kodeid = $this->input->post('kodeid', true);
+		$filename = $_FILES['img-produk']['tmp_name'];
+		list($width, $height, $type, $attr) = getimagesize($_FILES['img-produk']['tmp_name']);
+		
+		// Move uploaded file to a temp location
+		$uploadDir = $_SERVER['DOCUMENT_ROOT'].'/ClientReta/admin/assets/uploads/';
+		$uploadFile = $uploadDir . basename($_FILES['img-produk']['name']);
+		if (move_uploaded_file($_FILES['img-produk']['tmp_name'], $uploadFile))
+		{
+			// Execute remote upload
+			$curl = curl_init();
+
+			curl_setopt_array($curl, array(
+				CURLOPT_URL => 'https://api-reta.id/reta-api/Produk/upload/:file/'.$kodeid.'/'.$width.'/'.$height,
+				CURLOPT_RETURNTRANSFER => true,
+				CURLOPT_ENCODING => '',
+				CURLOPT_MAXREDIRS => 10,
+				CURLOPT_TIMEOUT => 0,
+				CURLOPT_SSL_VERIFYHOST => 0,
+				CURLOPT_SSL_VERIFYPEER => 0,
+				CURLOPT_FOLLOWLOCATION => true,
+				CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				CURLOPT_CUSTOMREQUEST => 'POST',
+				CURLOPT_POSTFIELDS => array('file'=> new CURLFILE($uploadFile, 'image/jpg')),
+				CURLOPT_HTTPHEADER => array(
+					'Content-Type: multipart/form-data',
+					'Authorization: Basic YWtiYXI6d2lyYWlzeQ==',
+				),
+			));
+
+			$response = curl_exec($curl);
+			curl_close($curl);
+
+			// Now delete local temp file
+			unlink($uploadFile);
+			// die(var_dump($response));
+		}
+		else
+		{
+			echo "Possible file upload attack!\n";
+		}
+		
+		redirect('produkandalan');
+	}
 }
+
 
 

@@ -19,11 +19,13 @@ class Import extends CI_Controller {
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-        CURLOPT_URL => 'http://api-reta.id/reta-api/Produk/importcsvproduk',
+        CURLOPT_URL => 'https://api-reta.id/reta-api/Produk/importcsvproduk',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
         CURLOPT_TIMEOUT => 0,
+		CURLOPT_SSL_VERIFYHOST => 0,
+		CURLOPT_SSL_VERIFYPEER => 0,
         CURLOPT_FOLLOWLOCATION => true,
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'POST',
@@ -39,7 +41,7 @@ class Import extends CI_Controller {
 
         $response = json_decode($response, true);
 
-		if (isset($response['status'])) {
+		if ($response['status'] === 500) {
 			$this->session->set_flashdata('errorMsg', 'Import Produk Gagal');
 			redirect('import');
         } else {
@@ -55,13 +57,15 @@ class Import extends CI_Controller {
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-        CURLOPT_URL => 'http://api-reta.id/reta-api/PasienAPI/importcsvpasien',
+        CURLOPT_URL => 'https://api-reta.id/reta-api/PasienAPI/importcsvpasien',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
         CURLOPT_TIMEOUT => 0,
         CURLOPT_FOLLOWLOCATION => true,
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_SSL_VERIFYHOST => 0,
+		CURLOPT_SSL_VERIFYPEER => 0,
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS => array('file'=> new CURLFILE($filepasien)),
         CURLOPT_HTTPHEADER => array(
@@ -75,7 +79,7 @@ class Import extends CI_Controller {
 
         $response = json_decode($response, true);
 
-		if (isset($response['status'])) {
+		if ($response['status'] === 500) {
 			$this->session->set_flashdata('errorMsg', 'Import Pasien Gagal');
 			redirect('import');
         } else {

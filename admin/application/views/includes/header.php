@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   <title>DASHBOARD | Reta Beauty Clinic</title>
   <link rel="icon" href="<?= base_url() ?>assets/img/brand/favicon.png" >
 
@@ -38,10 +39,14 @@
   <!-- Select -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 
+  <!-- Magnific PopUp -->
+  <link rel="stylesheet" href="<?= base_url(); ?>/assets/js/magnific-popup/magnific-popup.css">  
+
   <!-- Toast -->
   <link rel="stylesheet" href="<?= base_url() ?>assets/js/toastr/toastr.min.css">
   
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="<?= base_url() ?>assets/js/core/jquery.min.js"></script>
 
   <style>
     ::-webkit-scrollbar {
@@ -166,12 +171,18 @@
                 <br>
                 <h5>Menu Khusus</h5>
                 <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="<?= site_url('admin') ?>">
-                    <i class="fas fa-users text-default"></i>
-                    <span class="nav-link-text">Tambah Admin</span>
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= site_url('admin') ?>">
+                        <i class="fas fa-user-tie text-default"></i>
+                        <span class="nav-link-text">Tambah Admin</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= site_url('pasien') ?>">
+                        <i class="fas fa-users text-default"></i>
+                        <span class="nav-link-text">Data Pasien</span>
+                        </a>
+                    </li>
                 </ul>
                 <hr>
                 <div style="text-align: center;">
@@ -233,182 +244,170 @@
                     <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-comment-dots"></i>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-xl  dropdown-menu-right  py-0 overflow-hidden">
-                    <!-- Dropdown header -->
-                    <div class="px-3 py-3">
-                        <h6 class="text-sm text-muted m-0">Kamu menerima <strong class="text-primary">5</strong> chat baru.</h6>
-                    </div>
-                    <!-- List group -->
-                    <div class="list-group list-group-flush">
-                        <a href="#!" class="list-group-item list-group-item-action">
-                        <div class="row align-items-center">
-                            <div class="col-auto">
-                            <!-- Avatar -->
-                            <img alt="Image placeholder" src="<?= base_url() ?>assets/img/theme/team-1.jpg" class="avatar rounded-circle">
-                            </div>
-                            <div class="col ml--2">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                <h4 class="mb-0 text-sm">John Snow</h4>
-                                </div>
-                                <div class="text-right text-muted">
-                                <small>2 hrs ago</small>
-                                </div>
-                            </div>
-                            <p class="text-sm mb-0">Bagaimana ini belinya?</p>
-                            </div>
+                    <!-- <div class="dropdown-menu dropdown-menu-xl  dropdown-menu-right  py-0 overflow-hidden">
+                        <div class="px-3 py-3">
+                            <h6 class="text-sm text-muted m-0">Kamu menerima <strong class="text-primary">5</strong> chat baru.</h6>
                         </div>
-                        </a>
-                        <a href="#!" class="list-group-item list-group-item-action">
-                        <div class="row align-items-center">
-                            <div class="col-auto">
-                            <!-- Avatar -->
-                            <img alt="Image placeholder" src="<?= base_url() ?>assets/img/theme/team-2.jpg" class="avatar rounded-circle">
-                            </div>
-                            <div class="col ml--2">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                <h4 class="mb-0 text-sm">Sansa Stark</h4>
+                        <div class="list-group list-group-flush">
+                            <a href="#!" class="list-group-item list-group-item-action">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                <img alt="Image placeholder" src="<?= base_url() ?>assets/img/theme/team-1.jpg" class="avatar rounded-circle">
                                 </div>
-                                <div class="text-right text-muted">
-                                <small>3 hrs ago</small>
+                                <div class="col ml--2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                    <h4 class="mb-0 text-sm">John Snow</h4>
+                                    </div>
+                                    <div class="text-right text-muted">
+                                    <small>2 hrs ago</small>
+                                    </div>
+                                </div>
+                                <p class="text-sm mb-0">Bagaimana ini belinya?</p>
                                 </div>
                             </div>
-                            <p class="text-sm mb-0">Terima kasih</p>
+                            </a>
+                            <a href="#!" class="list-group-item list-group-item-action">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                <img alt="Image placeholder" src="<?= base_url() ?>assets/img/theme/team-2.jpg" class="avatar rounded-circle">
+                                </div>
+                                <div class="col ml--2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                    <h4 class="mb-0 text-sm">Sansa Stark</h4>
+                                    </div>
+                                    <div class="text-right text-muted">
+                                    <small>3 hrs ago</small>
+                                    </div>
+                                </div>
+                                <p class="text-sm mb-0">Terima kasih</p>
+                                </div>
                             </div>
+                            </a>
+                            <a href="#!" class="list-group-item list-group-item-action">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                <img alt="Image placeholder" src="<?= base_url() ?>assets/img/theme/team-3.jpg" class="avatar rounded-circle">
+                                </div>
+                                <div class="col ml--2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                    <h4 class="mb-0 text-sm">Arya Stark</h4>
+                                    </div>
+                                    <div class="text-right text-muted">
+                                    <small>5 hrs ago</small>
+                                    </div>
+                                </div>
+                                <p class="text-sm mb-0">Saya sudah bayar, lalu bagaimana?</p>
+                                </div>
+                            </div>
+                            </a>
+                            <a href="#!" class="list-group-item list-group-item-action">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                <img alt="Image placeholder" src="<?= base_url() ?>assets/img/theme/team-4.jpg" class="avatar rounded-circle">
+                                </div>
+                                <div class="col ml--2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                    <h4 class="mb-0 text-sm">Daenerys</h4>
+                                    </div>
+                                    <div class="text-right text-muted">
+                                    <small>2 hrs ago</small>
+                                    </div>
+                                </div>
+                                <p class="text-sm mb-0">Halo?</p>
+                                </div>
+                            </div>
+                            </a>
+                            <a href="#!" class="list-group-item list-group-item-action">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                <img alt="Image placeholder" src="<?= base_url() ?>assets/img/theme/team-5.jpg" class="avatar rounded-circle">
+                                </div>
+                                <div class="col ml--2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                    <h4 class="mb-0 text-sm">Missandei</h4>
+                                    </div>
+                                    <div class="text-right text-muted">
+                                    <small>3 hrs ago</small>
+                                    </div>
+                                </div>
+                                <p class="text-sm mb-0">Bisakah saya mendaftar jadi member lewat sini?</p>
+                                </div>
+                            </div>
+                            </a>
                         </div>
-                        </a>
-                        <a href="#!" class="list-group-item list-group-item-action">
-                        <div class="row align-items-center">
-                            <div class="col-auto">
-                            <!-- Avatar -->
-                            <img alt="Image placeholder" src="<?= base_url() ?>assets/img/theme/team-3.jpg" class="avatar rounded-circle">
-                            </div>
-                            <div class="col ml--2">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                <h4 class="mb-0 text-sm">Arya Stark</h4>
-                                </div>
-                                <div class="text-right text-muted">
-                                <small>5 hrs ago</small>
-                                </div>
-                            </div>
-                            <p class="text-sm mb-0">Saya sudah bayar, lalu bagaimana?</p>
-                            </div>
-                        </div>
-                        </a>
-                        <a href="#!" class="list-group-item list-group-item-action">
-                        <div class="row align-items-center">
-                            <div class="col-auto">
-                            <!-- Avatar -->
-                            <img alt="Image placeholder" src="<?= base_url() ?>assets/img/theme/team-4.jpg" class="avatar rounded-circle">
-                            </div>
-                            <div class="col ml--2">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                <h4 class="mb-0 text-sm">Daenerys</h4>
-                                </div>
-                                <div class="text-right text-muted">
-                                <small>2 hrs ago</small>
-                                </div>
-                            </div>
-                            <p class="text-sm mb-0">Halo?</p>
-                            </div>
-                        </div>
-                        </a>
-                        <a href="#!" class="list-group-item list-group-item-action">
-                        <div class="row align-items-center">
-                            <div class="col-auto">
-                            <!-- Avatar -->
-                            <img alt="Image placeholder" src="<?= base_url() ?>assets/img/theme/team-5.jpg" class="avatar rounded-circle">
-                            </div>
-                            <div class="col ml--2">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                <h4 class="mb-0 text-sm">Missandei</h4>
-                                </div>
-                                <div class="text-right text-muted">
-                                <small>3 hrs ago</small>
-                                </div>
-                            </div>
-                            <p class="text-sm mb-0">Bisakah saya mendaftar jadi member lewat sini?</p>
-                            </div>
-                        </div>
-                        </a>
-                    </div>
-                    </div>
+                    </div> -->
                 </li>
-                <li class="nav-item dropdown">
+                <!-- <li class="nav-item dropdown">
                     <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="far fa-bell"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-xl  dropdown-menu-right  py-0 overflow-hidden">
-                    <!-- Dropdown header -->
-                    <div class="px-3 py-3">
-                        <h6 class="text-sm text-muted m-0">Kamu mendapat <strong class="text-primary">3</strong> pemberitahuan</h6>
-                    </div>
-                    <!-- List group -->
-                    <div class="list-group list-group-flush">
-                        <a href="#!" class="list-group-item list-group-item-action">
-                        <div class="row align-items-center">
-                            <div class="col-auto">
-                            <!-- Avatar -->
-                            <img alt="Image placeholder" src="<?= base_url() ?>assets/img/theme/team-1.jpg" class="avatar rounded-circle">
-                            </div>
-                            <div class="col ml--2">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                <h4 class="mb-0 text-sm">Member Missandei</h4>
-                                </div>
-                                <div class="text-right text-muted">
-                                <small>2 hrs ago</small>
-                                </div>
-                            </div>
-                            <p class="text-sm mb-0">telah mengirimkan bukti pembayaran</p>
-                            </div>
+                        <div class="px-3 py-3">
+                            <h6 class="text-sm text-muted m-0">Kamu mendapat <strong class="text-primary">3</strong> pemberitahuan</h6>
                         </div>
-                        </a>
-                        <a href="#!" class="list-group-item list-group-item-action">
-                        <div class="row align-items-center">
-                            <div class="col-auto">
-                            <!-- Avatar -->
-                            <img alt="Image placeholder" src="<?= base_url() ?>assets/img/theme/team-2.jpg" class="avatar rounded-circle">
-                            </div>
-                            <div class="col ml--2">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                <h4 class="mb-0 text-sm">Member John Snow</h4>
+                        <div class="list-group list-group-flush">
+                            <a href="#!" class="list-group-item list-group-item-action">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                <img alt="Image placeholder" src="<?= base_url() ?>assets/img/theme/team-1.jpg" class="avatar rounded-circle">
                                 </div>
-                                <div class="text-right text-muted">
-                                <small>3 hrs ago</small>
+                                <div class="col ml--2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                    <h4 class="mb-0 text-sm">Member Missandei</h4>
+                                    </div>
+                                    <div class="text-right text-muted">
+                                    <small>2 hrs ago</small>
+                                    </div>
+                                </div>
+                                <p class="text-sm mb-0">telah mengirimkan bukti pembayaran</p>
                                 </div>
                             </div>
-                            <p class="text-sm mb-0">belum membayar pesanan</p>
+                            </a>
+                            <a href="#!" class="list-group-item list-group-item-action">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                <img alt="Image placeholder" src="<?= base_url() ?>assets/img/theme/team-2.jpg" class="avatar rounded-circle">
+                                </div>
+                                <div class="col ml--2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                    <h4 class="mb-0 text-sm">Member John Snow</h4>
+                                    </div>
+                                    <div class="text-right text-muted">
+                                    <small>3 hrs ago</small>
+                                    </div>
+                                </div>
+                                <p class="text-sm mb-0">belum membayar pesanan</p>
+                                </div>
                             </div>
+                            </a>
+                            <a href="#!" class="list-group-item list-group-item-action">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                <img alt="Image placeholder" src="<?= base_url() ?>assets/img/theme/team-3.jpg" class="avatar rounded-circle">
+                                </div>
+                                <div class="col ml--2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                    <h4 class="mb-0 text-sm">Member Arya Stark</h4>
+                                    </div>
+                                    <div class="text-right text-muted">
+                                    <small>5 hrs ago</small>
+                                    </div>
+                                </div>
+                                <p class="text-sm mb-0">telah melakukan pembayaran via gateway</p>
+                                </div>
+                            </div>
+                            </a>
                         </div>
-                        </a>
-                        <a href="#!" class="list-group-item list-group-item-action">
-                        <div class="row align-items-center">
-                            <div class="col-auto">
-                            <!-- Avatar -->
-                            <img alt="Image placeholder" src="<?= base_url() ?>assets/img/theme/team-3.jpg" class="avatar rounded-circle">
-                            </div>
-                            <div class="col ml--2">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                <h4 class="mb-0 text-sm">Member Arya Stark</h4>
-                                </div>
-                                <div class="text-right text-muted">
-                                <small>5 hrs ago</small>
-                                </div>
-                            </div>
-                            <p class="text-sm mb-0">telah melakukan pembayaran via gateway</p>
-                            </div>
-                        </div>
-                        </a>
                     </div>
-                    </div>
-                </li>
+                </li> -->
             </ul>
             <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
                 <li class="nav-item dropdown">
@@ -418,7 +417,7 @@
                         <img alt="Image placeholder" src="<?= base_url() ?>assets/img/theme/team-4.jpg">
                         </span>
                         <div class="media-body  ml-2  d-none d-lg-block">
-                            <span class="mb-0 text-sm  font-weight-bold">John Snow</span>
+                            <span class="mb-0 text-sm  font-weight-bold">Hai, <?= $this->session->userdata('data_admin_reta')['name'] ?></span>
                         </div>
                     </div>
                     </a>
@@ -427,7 +426,7 @@
                             <h6 class="text-overflow m-0">Welcome!</h6>
                         </div>
                         <div class="dropdown-divider"></div>
-                        <a href="<?= site_url('logout') ?>" class="dropdown-item">
+                        <a href="<?= site_url('auth/logout') ?>" class="dropdown-item">
                             <i class="ni ni-user-run"></i>
                             <span>Logout</span>
                         </a>

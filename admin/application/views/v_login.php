@@ -23,9 +23,34 @@
   <!-- Chat CSS & Links -->
   <link rel="stylesheet" href="<?= base_url() ?>assets/css/chat.css" type="text/css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" />
+  
+  <!-- Toast -->
+  <link rel="stylesheet" href="<?= base_url() ?>assets/js/toastr/toastr.min.css">
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 </head>
+
+<?php
+  $error = $this->session->flashdata('error');
+  if ($error) {
+  ?>
+    <script type="text/javascript">
+        $(function() {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+          });
+
+          Toast.fire({
+            icon: 'error',
+            title: '&nbsp;<?php echo $error ?>'
+          })
+        });
+    </script>
+  <?php }
+  ?>
 
 <style>
     .field-icon {
@@ -68,50 +93,50 @@
                         <div class="text-center text-muted mb-4">
                         <small>Login</small>
                         </div>
-                        <form role="form">
-                        <div class="form-group mb-3">
-                            <div class="input-group input-group-merge input-group-alternative">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                        <form action="<?= base_url() ?>auth/auth" method="POST">
+                            <div class="form-group mb-3">
+                                <div class="input-group input-group-merge input-group-alternative">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                                </div>
+                                <input class="form-control" name="username" id="username" placeholder="Username" type="text">
+                                </div>
                             </div>
-                            <input class="form-control" placeholder="Email" type="email">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group input-group-merge input-group-alternative">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                            </div>
-                            <input class="form-control" placeholder="Password" id="password" type="password">
-                            <span class="field-icon">
-                                <script>
-                                    function pswVisibilty(){
-                                        var x = document.getElementById("password");
-                                        var element = document.getElementById("togglePsw");
-                                        if (x.type === "password") {
-                                            x.type = "text";
-                                            element.classList.remove("toggle-password");
-                                            element.classList.add("toggle-password-after");
-                                        } else {
-                                            x.type = "password";
-                                            element.classList.remove("toggle-password-after");
-                                            element.classList.add("toggle-password");
+                            <div class="form-group">
+                                <div class="input-group input-group-merge input-group-alternative">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                                </div>
+                                <input class="form-control" placeholder="Password" name="password" id="password" type="password">
+                                <span class="field-icon">
+                                    <script>
+                                        function pswVisibilty(){
+                                            var x = document.getElementById("password");
+                                            var element = document.getElementById("togglePsw");
+                                            if (x.type === "password") {
+                                                x.type = "text";
+                                                element.classList.remove("toggle-password");
+                                                element.classList.add("toggle-password-after");
+                                            } else {
+                                                x.type = "password";
+                                                element.classList.remove("toggle-password-after");
+                                                element.classList.add("toggle-password");
+                                            }
                                         }
-                                    }
-                                </script>
-                                <i class="fas fa-eye toggle-password" id="togglePsw" onclick="pswVisibilty()"></i>
-                            </span>
+                                    </script>
+                                    <i class="fas fa-eye toggle-password" id="togglePsw" onclick="pswVisibilty()"></i>
+                                </span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="custom-control custom-control-alternative custom-checkbox">
-                            <input class="custom-control-input" id="rememberMe" type="checkbox" value="lsRememberMe">
-                            <label class="custom-control-label" for="rememberMe">
-                            <span class="text-muted">Ingatkan saya?</span>
-                            </label>
-                        </div>
-                        <div class="text-center">
-                            <button type="button" class="btn btn-primary my-4">Login</button>
-                        </div>
+                            <div class="custom-control custom-control-alternative custom-checkbox">
+                                <input class="custom-control-input" id="rememberMe" type="checkbox" value="lsRememberMe">
+                                <label class="custom-control-label" for="rememberMe">
+                                <span class="text-muted">Ingat saya?</span>
+                                </label>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary my-4">Login</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -119,6 +144,30 @@
         </div>
     </div>
 </div>
+
+    <!-- Script Remember Me -->
+    <script>
+        const rmCheck = document.getElementById("rememberMe"),
+        emailInput = document.getElementById("username");
+
+        if (localStorage.checkbox && localStorage.checkbox !== "") {
+          rmCheck.setAttribute("checked", "checked");
+          emailInput.value = localStorage.username;
+        } else {
+          rmCheck.removeAttribute("checked");
+          emailInput.value = "";
+        }
+
+        function lsRememberMe() {
+          if (rmCheck.checked && emailInput.value !== "") {
+            localStorage.username = emailInput.value;
+            localStorage.checkbox = rmCheck.value;
+          } else {
+            localStorage.username = "";
+            localStorage.checkbox = "";
+          }
+        }
+    </script>
 
 <!-- Argon Scripts -->
 <!-- Core -->
@@ -132,6 +181,10 @@
 <script src="<?= base_url() ?>assets/vendor/chart.js/dist/Chart.extension.js"></script>
 <!-- Argon JS -->
 <script src="<?= base_url() ?>assets/js/argon.js?v=1.2.0"></script>
+<!-- Toast -->
+<script src="<?= base_url() ?>assets/js/toastr/toastr.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 
 </body>

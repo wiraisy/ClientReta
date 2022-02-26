@@ -84,4 +84,3 @@ $route['import-data'] = 'import';
 
 // Auth
 $route['login'] = 'auth/login';
-$route['logout'] = 'auth/logout';
