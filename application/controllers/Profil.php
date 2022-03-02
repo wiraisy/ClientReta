@@ -3,6 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Profil extends MY_Controller {
 
+	public function __construct(){
+        parent::__construct();
+        $this->load->model('ModelChat');
+    }
+
 	public function info_akun()
 	{
 		// Check Session
@@ -11,6 +16,7 @@ class Profil extends MY_Controller {
 		}
 		
 		$id_pasien = $this->session->userdata('data_user_reta')['data']['id_pasien'];
+
 		$url = 'https://api-reta.id/reta-api/AlamatKirimAPI/GetAlamatbyidpasien/'.$id_pasien;
         $method = 'GET';
         $dataAlamat = $this->SendRequest($url, $method);
@@ -33,6 +39,9 @@ class Profil extends MY_Controller {
 		$response = curl_exec($curl);
 		$dataProvinsi = json_decode($response, true);
 
+		$custid = $this->session->userdata('data_user_reta')['data']['custid'];
+
+        $data['dataChatPasien'] =$this->ModelChat->get_user($custid);
         $data['barTitle'] = "My Profile";
 		$data['dataAlamat'] = $dataAlamat;
 		$data['dataProvinsi'] = $dataProvinsi;
@@ -49,10 +58,19 @@ class Profil extends MY_Controller {
 			return redirect(base_url() . 'auth');
 		}
 
+		$id_pasien = $this->session->userdata('data_user_reta')['data']['id_pasien'];
+
+		$url = 'https://api-reta.id/reta-api/Penjualan/getallpenjualanfilter?id_pasien='.$id_pasien;
+        $method = 'GET';
+        $dataPenjualan = $this->SendRequest($url, $method);
+		$custid = $this->session->userdata('data_user_reta')['data']['custid'];
+
+        $data['dataChatPasien'] =$this->ModelChat->get_user($custid);
         $data['barTitle'] = "My Cart";
+		$data['dataPenjualan'] = $dataPenjualan;
 
         $this->load->view('includes/header', $data);
-		$this->load->view('v_pesanan');
+		$this->load->view('v_pesanan', $data);
         $this->load->view('includes/footer');
 	}
 

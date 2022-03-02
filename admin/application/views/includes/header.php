@@ -30,7 +30,6 @@
   <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css">
 
   <!-- Chat CSS & Links -->
-  <link rel="stylesheet" href="<?= base_url() ?>assets/css/chat.css" type="text/css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" />
 
   <!-- Select2 -->
@@ -241,7 +240,7 @@
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link" href="<?= site_url('chat') ?>" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-comment-dots"></i>
                     </a>
                     <!-- <div class="dropdown-menu dropdown-menu-xl  dropdown-menu-right  py-0 overflow-hidden">

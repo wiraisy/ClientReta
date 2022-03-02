@@ -36,6 +36,19 @@
     <script src="<?= base_url() ?>assets/js/plugins/moment.min.js"></script>
     <script src="<?= base_url() ?>assets/js/plugins/datetimepicker.js" type="text/javascript"></script>
     <script src="<?= base_url() ?>assets/js/plugins/bootstrap-datepicker.min.js"></script>
+    <!-- DataTables -->
+    <script src="<?= base_url() ?>assets/js/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="<?= base_url() ?>assets/js/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#datatable-basic').DataTable( {
+                "pagingType": "numbers"
+            } );
+        } );
+    </script>
+
+<!-- Chat RealTime -->
+<?php include('chat.php'); ?>
 
 </body>
 </html>

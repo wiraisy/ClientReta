@@ -85,13 +85,6 @@
         }
     }
 </style>
-<script>
-    function removeProduct(custid, kodeid){
-        console.log(kodeid);
-        // $(`#${kodeid}`).remove();
-        // return false;
-    }
-</script>
 <div class="section">
     <div class="container">
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -127,16 +120,17 @@
                         <div class="modal-content">
                             <div class="modal-body p-0">
                                 <div class="card-header bg-white pb-5">
-                                    <form method="POST" action="<?= base_url() ?>transaksi/">
+                                    <form method="POST" action="<?= base_url() ?>transaksi/addAlamatKirim">
+                                        <input type="hidden" name="idAlamatKirim" value="<?= ($dataAlamat) ? $dataAlamat[0]['idkirim'] : '' ?>">
                                         <input type="hidden" id="idpasien" value="<?= $this->session->userdata('data_user_reta')['data']['id_pasien'] ?>">
                                         <div class="col-md-12 mt-2">
                                             <label class="labels">Alamat Penerima</label>
-                                            <textarea class="form-control" id="alamatpenerima" required="true" placeholder="Masukkan Alamat Penerima" rows="3"></textarea>
+                                            <textarea class="form-control" id="alamatpenerima" name="alamat" required="true" placeholder="Masukkan Alamat Penerima" rows="3"><?= ($dataAlamat) ? $dataAlamat[0]['alamat'] : '' ?></textarea>
                                         </div>
                                         <div class="col-md-12 mt-2">
                                             <label for="pilih-produk">Pilih Provinsi</label>
-                                            <select class="form-control" name="selectProvinsi" id="selectProvinsi">
-                                                <option value="" selected disabled>Pilih Provinsi</option>
+                                            <select class="form-control" name="selectProvinsi" id="selectProvinsi" required>
+                                            <option value="<?= ($dataAlamat) ? $dataAlamat[0]['idpropinsi'] : '' ?>" selected><?= ($dataAlamat) ? $dataAlamat[0]['propinsi'] : 'Pilih Provinsi' ?></option>
                                                 <?php if($dataProvinsi['rajaongkir']['status']['code']===200){ ?>
                                                     <?php foreach ($dataProvinsi['rajaongkir']['results'] as $row_dataProvinsi) { ?>
                                                         <option value="<?= $row_dataProvinsi['province_id'] ?>"><?= $row_dataProvinsi['province'] ?></option>
@@ -145,18 +139,26 @@
                                                         <option disabled>Data Provinsi Tidak Tersedia</option>
                                                 <?php } ?>
                                             </select>
+                                            <input type="hidden" name="provinsi" id="hiddenProvinsi">
+                                            <script>
+                                                document.getElementById('hiddenProvinsi').value=$('#selectProvinsi').find(":selected").text();
+                                            </script>
                                         </div>
                                         <div class="col-md-12 mt-2">
                                             <label for="pilih-produk">Pilih Kota / Kabupaten</label>
-                                            <select class="form-control" name="selectKota" id="selectKota">
-                                                <option value="" selected disabled>Pilih Kota / Kabupaten</option>
+                                            <select class="form-control" name="selectKota" id="selectKota" onchange="document.getElementById('hiddenKabupaten').value=this.options[this.selectedIndex].text" required>
+                                                <option value="<?= ($dataAlamat) ? $dataAlamat[0]['idkabupaten'] : '' ?>" selected><?= ($dataAlamat) ? $dataAlamat[0]['kabupaten'] : 'Pilih Kota / Kabupaten' ?></option>
                                             </select>
+                                            <input type="hidden" name="kabupaten" id="hiddenKabupaten">
+                                            <script>
+                                                document.getElementById('hiddenKabupaten').value=$('#selectKota').find(":selected").text();
+                                            </script>
                                         </div>
                                         <br>
-                                    </form>
                                     <div class="text-center">
                                         <button type="button" class="btn btn-secondary my-4" data-dismiss="modal">Batal</button><button type="submit" id="addAlamatKirim" class="btn btn-primary my-4">Simpan</button>
                                     </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -166,7 +168,7 @@
         </div>
     </div>
     <br>
-    <div class="container">
+    <div class="container section-cart-checkout">
         <?php if($datacart){ ?>
             <input type="hidden" value="<?php 
                 $allQty = 0;
@@ -175,7 +177,7 @@
                 };
                 echo $allQty; ?>" id="countAllQty">
             <?php foreach ($datacart as $row) { ?>
-                <div class="form-group" id="<?= $row['kodeid'] ?>">
+                <div class="form-group main-cart" id="<?= $row['kodeid'] ?>">
                     <div class="row align-items-center bg-secondary mt-2 py-4">
                         <div class="col-md-4 product-img text-center">
                             <?php 
@@ -209,43 +211,71 @@
                             <div class="number my-4">
                                 <input class="mx-2" id="qty-<?= $row['kodeid'] ?>" type="number" value="<?= $row['jumlah'] ?>" disabled/>
                             </div>
-                            <button class="btn btn-danger btn-sm mt-1" id="remove-<?= $row['kodeid'] ?>"><i class="fa fa-trash"></i><span> Hapus dari Keranjang</span></button>
-                            <script>
-                                $(`#remove-<?= $row['kodeid'] ?>`).click(function() {
-                                    var xhr = new XMLHttpRequest();
-                                    xhr.open("DELETE", "https://api-reta.id/reta-api/Penjualan/removedetailfromcart/<?= $this->session->userdata('data_user_reta')['data']['custid'] ?>/<?= $row['kodeid'] ?>");
-                                    xhr.setRequestHeader("Authorization", "Basic YWtiYXI6d2lyYWlzeQ==");
-                                    xhr.send();
-                                    $(`#<?= $row['kodeid'] ?>`).remove();
-                                    
-                                    alert("Produk dihapus dari keranjang.");
-
-                                    var settingscart = {
-                                        "url": "https://api-reta.id/reta-api/Penjualan/lihatcart/<?= $this->session->userdata('data_user_reta')['data']['custid'] ?>",
-                                        "method": "GET",
-                                        "timeout": 0,
-                                        "async": false,
-                                        "headers": {
-                                            "Authorization": "Basic YWtiYXI6d2lyYWlzeQ=="
-                                        },
-                                    };
-                                    var datacart = $.ajax(settingscart).done(function(response) {
-                                        return response;
-                                    }).responseJSON;
-                                    document.getElementById('cartProduct').dataset.count = parseInt(datacart.length);
-                                    return false;
-                                });
-                            </script>
+                            <div class="buttonaksi" style="display: flex;">
+                                <a data-toggle="modal" data-target="#updateQty<?= $row['kodeid'] ?>" type="button" class="btn btn-success btn-sm mt-1"><i class="fa fa-pencil"></i><span> Edit Jumlah</span></a>
+                                <!-- Modal -->
+                                <div class="modal fade" id="updateQty<?= $row['kodeid'] ?>" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="editModalLabel">Update Jumlah Produk <strong><?= $row['namabarang'] ?></strong> </h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="<?= base_url('transaksi/updateQty'); ?>" method="POST" >
+                                                    <div class="form-group text-center">
+                                                        <input type="hidden" name="kodeid" value="<?= $row['kodeid'] ?>">
+                                                        <input type="number" class="form-control" name="jumlah" min="1" style="width: 80%;" required>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-success">Save</button>
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-danger btn-sm mt-1" id="remove-<?= $row['kodeid'] ?>"><i class="fa fa-trash"></i><span> Hapus dari Keranjang</span></button>
+                                <script>
+                                    $(`#remove-<?= $row['kodeid'] ?>`).click(function() {
+                                        var xhr = new XMLHttpRequest();
+                                        xhr.onreadystatechange = function() {
+                                            if (xhr.readyState == 4) {
+                                                if (xhr.status == 200) {
+                                                    JSON.parse(xhr.responseText);
+                                                }
+                                            }
+                                        };
+                                        xhr.open("DELETE", "https://api-reta.id/reta-api/Penjualan/removedetailfromcart/<?= $this->session->userdata('data_user_reta')['data']['custid'] ?>/<?= $row['kodeid'] ?>");
+                                        xhr.setRequestHeader("Authorization", "Basic YWtiYXI6d2lyYWlzeQ==");
+                                        xhr.send();
+                                        $(`#<?= $row['kodeid'] ?>`).remove();
+                                        location.reload();
+                                        alert("Produk dihapus dari keranjang.");
+                                        var settingscart = {
+                                            "url": "https://api-reta.id/reta-api/Penjualan/lihatcart/<?= $this->session->userdata('data_user_reta')['data']['custid'] ?>",
+                                            "method": "GET",
+                                            "timeout": 0,
+                                            "async": false,
+                                            "headers": {
+                                                "Authorization": "Basic YWtiYXI6d2lyYWlzeQ=="
+                                            },
+                                        };
+                                        var datacart = $.ajax(settingscart).done(function(response) {
+                                            return response;
+                                        }).responseJSON;
+                                        document.getElementById('cartProduct').dataset.count = parseInt(datacart.length);
+                                    });
+                                </script>                                    
+                            </div>
                         </div>
                     </div>
                 </div>
             <?php } ?>
-        <?php } else{ ?>
-            <div class="text-center">
-                <h2>Anda belum menambahkan produk ke dalam keranjang anda.</h2>
-            </div>
-        <?php } ?>
-        <br>
+            <br>
         <div style="text-align: right;">
             <a href="<?= base_url(); ?>" button class="btn btn-icon btn-3 btn-outline-success" type="button">
                 <span class="btn-inner--icon"><i class="fas fa-cart-plus"></i></span>
@@ -316,12 +346,86 @@
                 <tr>
                     <td class="text-right"><h5>Biaya Pengiriman</h5></td>
                     <td class="pl-4"><h5 id="costPengiriman"></h5></td>
+                    <input type="hidden" class="costTotal">
                 </tr>
             </table>
+        <?php } else{ ?>
+            <div class="text-center">
+                <h2>Anda belum menambahkan produk ke dalam keranjang anda.</h2>
+                <a href="<?= base_url() ?>" class="btn btn-info btn-round mt-3">Beli Produk</a>
+            </div>
+        <?php } ?>
+        
             <nav class="navbar fixed-bottom navbar-light bg-white shadow">
                 <div class="container">
                     <h4 id="totalCost"></h4>
-                    <a href="<?= site_url('payment-product') ?>"button type="button" class="btn btn-warning btn-round">Lanjut Bayar</a>
+                    <input type="hidden" id="namaekspedisi">
+                    <button type="button" class="btn btn-warning btn-round" id="postPenjualan" onclick="postPenjualan()">Lanjut Bayar</button>
+                    <script>
+                        function postPenjualan() {
+                            const button = document.getElementById('postPenjualan');
+                            let checkField = document.getElementById("totalCost").innerHTML;
+                            let biayapengiriman = document.getElementsByClassName("costTotal").value;
+                            let idpasien = <?= $this->session->userdata('data_user_reta')['data']['id_pasien'] ?>;
+                            let custid = "<?= $this->session->userdata('data_user_reta')['data']['custid'] ?>";
+                            let idalamatkirim = <?= ($dataAlamat) ? $dataAlamat[0]['idkirim'] : '' ?>;
+                            let namaekspedisi = document.getElementById("namaekspedisi").value;
+
+                            if (checkField == "") {
+                                alert("Alamat Pengiriman, Keranjang, & Jasa Ekspedisi Tidak Boleh Kosong!");
+                                return false;
+                            } else {
+                                button.setAttribute('disabled', '');
+                                var settingsKodePenjualan = {
+                                    "url": "https://api-reta.id/reta-api/Penjualan/generatekodepenjualan",
+                                    "method": "GET",
+                                    "timeout": 0,
+                                    "async" : false,
+                                    "headers": {
+                                        "Authorization": "Basic YWtiYXI6d2lyYWlzeQ=="
+                                    },
+                                };
+                                var KodePenjualan = $.ajax(settingsKodePenjualan).done(function (res) {
+                                    return res;
+                                }).responseText;
+
+                                var settingsPost = {
+                                    "url": "https://api-reta.id/reta-api/Penjualan/Checkout",
+                                    "method": "POST",
+                                    "timeout": 0,
+                                    "async" : false,
+                                    "headers": {
+                                        "Content-Type": "application/json",
+                                        "Authorization": "Basic YWtiYXI6d2lyYWlzeQ=="
+                                    },
+                                    "data": JSON.stringify({
+                                        "biayapengiriman": biayapengiriman,
+                                        "idalamatkirim": idalamatkirim,
+                                        "idpasien": idpasien,
+                                        "kodetransaksi": KodePenjualan,
+                                        "namaexpedisi": namaekspedisi
+                                    }),
+                                };
+                                var responsePost = $.ajax(settingsPost).done(function (response) {
+                                    return response;
+                                }).responseJSON;
+
+                                var settingsEmpty = {
+                                    "url": "https://api-reta.id/reta-api/Penjualan/emptycartuser/"+custid,
+                                    "method": "DELETE",
+                                    "timeout": 0,
+                                    "async" : false,
+                                    "headers": {
+                                        "Authorization": "Basic YWtiYXI6d2lyYWlzeQ=="
+                                    },
+                                };
+                                var emptyCart = $.ajax(settingsEmpty).done(function (resEmpty) {
+                                    return resEmpty;
+                                });
+                                location.href = "<?= base_url() ?>payment-product";
+                            }
+                        }
+                    </script>
                 </div>
             </nav>
         </div> 

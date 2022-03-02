@@ -27,6 +27,9 @@
 
   <!-- Argon CSS Files -->
   <link href="<?= base_url() ?>assets/css/argon-design-system.css?v=1.2.2" rel="stylesheet" />
+
+  <!-- DataTables -->
+  <link rel="stylesheet" href="<?= base_url() ?>assets/js/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
   
   <!-- Select -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">

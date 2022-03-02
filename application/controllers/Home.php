@@ -3,6 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home extends MY_Controller {
 
+	public function __construct(){
+        parent::__construct();
+        $this->load->model('ModelChat');
+    }
+
 	public function index()
 	{
 		// Check Session
@@ -19,6 +24,9 @@ class Home extends MY_Controller {
         $method = 'GET';
         $produkandalan = $this->SendRequest($url, $method);
 
+		$custid = $this->session->userdata('data_user_reta')['data']['custid'];
+
+        $data['dataChatPasien'] =$this->ModelChat->get_user($custid);
         $data['barTitle'] = "Buy Products";
 		$data['produkumum'] = $produkumum;
 		$data['produkandalan'] = $produkandalan;

@@ -72,3 +72,6 @@ $route['my-transaction'] = 'profil/info_pesanan';
 
 // Product
 $route['product-detail/(:num)'] = 'product/detailProduct/$1';
+
+// Testing Database
+$route['testing'] = 'countdown';

@@ -49,7 +49,6 @@ $(document).ready(function() {
         var response = $.ajax(settings).done(function(response) {
             return response;
         }).responseJSON;
-
         var ongkosKirim;
         if (jasaEkspedisi == 'pos') {
             ongkosKirim = response.rajaongkir.results[0].costs[1].cost[0].value;

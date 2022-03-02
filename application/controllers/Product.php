@@ -3,6 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Product extends MY_Controller {
 
+	public function __construct(){
+        parent::__construct();
+        $this->load->model('ModelChat');
+    }
+
 	public function detailProduct($id_produk){
 		
 		// Check Session
@@ -14,7 +19,10 @@ class Product extends MY_Controller {
 		$url = "https://api-reta.id/reta-api/Produk/GetProdukbyId/$id_produk";
         $method = 'GET';
         $detailproduk = $this->SendRequest($url, $method);	
+		
+		$custid = $this->session->userdata('data_user_reta')['data']['custid'];
 
+        $data['dataChatPasien'] =$this->ModelChat->get_user($custid);
         $data['barTitle'] = "Detail Products";
 		$data['detailproduk'] = $detailproduk;
 

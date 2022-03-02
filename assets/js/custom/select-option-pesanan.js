@@ -138,8 +138,6 @@ $(document).ready(function() {
                     return response;
                 }).responseJSON;
 
-                console.log(datacart.length);
-
                 document.getElementById('cartProduct').dataset.count = parseInt(datacart.length);
 
                 return false;
@@ -165,7 +163,6 @@ $(document).ready(function() {
             document.getElementById(`remove-${selected_opt}`).onclick = function(e) {
                 $(`.${selected_opt}`).remove();
                 $("#selectPesananUmum").prop('selectedIndex', 0);
-                alert("Produk berhasil dihapus dari keranjang.");
             }
         };
     });
