@@ -27,7 +27,7 @@ class ModelChat extends CI_Model {
     function get_message($outgoing_id){
         $sql = "SELECT * FROM messages LEFT JOIN users ON users.custid = messages.outgoing_msg_id
         WHERE (outgoing_msg_id = '$outgoing_id' AND incoming_msg_id = 'ADMINCS')
-        OR (outgoing_msg_id = 'ADMINCS' AND incoming_msg_id = '$outgoing_id') ORDER BY msg_id DESC" ;
+        OR (outgoing_msg_id = 'ADMINCS' AND incoming_msg_id = '$outgoing_id') ORDER BY msg_id ASC" ;
         $query = $this->db->query($sql);
         $res = $query->result_array();
         $output = "";

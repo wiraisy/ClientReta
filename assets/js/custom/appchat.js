@@ -27,6 +27,15 @@ function startChat() {
         e.preventDefault();
     }
 
+    // Add & Remove Active Class in Chatbox Div
+    chatBox.onmouseenter = () => {
+        chatBox.classList.add("active");
+    }
+
+    chatBox.onmouseleave = () => {
+        chatBox.classList.remove("active");
+    }
+
     // Waktu ada inputan,button send aktif
     inputField.focus();
     inputField.onkeyup = () => {
@@ -45,7 +54,6 @@ function startChat() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
                     inputField.value = "";
-                    scrollToBottom();
                 }
             }
         }
@@ -67,8 +75,4 @@ function startChat() {
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhr.send("outgoing_id=" + custid);
     }, 500);
-
-    function scrollToBottom() {
-        chatBox.scrollTop = chatBox.scrollHeight;
-    }
 }

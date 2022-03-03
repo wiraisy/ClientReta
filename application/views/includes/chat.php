@@ -25,8 +25,8 @@
             </div>
             <?php } else { ?>
                 <!-- Else pengguna pernah chat / data mash tersimpan di database -->
-                <div class="chatbox__messages " id="chat-box">
-                    <div>
+                <div class="chatbox__messages " id="chatbox__messages">
+                    <div id="chat-box">
                     </div>
                 </div>
                 <div class="chatbox__footer">
@@ -43,11 +43,21 @@
                             inputField = form.querySelector(".input-field"),
                             sendBtn = form.querySelector("#sendBtn"),
                             custid = document.getElementById('custid').value,
+                            chatbox__messages = document.getElementById('chatbox__messages'),
                             chatBox = document.getElementById("chat-box");
 
                     // Preventing frorm Refresh Browser
                     form.onsubmit = (e) => {
                         e.preventDefault();
+                    }
+
+                    // Add & Remove Active Class in Chatbox Div
+                    chatBox.onmouseenter = () => {
+                        chatBox.classList.add("active");
+                    }
+
+                    chatBox.onmouseleave = () => {
+                        chatBox.classList.remove("active");
                     }
 
                     // Waktu ada inputan,button send aktif
@@ -68,7 +78,6 @@
                             if(xhr.readyState === XMLHttpRequest.DONE){
                                 if(xhr.status === 200){
                                     inputField.value = "";
-                                    scrollToBottom();
                                 }
                             }
                         }
@@ -84,6 +93,9 @@
                             if(xhr.status === 200){
                                 let data = xhr.response;
                                 chatBox.innerHTML = data;
+                                if(!chatBox.classList.contains("active")){
+                                    scrollToBottom();
+                                }
                             }
                         }
                         }
@@ -92,7 +104,7 @@
                     }, 500);
 
                     function scrollToBottom(){
-                        chatBox.scrollTop = chatBox.scrollHeight;
+                        chatbox__messages.scrollTop = chatbox__messages.scrollHeight;
                     }
                 </script>
             <?php } ?>  

@@ -35,25 +35,7 @@ function openMessage(custid) {
     xhrUser.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhrUser.send("incoming_id=" + custid);
 
-    setInterval(() => {
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", "chat/getmessage", true);
-        xhr.onload = () => {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    let data = xhr.response;
-                    chatApp.innerHTML = data;
-                }
-            }
-        }
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhr.send("incoming_id=" + custid);
-    }, 500);
-
-
-    // Insert Message
     const form = document.querySelector(".typing-area"),
-        outgoing_id = custid,
         inputField = document.getElementById("input-field"),
         sendBtn = document.getElementById("sendBtn"),
         chatBox = document.getElementById("chatApp");
@@ -61,6 +43,15 @@ function openMessage(custid) {
     // Preventing frorm Refresh Browser
     form.onsubmit = (e) => {
         e.preventDefault();
+    }
+
+    // Add & Remove Active Class in Chatbox Div
+    chatBox.onmouseenter = () => {
+        chatBox.classList.add("active");
+    }
+
+    chatBox.onmouseleave = () => {
+        chatBox.classList.remove("active");
     }
 
     // Waktu ada inputan,button send aktif
@@ -72,6 +63,25 @@ function openMessage(custid) {
             sendBtn.classList.remove("active");
         }
     }
+
+    // Get Message
+    setInterval(() => {
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "chat/getmessage", true);
+        xhr.onload = () => {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    let data = xhr.response;
+                    chatApp.innerHTML = data;
+                    if (!chatBox.classList.contains("active")) {
+                        scrollToBottom();
+                    }
+                }
+            }
+        }
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.send("incoming_id=" + custid);
+    }, 500);
 
     // Kirim Pesan
     sendBtn.onclick = () => {
