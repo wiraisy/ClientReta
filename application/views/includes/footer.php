@@ -42,7 +42,8 @@
     <script>
         $(document).ready(function() {
             $('#datatable-basic').DataTable( {
-                "pagingType": "numbers"
+                "pagingType": "numbers",
+                "ordering": false
             } );
         } );
     </script>
