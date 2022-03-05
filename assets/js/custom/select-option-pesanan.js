@@ -91,7 +91,7 @@ $(document).ready(function() {
                     img.src = url;
                 }
             });
-            xhr.open("GET", "https://api-reta.id/reta-api/Produk/getImagebykodeid/" + selected_opt);
+            xhr.open("GET", "https://api-reta.id/reta-api/Produk/getproductimagebykodeid/" + selected_opt);
             xhr.setRequestHeader("Authorization", "Basic YWtiYXI6d2lyYWlzeQ==");
             xhr.responseType = 'blob';
             xhr.send();
@@ -232,7 +232,7 @@ $(document).ready(function() {
                     img.src = url;
                 }
             });
-            xhr.open("GET", "https://api-reta.id/reta-api/Produk/getImagebykodeid/" + selected_opt);
+            xhr.open("GET", "https://api-reta.id/reta-api/Produk/getproductimagebykodeid/" + selected_opt);
             xhr.setRequestHeader("Authorization", "Basic YWtiYXI6d2lyYWlzeQ==");
             xhr.responseType = 'blob';
             xhr.send();

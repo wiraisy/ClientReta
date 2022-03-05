@@ -15,6 +15,11 @@ class Auth extends MY_Controller {
 
 	public function index()
 	{
+		// Check Session
+		if ($this->session->userdata('isLoggedIn_userReta')) {
+			return redirect(base_url());
+		}
+
         $data['barTitle'] = "SHOP";
 
 		$this->load->view('v_prelogin', $data);
@@ -114,11 +119,39 @@ class Auth extends MY_Controller {
 		if ($this->session->userdata('isLoggedIn_userReta')) {
 			return redirect(base_url());
 		}
+		$nohp = $this->input->post('hp1');
+		$curl = curl_init();
+		curl_setopt_array($curl, array(
+		CURLOPT_URL => 'https://api-reta.id/reta-api/PasienAPI/validasihppasien/'.$nohp,
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => '',
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 0,
+		CURLOPT_SSL_VERIFYHOST => 0,
+		CURLOPT_SSL_VERIFYPEER => 0,
+		CURLOPT_FOLLOWLOCATION => true,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => 'GET',
+		CURLOPT_HTTPHEADER => array(
+			'Authorization: Basic YWtiYXI6d2lyYWlzeQ=='
+		),
+		));
+		$response = curl_exec($curl);
+		$res = json_decode($response, true);
+		curl_close($curl);
+
+		if ($res['status'] === 500) {
+			$this->session->set_flashdata('errorMsg', 'Nomor Tidak Terdaftar');
+			redirect(base_url() . 'verifikasi-password');
+        } else {
+			$this->session->set_flashdata('successMsg', 'Verifikasi Berhasil');
+			redirect(base_url() . 'make-password/'.$res);
+		}	
+
 		
-		redirect(base_url() . 'auth/makepassword');
 	}
     
-    public function makepassword()
+    public function makepassword($id)
 	{
 		// Check Session
 		if ($this->session->userdata('isLoggedIn_userReta')) {
@@ -126,6 +159,7 @@ class Auth extends MY_Controller {
 		}
 
         $data['barTitle'] = "VERIFIKASI";
+		$data['id_pasien'] = $id;
 
 		$this->load->view('v_password', $data);
 	}
@@ -137,6 +171,29 @@ class Auth extends MY_Controller {
 			return redirect(base_url());
 		}
 		
+		$password = $this->input->post('password');
+		$id_pasien = $this->input->post('id_pasien');
+		
+		$curl = curl_init();
+		curl_setopt_array($curl, array(
+		CURLOPT_URL => "https://api-reta.id/reta-api/PasienAPI/ubahpasswordpasien/{$id_pasien}/".$password,
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => '',
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 0,
+		CURLOPT_SSL_VERIFYHOST => 0,
+		CURLOPT_SSL_VERIFYPEER => 0,
+		CURLOPT_FOLLOWLOCATION => true,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => 'PUT',
+		CURLOPT_HTTPHEADER => array(
+			'Authorization: Basic YWtiYXI6d2lyYWlzeQ=='
+		),
+		));
+		$response = curl_exec($curl);
+		curl_close($curl);
+		
+		$this->session->set_flashdata('successMsg', 'Silahkan Login Kembali');
 		redirect(base_url('auth'));
 	}
 

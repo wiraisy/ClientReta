@@ -160,7 +160,7 @@ class Produkandalan extends MY_Controller {
 			$curl = curl_init();
 
 			curl_setopt_array($curl, array(
-				CURLOPT_URL => 'https://api-reta.id/reta-api/Produk/upload/:file/'.$kodeid.'/'.$width.'/'.$height,
+				CURLOPT_URL => 'https://api-reta.id/reta-api/Produk/uploadproductimagetoserver/'.$kodeid.'/'.$width.'/'.$height,
 				CURLOPT_RETURNTRANSFER => true,
 				CURLOPT_ENCODING => '',
 				CURLOPT_MAXREDIRS => 10,

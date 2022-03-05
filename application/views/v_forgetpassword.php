@@ -31,7 +31,7 @@
     <script src="<?= base_url() ?>assets/js/core/jquery.min.js" type="text/javascript"></script>
 </head>
 <?php
-  $error = $this->session->flashdata('error');
+  $error = $this->session->flashdata('errorMsg');
   if ($error) {
   ?>
     <script type="text/javascript">
@@ -54,57 +54,50 @@
 <body>
     <section class="section section-shaped section-xxl" style="height: 100vh">
         <div class="shape shape-style-1 bg-gradient-pink">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
         <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-5">
-            <div class="card bg-secondary shadow border-0">
-                <div class="card-body px-lg-5 py-lg-3">
-                <div class="text-center text-muted mb-4">
-                    <img src="./assets/logo-300x167.png" width="200; alt="centered image">
-                    <br>
-                    <br>
-                    <medium>Sebelum memperbarui password silahkan isi kolom dibawah ini sesuai pada saat anda mendaftarkan diri menjadi Member Reta</medium>
-                </div>
-                <form method="POST" action="<?= base_url('auth/checkpassword') ?>">
-                    <div class="form-group mb-3">
-                    <div class="input-group input-group-alternative">
-                        <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="ni ni-credit-card"></i></span>
-                        </div>
-                        <input class="form-control" placeholder="Nomor KTP" type="number" name="noktp" required>
-                    </div>
-                    </div>
-                    <div class="form-group mb-3">  
-                    <div class="input-group input-group-alternative">
-                        <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="ni ni-mobile-button"></i></span>
-                        </div>
-                        <input class="form-control" placeholder="Nomor handphone" type="number" name="hp1" required>
-                    </div>
-                    </div>  
-                    </div>
-                    <div class="form-group focused">
-                    <div class="text-center">
-                    <button type="submit" button class="btn btn-warning btn-lg">Buat Password</button>
-                    <br>
-                    <br>                
-                    <br>
-                    <small>belum jadi member? <a href="<?= site_url('register') ?>">Daftar Sekarang</a></small>
-                    <br>
+          <div class="row justify-content-center">
+              <div class="col-lg-5">
+                <div class="card bg-secondary shadow border-0">
+                    <div class="card-body px-lg-5 py-lg-3">
+                      <div class="text-center text-muted mb-4">
+                          <img src="./assets/logo-300x167.png" width="200; alt="centered image">
+                          <br>
+                          <br>
+                          <medium>Sebelum memperbarui password silahkan isi kolom dibawah ini sesuai pada saat anda mendaftarkan diri menjadi Member Reta</medium>
+                      </div>
+                      <form method="POST" action="<?= base_url('auth/checkpassword') ?>">
+                          <div class="form-group mb-3">  
+                            <div class="input-group input-group-alternative">
+                                <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="ni ni-mobile-button"></i></span>
+                                </div>
+                                <input class="form-control" placeholder="Nomor handphone" type="number" name="hp1" required>
+                            </div>
+                          </div> 
+                          <div class="form-group focused">
+                            <div class="text-center">
+                              <button type="submit" button class="btn btn-warning btn-lg">Buat Password</button>
+                              <br>
+                              <br>                
+                              <br>
+                              <small>belum jadi member? <a href="<?= site_url('register') ?>">Daftar Sekarang</a></small>
+                              <br>
+                            </div>
+                          </div>
+                        </form>
                     </div>
                 </div>
-            </div>
-            </div>
-        </div>
+              </div>
+          </div>
         </div>
     </section>
 

@@ -65,6 +65,12 @@
         display: inline-block;
         vertical-align: middle;
     }
+    .title-product-car a{
+        color: #000;
+    }
+    .title-product-car a:hover{
+        color: grey;
+    }
     @media screen and (max-width: 768px) {
         .carousel-produk > img {
             width: 100px; /* You can set the dimensions to whatever you want */
@@ -152,7 +158,7 @@
                                                         $curl = curl_init();
 
                                                         curl_setopt_array($curl, array(
-                                                        CURLOPT_URL => 'https://api-reta.id/reta-api/Produk/getImagebykodeid/'.$row_produkandalan['kodeid'],
+                                                        CURLOPT_URL => 'https://api-reta.id/reta-api/Produk/getproductimagebykodeid/'.$row_produkandalan['kodeid'],
                                                         CURLOPT_RETURNTRANSFER => true,
                                                         CURLOPT_ENCODING => '',
                                                         CURLOPT_MAXREDIRS => 10,
@@ -173,7 +179,7 @@
                                                     ?>
                                                     <img src="<?= $src; ?>" alt="Rounded image" class="img-fluid rounded img-produk-sebelum">
                                                     <br>
-                                                    <small class="d-block text-uppercase font-weight-bold mb-4"><a href="<?= base_url() ?>product-detail/<?= $row_produkandalan['idproduk'] ?>" class="title-produk-sebelum"><?= $row_produkandalan['namabarang'] ?></a>
+                                                    <small class="d-block text-uppercase font-weight-bold mb-4 title-product-car"><a href="<?= base_url() ?>product-detail/<?= $row_produkandalan['idproduk'] ?>" class="title-produk-sebelum"><?= $row_produkandalan['namabarang'] ?></a>
                                                     <br>
                                                     Rp. <?= number_format($row_produkandalan['hargajual'],2,',','.') ?>
                                                     </small>

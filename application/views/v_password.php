@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="<?= base_url() ?>assets/img/favicon.png">
   <title><?= $barTitle ?> | Reta Beauty Clinic</title>
     
     <!-- Font -->
@@ -79,17 +79,18 @@ if ($success) {
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-credit-card"></i></span>
                     </div>
-                    <input class="form-control" placeholder="isi password baru" type="text">
+                    <input class="form-control" name="password" placeholder="isi password baru" type="text">
                   </div>
                 </div>
-                </div>
+                <input type="hidden" name="id_pasien" value="<?= $id_pasien ?>">
                 <div class="form-group focused">
-                <div class="text-center">
-                <button type="submit" class="btn btn-warning btn-lg">Konfirmasi</button>
-                <br>
-                <br>
+                  <div class="text-center">
+                  <button type="submit" class="btn btn-warning btn-lg">Konfirmasi</button>
+                  <br>
+                  <br>
+                  </div>
                 </div>
-              </div>
+              </form>
           </div>
         </div>
       </div>

@@ -184,7 +184,7 @@
                                 $curl = curl_init();
 
                                 curl_setopt_array($curl, array(
-                                CURLOPT_URL => 'https://api-reta.id/reta-api/Produk/getImagebykodeid/'.$row['kodeid'],
+                                CURLOPT_URL => 'https://api-reta.id/reta-api/Produk/getproductimagebykodeid/'.$row['kodeid'],
                                 CURLOPT_RETURNTRANSFER => true,
                                 CURLOPT_ENCODING => '',
                                 CURLOPT_MAXREDIRS => 10,

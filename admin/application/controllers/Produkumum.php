@@ -159,7 +159,7 @@ class Produkumum extends MY_Controller {
 			$curl = curl_init();
 
 			curl_setopt_array($curl, array(
-				CURLOPT_URL => 'https://api-reta.id/reta-api/Produk/upload/:file/'.$kodeid.'/'.$width.'/'.$height,
+				CURLOPT_URL => 'https://api-reta.id/reta-api/Produk/uploadproductimagetoserver/'.$kodeid.'/'.$width.'/'.$height,
 				CURLOPT_RETURNTRANSFER => true,
 				CURLOPT_ENCODING => '',
 				CURLOPT_MAXREDIRS => 10,
@@ -178,7 +178,6 @@ class Produkumum extends MY_Controller {
 
 			$response = curl_exec($curl);
 			curl_close($curl);
-
 			// Now delete local temp file
 			unlink($uploadFile);
 			// die(var_dump($response));
@@ -187,7 +186,6 @@ class Produkumum extends MY_Controller {
 		{
 			echo "Possible file upload attack!\n";
 		}
-		
-		redirect('produkandalan');
+		redirect('produkumum');
 	}
 }

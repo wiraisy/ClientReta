@@ -66,7 +66,7 @@ class Profil extends MY_Controller {
 		$custid = $this->session->userdata('data_user_reta')['data']['custid'];
 
         $data['dataChatPasien'] =$this->ModelChat->get_user($custid);
-        $data['barTitle'] = "My Cart";
+        $data['barTitle'] = "My Transaction";
 		$data['dataPenjualan'] = $dataPenjualan;
 
         $this->load->view('includes/header', $data);

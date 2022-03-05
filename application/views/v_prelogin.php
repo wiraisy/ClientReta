@@ -24,8 +24,33 @@
 
     <!-- Argon CSS Files -->
     <link href="<?= base_url() ?>assets/css/argon-design-system.css?v=1.2.2" rel="stylesheet" />
-</head>
+    
+    <!-- Toast -->
+    <link rel="stylesheet" href="<?= base_url() ?>assets/js/toastr/toastr.min.css">
 
+    <script src="<?= base_url() ?>assets/js/core/jquery.min.js" type="text/javascript"></script>
+</head>
+<?php
+$success = $this->session->flashdata('successMsg');
+if ($success) {
+?>
+  <script type="text/javascript">
+      $(function() {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000
+        });
+
+        Toast.fire({
+          icon: 'success',
+          title: '&nbsp;<?php echo $success ?>'
+        })
+      });
+  </script>
+<?php }
+?>
 <body>
     <!--pink-->
     <section class="section section-shaped section-xxl" style="height: 100vh">
@@ -76,6 +101,10 @@
     <script src="<?= base_url() ?>assets/js/plugins/moment.min.js"></script>
     <script src="<?= base_url() ?>assets/js/plugins/datetimepicker.js" type="text/javascript"></script>
     <script src="<?= base_url() ?>assets/js/plugins/bootstrap-datepicker.min.js"></script>
+    <!-- Toast -->
+    <script src="<?= base_url() ?>assets/js/toastr/toastr.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </body>
 
 </html>

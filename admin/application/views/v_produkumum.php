@@ -83,7 +83,7 @@
                                                         $curl = curl_init();
 
                                                         curl_setopt_array($curl, array(
-                                                        CURLOPT_URL => 'https://api-reta.id/reta-api/Produk/getImagebykodeid/'.$rows['kodeid'],
+                                                        CURLOPT_URL => 'https://api-reta.id/reta-api/Produk/getproductimagebykodeid/'.$rows['kodeid'],
                                                         CURLOPT_RETURNTRANSFER => true,
                                                         CURLOPT_ENCODING => '',
                                                         CURLOPT_MAXREDIRS => 10,
@@ -116,7 +116,7 @@
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action="<?= base_url('produkumum/tambahimg'); ?>" method="POST">
+                                                                <form action="<?= base_url('produkumum/tambahimg'); ?>" method="POST" enctype="multipart/form-data">
                                                                     <input type="hidden" value="<?= $rows['kodeid'] ?>" name="kodeid">
                                                                     <input type="file" class="form-control" name="img-produk" id="sampul-<?= $rows['idproduk'] ?>" onchange="previewImg(<?= $rows['idproduk'] ?>)" accept="image/jpg, image/jpeg" required>
                                                                     <img class="img-thumbnail" id="img-preview-<?= $rows['idproduk'] ?>">

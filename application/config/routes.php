@@ -58,7 +58,7 @@ $route['auth'] = 'auth';
 $route['login'] = 'auth/member';
 $route['register'] = 'auth/nonmember';
 $route['verifikasi-password'] = 'auth/forgetpassword';
-$route['make-password'] = 'auth/makepassword';
+$route['make-password/(:num)'] = 'auth/makepassword/$1';
 
 // Transaksi
 $route['checkout-product'] = 'transaksi/addToCart';
