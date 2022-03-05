@@ -119,20 +119,16 @@ class Transaksi extends MY_Controller {
 		redirect(base_url() . 'transaksi/checkout');
 	}
 
-	public function payment(){
+	public function payment($idpenjualan){
 		// Check Session
 		if (!$this->session->userdata('isLoggedIn_userReta')) {
 			return redirect(base_url() . 'auth');
 		}
 
-        $idpasien = $this->session->userdata('data_user_reta')['data']['id_pasien'];
-
         // Get Data Penjualan Pasien
-		$url = 'https://api-reta.id/reta-api/Penjualan/getallpenjualanfilter?id_pasien='.$idpasien;
+		$url = 'https://api-reta.id/reta-api/Penjualan/getpenjualanbyid/'.$idpenjualan;
         $method = 'GET';
         $datapenjualan = $this->SendRequest($url, $method);
-
-		die(var_dump($datapenjualan));
 
 		$custid = $this->session->userdata('data_user_reta')['data']['custid'];
 

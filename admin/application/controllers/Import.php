@@ -5,6 +5,11 @@ class Import extends CI_Controller {
 
 	public function index()
 	{
+		// Check Session
+		if (!$this->session->userdata('isLoggedIn_adminReta')) {
+			return redirect(base_url() . 'login');
+		}
+
 		$data['title'] = "Export Data";
 
 		$this->load->view('includes/header');
@@ -14,6 +19,11 @@ class Import extends CI_Controller {
 
     public function import_produk()
 	{
+		// Check Session
+		if (!$this->session->userdata('isLoggedIn_adminReta')) {
+			return redirect(base_url() . 'login');
+		}
+        
         $fileproduk = $_FILES['file']['tmp_name'];
 
         $curl = curl_init();

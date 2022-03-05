@@ -198,7 +198,7 @@
                 </div>
                 <br>
                 <div style="text-align: center;">
-                    <a href="#" class="btn btn-outline-warning">Export Data</a>
+                    <a href="<?= site_url('export-data') ?>" class="btn btn-outline-warning">Export Data</a>
                 </div>
             </div>
         </div>

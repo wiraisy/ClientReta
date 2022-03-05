@@ -63,7 +63,7 @@ $route['make-password'] = 'auth/makepassword';
 // Transaksi
 $route['checkout-product'] = 'transaksi/addToCart';
 $route['checkout'] = 'transaksi/checkout';
-$route['payment-product'] = 'transaksi/payment';
+$route['payment-product/(:num)'] = 'transaksi/payment/$1';
 $route['payment-expired'] = 'transaksi/expired';
 
 // Profil User

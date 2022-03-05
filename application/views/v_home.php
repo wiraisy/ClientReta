@@ -132,7 +132,7 @@
                     </div>
                     <br>
                     <br>
-                    <div style="text-align: right;"><a href="<?= base_url('transaksi/checkout') ?>" class="btn btn-outline-danger btn-round">Checkout</a></div>  
+                    <div style="text-align: right;"><a href="<?= base_url('checkout') ?>" class="btn btn-outline-danger btn-round">Checkout</a></div>  
                 </form>
                 <hr>
                 <h6 style="text-align: center;">Produk yang mungkin anda sukai</h6>
@@ -171,9 +171,9 @@
                                                         curl_close($curl);
                                                         $src = 'data:image/png;base64,'.base64_encode($response).'';
                                                     ?>
-                                                    <img src="<?= $src; ?>" onclick="window.open('<?= base_url() ?>product-detail/<?= $row_produkandalan['idproduk'] ?>');" alt="Rounded image" class="img-fluid rounded img-produk-sebelum">
+                                                    <img src="<?= $src; ?>" alt="Rounded image" class="img-fluid rounded img-produk-sebelum">
                                                     <br>
-                                                    <small class="d-block text-uppercase font-weight-bold mb-4 title-produk-sebelum"  onclick="window.open('<?= base_url() ?>product-detail/<?= $row_produkandalan['idproduk'] ?>') ;"><?= $row_produkandalan['namabarang'] ?>
+                                                    <small class="d-block text-uppercase font-weight-bold mb-4"><a href="<?= base_url() ?>product-detail/<?= $row_produkandalan['idproduk'] ?>" class="title-produk-sebelum"><?= $row_produkandalan['namabarang'] ?></a>
                                                     <br>
                                                     Rp. <?= number_format($row_produkandalan['hargajual'],2,',','.') ?>
                                                     </small>

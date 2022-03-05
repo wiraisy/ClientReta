@@ -346,7 +346,7 @@
                 <tr>
                     <td class="text-right"><h5>Biaya Pengiriman</h5></td>
                     <td class="pl-4"><h5 id="costPengiriman"></h5></td>
-                    <input type="hidden" class="costTotal">
+                    <input type="hidden" class="costDeliver">
                 </tr>
             </table>
         <?php } else{ ?>
@@ -365,7 +365,7 @@
                         function postPenjualan() {
                             const button = document.getElementById('postPenjualan');
                             let checkField = document.getElementById("totalCost").innerHTML;
-                            let biayapengiriman = document.getElementsByClassName("costTotal").value;
+                            let biayapengiriman = document.getElementsByClassName("costDeliver").value;
                             let idpasien = <?= $this->session->userdata('data_user_reta')['data']['id_pasien'] ?>;
                             let custid = "<?= $this->session->userdata('data_user_reta')['data']['custid'] ?>";
                             let idalamatkirim = <?= ($dataAlamat) ? $dataAlamat[0]['idkirim'] : '' ?>;
@@ -422,7 +422,7 @@
                                 var emptyCart = $.ajax(settingsEmpty).done(function (resEmpty) {
                                     return resEmpty;
                                 });
-                                location.href = "<?= base_url() ?>payment-product";
+                                location.href = "<?= base_url() ?>payment-product/"+responsePost.idpenjualan;
                             }
                         }
                     </script>

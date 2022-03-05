@@ -83,5 +83,7 @@ $route['update-produk-andalan/(:num)'] = 'produkandalan/update_produk/$1';
 // Import Data
 $route['import-data'] = 'import';
 
+// Export Data
+$route['export-data'] = 'export';
 // Auth
 $route['login'] = 'auth/login';

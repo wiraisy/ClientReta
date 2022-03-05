@@ -1,3 +1,23 @@
+<style>
+    .counter-minus, .counter-plus{
+        background:#f2f2f2;
+        border-radius:4px;
+        padding:10px;
+        border:1px solid #ddd;
+        display: inline-block;
+        vertical-align: middle;
+        text-align: center;
+	}
+    .number > input{
+        width: 100px;
+        text-align: center;
+        font-size: 26px;
+		border:1px solid #ddd;
+		border-radius:4px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+</style>
 <div class="section">
         <div class="container">
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -52,10 +72,76 @@
                                     <p class="my-0">Jumlah :</p>
                                 </div>
                                 <div class="pl-2">
-                                    <input type="number" class="form-control" style="width: 100px;" required />
+                                    <div class="number my-4">
+                                        <span class="counter-minus minus counter">-</span>
+                                        <input class="mx-2" id="qty" min="1" type="number" value="1"/>
+                                        <span class="counter-plus plus counter">+</span>
+                                    </div>
+                                    <script>
+                                        $(`.minus`).click(function() {
+                                            var $input = $(this).parent().find('input');
+                                            var count = parseInt($input.val()) - 1;
+                                            count = count < 1 ? 1 : count;
+                                            $input.val(count);
+                                            $input.change();
+                                            return false;
+                                        });
+
+                                        $(`.plus`).click(function() {
+                                            var $input = $(this).parent().find('input');
+                                            $input.val(parseInt($input.val()) + 1);
+                                            $input.change();
+                                            return false;
+                                        });
+                                    </script>
                                 </div>
                         </div>
-                        <button type="submit" class="mt-4 btn" style="background: #eba0ce;"><span><i class="fas fa-cart-plus"></i></span> Add to Cart</button>
+                        <button type="button" id="addToCart" class="mt-4 btn" style="background: #eba0ce;"><span><i class="fas fa-cart-plus"></i></span> Add to Cart</button>
+                        <script>
+                            $(`#addToCart`).click(function() {
+                            var kodeid = "<?= $detailproduk['kodeid'] ?>";
+                            var custid = "<?= $this->session->userdata('data_user_reta')['data']['custid'] ?>";
+                            
+                            // API Add to Cart
+                            let settingsadd = {
+                                "url": "https://api-reta.id/reta-api/Penjualan/adddetailtocart",
+                                "method": "POST",
+                                "timeout": 0,
+                                "headers": {
+                                    "Content-Type": "application/json",
+                                    "Authorization": "Basic YWtiYXI6d2lyYWlzeQ=="
+                                },
+                                "data": JSON.stringify({
+                                    "custid": custid,
+                                    "jumlah": parseInt(document.getElementById(`qty`).value),
+                                    "kodeid": kodeid
+                                }),
+                            };
+                            $.ajax(settingsadd).done(function() {
+                                return false;
+                            });
+
+                            alert("Produk dimasukkan ke dalam keranjang.");
+
+                            var settingscart = {
+                                "url": "https://api-reta.id/reta-api/Penjualan/lihatcart/" + custid,
+                                "method": "GET",
+                                "timeout": 0,
+                                "async": false,
+                                "headers": {
+                                    "Authorization": "Basic YWtiYXI6d2lyYWlzeQ=="
+                                },
+                            };
+
+                            var datacart = $.ajax(settingscart).done(function(response) {
+                                return response;
+                            }).responseJSON;
+
+                            document.getElementById('cartProduct').dataset.count = parseInt(datacart.length);
+
+                            return false;
+                        });
+                        </script>
                     </form>
                     <hr>
                 </div>
