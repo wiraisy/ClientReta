@@ -10,6 +10,8 @@ class Produkandalan extends MY_Controller {
 			return redirect(base_url() . 'login');
 		}
 
+		die(var_dump($_SERVER['DOCUMENT_ROOT']));
+
 		// Get Data From API
 		$url = 'https://api-reta.id/reta-api/Produk/GetAllProdukbyFilterandPagination?kategori=ANDALAN';
         $method = 'GET';
