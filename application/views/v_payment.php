@@ -3,7 +3,6 @@
     <div class="container">
         <div style="text-align: center;">
             <h5>Lakukan pembayaran sebelum:</h5>
-            <h5><?= date("d-M-Y", ((int)$datapenjualan['tanggalpenjualan']/1000) ) ?></h5>
             <!-- <h5 class="display-4 mb-0" id="countdown-section"></h5> -->
             <h5>Total pembayaran:</h5>
             <h4>Rp. <?= number_format($datapenjualan['grandtotal'],2,',','.') ?></h4>

@@ -430,6 +430,7 @@
                                                 var emptyCart = $.ajax(settingsEmpty).done(function (resEmpty) {
                                                     return resEmpty;
                                                 });
+                                                // Alert Berhasil
                                             }
                                         }
                                     </script>
