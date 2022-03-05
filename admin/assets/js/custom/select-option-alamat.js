@@ -69,7 +69,7 @@ $(document).ready(function() {
         // Set Total Cost
         var ongkosKirim2 = parseInt(ongkosKirim) + parseInt(document.getElementById('subTotal').value);
         document.getElementById('totalCost').innerHTML = formatRupiah(ongkosKirim2, 'Rp. ');
-        document.getElementsByClassName("costTotal").value = (parseInt(ongkosKirim) + parseInt(document.getElementById('subTotal').value));
+        document.getElementsByClassName("costTotal").value = parseInt(ongkosKirim);
 
         function formatRupiah(angka, prefix) {
             var number_string = angka.toString().replace(/[^,\d]/g, ''),

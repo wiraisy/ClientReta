@@ -354,7 +354,7 @@
                             <tr>
                                 <td class="text-right"><h5>Biaya Pengiriman</h5></td>
                                 <td class="pl-4"><h5 id="costPengiriman"></h5></td>
-                                <input type="hidden" class="costTotal">
+                                <input type="hidden" class="costDelivery">
                             </tr>
                         </table>
                         <?php } else{ ?>
@@ -373,7 +373,7 @@
                                         function postPenjualan() {
                                             const button = document.getElementById('postPenjualan');
                                             let checkField = document.getElementById("totalCost").innerHTML;
-                                            let biayapengiriman = document.getElementsByClassName("costTotal").value;
+                                            let biayapengiriman = document.getElementsByClassName("costDelivery").value;
                                             let idpasien = <?= $dataPasien['id_pasien'] ?>;
                                             let custid = "<?= $dataPasien['custid'] ?>";
                                             let idalamatkirim = <?= ($dataAlamat) ? $dataAlamat[0]['idkirim'] : '' ?>;
