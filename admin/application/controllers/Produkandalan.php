@@ -10,8 +10,6 @@ class Produkandalan extends MY_Controller {
 			return redirect(base_url() . 'login');
 		}
 
-		die(var_dump($_SERVER['DOCUMENT_ROOT']));
-
 		// Get Data From API
 		$url = 'https://api-reta.id/reta-api/Produk/GetAllProdukbyFilterandPagination?kategori=ANDALAN';
         $method = 'GET';
@@ -154,7 +152,7 @@ class Produkandalan extends MY_Controller {
 		list($width, $height, $type, $attr) = getimagesize($_FILES['img-produk']['tmp_name']);
 		
 		// Move uploaded file to a temp location
-		$uploadDir = $_SERVER['DOCUMENT_ROOT'].'/public_html/shop/admin/assets/uploads/';
+		$uploadDir = $_SERVER['DOCUMENT_ROOT'].'/admin/assets/uploads/';
 		$uploadFile = $uploadDir . basename($_FILES['img-produk']['name']);
 		if (move_uploaded_file($_FILES['img-produk']['tmp_name'], $uploadFile))
 		{
