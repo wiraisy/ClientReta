@@ -126,7 +126,7 @@ class Transaksi extends MY_Controller {
 		}
 
         // Get Data Penjualan Pasien
-		$url = 'https://api-reta.id/reta-api/Penjualan/getpenjualanbyid/'.$idpenjualan;
+		$url = 'https://api-reta.id/reta-api/Penjualan/getpenjualanbyid/'.$idpenjualan.'&sortDirection=ASC';
         $method = 'GET';
         $datapenjualan = $this->SendRequest($url, $method);
 
