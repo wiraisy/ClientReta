@@ -174,40 +174,42 @@ class Produkumum extends MY_Controller {
 		// Move uploaded file to a temp location
 		$uploadDir = $_SERVER['DOCUMENT_ROOT'].'/admin/assets/uploads/';
 		$uploadFile = $uploadDir . basename($_FILES['img-produk']['name']);
-		die(var_dump($uploadDir));
+
 		if (move_uploaded_file($_FILES['img-produk']['tmp_name'], $uploadFile))
 		{
 			// Execute remote upload
-			$curl = curl_init();
+			// $curl = curl_init();
 
-			curl_setopt_array($curl, array(
-				CURLOPT_URL => 'https://api-reta.id/reta-api/Produk/uploadproductimagetoserver/'.$kodeid.'/'.$width.'/'.$height,
-				CURLOPT_RETURNTRANSFER => true,
-				CURLOPT_ENCODING => '',
-				CURLOPT_MAXREDIRS => 10,
-				CURLOPT_TIMEOUT => 0,
-				CURLOPT_SSL_VERIFYHOST => 0,
-				CURLOPT_SSL_VERIFYPEER => 0,
-				CURLOPT_FOLLOWLOCATION => true,
-				CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-				CURLOPT_CUSTOMREQUEST => 'POST',
-				CURLOPT_POSTFIELDS => array('file'=> new CURLFILE($uploadFile, 'image/jpg')),
-				CURLOPT_HTTPHEADER => array(
-					'Content-Type: multipart/form-data',
-					'Authorization: Basic YWtiYXI6d2lyYWlzeQ==',
-				),
-			));
+			// curl_setopt_array($curl, array(
+			// 	CURLOPT_URL => 'https://api-reta.id/reta-api/Produk/uploadproductimagetoserver/'.$kodeid.'/'.$width.'/'.$height,
+			// 	CURLOPT_RETURNTRANSFER => true,
+			// 	CURLOPT_ENCODING => '',
+			// 	CURLOPT_MAXREDIRS => 10,
+			// 	CURLOPT_TIMEOUT => 0,
+			// 	CURLOPT_SSL_VERIFYHOST => 0,
+			// 	CURLOPT_SSL_VERIFYPEER => 0,
+			// 	CURLOPT_FOLLOWLOCATION => true,
+			// 	CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			// 	CURLOPT_CUSTOMREQUEST => 'POST',
+			// 	CURLOPT_POSTFIELDS => array('file'=> new CURLFILE($uploadFile, 'image/jpg')),
+			// 	CURLOPT_HTTPHEADER => array(
+			// 		'Content-Type: multipart/form-data',
+			// 		'Authorization: Basic YWtiYXI6d2lyYWlzeQ==',
+			// 	),
+			// ));
 
-			$response = curl_exec($curl);
-			curl_close($curl);
-			// Now delete local temp file
-			unlink($uploadFile);
+			// $response = curl_exec($curl);
+			// curl_close($curl);
+			// // Now delete local temp file
+			// unlink($uploadFile);
 			// die(var_dump($response));
+			echo "test";
 		}
 		else
 		{
 			echo "Possible file upload attack!\n";
 		}
+		die();
 		redirect('produkumum');
 	}
 }
