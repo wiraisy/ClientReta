@@ -175,6 +175,8 @@ class Produkumum extends MY_Controller {
 		$uploadDir = $_SERVER['DOCUMENT_ROOT'].'/admin/assets/uploads/';
 		$uploadFile = $uploadDir . basename($_FILES['img-produk']['name']);
 
+		var_dump($uploadDir);
+
 		if (move_uploaded_file($_FILES['img-produk']['tmp_name'], $uploadFile))
 		{
 			// Execute remote upload
