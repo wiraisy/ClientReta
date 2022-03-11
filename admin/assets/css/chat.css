@@ -1,6 +1,7 @@
-body{
-    background-color: #f4f7f6;
+#containerChat {
+    height: 700px;
 }
+
 .card {
     background: #fff;
     transition: .5s;
@@ -11,18 +12,38 @@ body{
     width: 100%;
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
 }
+
 .chat-app .people-list {
     width: 280px;
     position: absolute;
     left: 0;
     top: 0;
-    padding: 20px;
+    padding: 0px 20px;
     z-index: 7
 }
 
 .chat-app .chat {
+    height: 700px;
     margin-left: 280px;
     border-left: 1px solid #eaeaea
+}
+
+.refresh-user {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #f5869e;
+    cursor: pointer;
+}
+
+.refresh-chat {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    font-size: 18px;
+    color: #f5869e;
+    cursor: pointer;
 }
 
 .people-list {
@@ -48,7 +69,11 @@ body{
 }
 
 .people-list .chat-list li .name {
-    font-size: 15px
+    font-size: 16px
+}
+
+.people-list .chat-list li .custid {
+    font-size: 12px
 }
 
 .people-list .chat-list img {
@@ -72,7 +97,8 @@ body{
 }
 
 .chat .chat-header {
-    padding: 15px 20px;
+    padding: 0px 20px;
+    height: 50px;
     border-bottom: 2px solid #f4f7f6
 }
 
@@ -88,6 +114,8 @@ body{
 }
 
 .chat .chat-history {
+    overflow-y: auto;
+    height: 550px;
     padding: 20px;
     border-bottom: 2px solid #fff
 }
@@ -112,11 +140,6 @@ body{
 .chat .chat-history .message-data img {
     border-radius: 40px;
     width: 40px
-}
-
-.chat .chat-history .message-data-time {
-    color: #434651;
-    padding-left: 6px
 }
 
 .chat .chat-history .message {
@@ -175,26 +198,6 @@ body{
     padding: 20px
 }
 
-.online,
-.offline,
-.me {
-    margin-right: 2px;
-    font-size: 8px;
-    vertical-align: middle
-}
-
-.online {
-    color: #86c541
-}
-
-.offline {
-    color: #e47297
-}
-
-.me {
-    color: #1d8ecd
-}
-
 .float-right {
     float: right
 }
@@ -206,6 +209,32 @@ body{
     content: " ";
     clear: both;
     height: 0
+}
+
+.footerChat {
+    height: 100px;
+}
+
+.typing-area button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    width: 55px;
+    border: none;
+    outline: none;
+    background: #764675;
+    font-size: 19px;
+    cursor: pointer;
+    opacity: 0.7;
+    pointer-events: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.typing-area button.active {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 @media only screen and (max-width: 767px) {

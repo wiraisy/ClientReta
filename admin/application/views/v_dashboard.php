@@ -1,4 +1,18 @@
 
+    <style>
+        .info-lengkap{
+            position:absolute;
+            bottom: 20px;
+        }
+        .number-count{
+            position:absolute;
+            bottom: 50px;
+        }
+        .text-nowrap:hover{
+            text-decoration: underline;
+            color:grey;
+        }
+    </style>
     <div class="header bg-pink pb-6">
         <div class="container-fluid">
             <div class="header-body">
@@ -17,13 +31,12 @@
                 <!-- Card stats -->
                 <div class="row">
                     <div class="col-xl-3 col-md-6">
-                        <div class="card card-stats">
+                        <div class="card card-stats" style="height:150px;">
                             <!-- Card body -->
-                            <div class="card-body">
+                            <div class="card-body" style="position: relative;">
                                 <div class="row">
                                     <div class="col">
-                                        <h5 class="card-title text-uppercase text-muted mb-0">Total kunjungan</h5>
-                                        <span class="h2 font-weight-bold mb-0">-</span>
+                                        <h5 class="card-title text-uppercase text-muted mb-0">Total pasien</h5>
                                     </div>
                                     <div class="col-auto">
                                         <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
@@ -31,20 +44,20 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p class="mt-2 mb-0 text-sm">
-                                    <span class="text-nowrap">total kunjungan hari kemarin</span>
+                                <span class="number-count h2 font-weight-bold mb-0"><?= ($jumlahpasien['content']) ? $jumlahpasien['totalElements'] : '-' ?></span>
+                                <p class="info-lengkap mb-0 text-sm">
+                                    <a href="<?= base_url() ?>/pasien" class="text-nowrap">Informasi selengkapnya <span><i class="fa fa-chevron-right"></i></span></a>
                                 </p>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
-                        <div class="card card-stats">
+                        <div class="card card-stats" style="height:150px;">
                             <!-- Card body -->
-                            <div class="card-body">
+                            <div class="card-body" style="position: relative;">
                                 <div class="row">
                                     <div class="col">
-                                        <h5 class="card-title text-uppercase text-muted mb-0">Pendaftaran member baru</h5>
-                                        <span class="h2 font-weight-bold mb-0">-</span>
+                                        <h5 class="card-title text-uppercase text-muted mb-0">Total produk</h5>
                                     </div>
                                     <div class="col-auto">
                                         <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
@@ -52,20 +65,20 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p class="mt-2 mb-0 text-sm">
-                                    <span class="text-nowrap">Membutuhkan persetujuan</span>
+                                <span class="number-count h2 font-weight-bold mb-0"><?= ($jumlahproduk['content']) ? $jumlahproduk['totalElements'] : '-' ?></span>
+                                <p class="info-lengkap mb-0 text-sm">
+                                <a href="<?= base_url() ?>" class="text-nowrap">Informasi selengkapnya  <span><i class="fa fa-chevron-right"></i></span></a>
                                 </p>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
-                        <div class="card card-stats">
+                        <div class="card card-stats" style="height:150px;">
                             <!-- Card body -->
-                            <div class="card-body">
+                            <div class="card-body" style="position: relative;">
                                 <div class="row">
                                     <div class="col">
-                                        <h5 class="card-title text-uppercase text-muted mb-0">Penjualan Hari Ini</h5>
-                                        <span class="h2 font-weight-bold mb-0">-</span>
+                                        <h5 class="card-title text-uppercase text-muted mb-0">Telah dikirim</h5>
                                     </div>
                                     <div class="col-auto">
                                         <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
@@ -73,20 +86,20 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p class="mt-2 mb-0 text-sm">
-                                    <span class="text-nowrap">Penjualan hari kemarin</span>
+                                <span class="number-count h2 font-weight-bold mb-0"><?= ($jumlahkirim) ? count($jumlahkirim) : '-' ?></span>
+                                <p class="info-lengkap mb-0 text-sm">
+                                    <a href="<?= base_url() ?>/pemesanan" class="text-nowrap">Informasi selengkapnya  <span><i class="fa fa-chevron-right"></i></span></a>
                                 </p>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
-                        <div class="card card-stats">
+                        <div class="card card-stats" style="height:150px;">
                         <!-- Card body -->
-                        <div class="card-body">
+                        <div class="card-body" style="position: relative;">
                             <div class="row">
                                 <div class="col">
-                                    <h5 class="card-title text-uppercase text-muted mb-0">Menunggu Pengiriman</h5>
-                                    <span class="h2 font-weight-bold mb-0">-</span>
+                                    <h5 class="card-title text-uppercase text-muted mb-0">Total Admin</h5>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
@@ -94,8 +107,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <p class="mt-2 mb-0 text-sm">
-                                <span class="text-nowrap">Produk yang belum terkirim</span>
+                            <span class="number-count h2 font-weight-bold mb-0"><?= ($jumlahadmin) ? count($jumlahadmin) : '-' ?></span>
+                            <p class="info-lengkap mb-0 text-sm">
+                                <a href="<?= base_url() ?>/admin" class="text-nowrap">Informasi selengkapnya  <span><i class="fa fa-chevron-right"></i></span></a>
                             </p>
                         </div>
                         </div>
@@ -112,16 +126,12 @@
                     <div class="card-header bg-transparent">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h6 class="text-uppercase text-muted ls-1 mb-1">Performa Bulanan</h6>
-                                <h5 class="h3 mb-0">Total orders</h5>
+                                <h2 class="text-uppercase text-muted ls-1 mb-1">Welcome, <?= $this->session->userdata('data_admin_reta')['name'] ?></h2>
                             </div>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <!-- Chart -->
-                        <div class="chart">
-                            <canvas id="chart-bars" class="chart-canvas"></canvas>
-                        </div>
+                    <div class="card-body text-center">
+                        <img src="<?= base_url() ?>/assets/dashboard.jpg" alt="" style="width:50%;">
                     </div>
                 </div>
             </div>

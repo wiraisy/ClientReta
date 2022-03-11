@@ -36,20 +36,35 @@
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <div class="row">
+                    <div class="row my-2">
                         <div class="col-8">
-                            <select class="form-control selectpicker" id="selectProduk" data-live-search="true">
-                                <option selected disabled>Pilih Produk</option>
-                                <?php if(isset($dataproduk['content'])){ ?>
-                                    <?php foreach ($dataproduk['content'] as $row_produk) { ?>
-                                        <option value="<?= $row_produk['idproduk'] ?>"><?= $row_produk['namabarang'] ?></option>
+                            <select class="form-control selectpicker" id="selectProdukUmum" data-live-search="true">
+                                <option selected disabled>Pilih Produk Umum</option>
+                                <?php if(isset($produkumum)){ ?>
+                                    <?php foreach ($produkumum as $row_produkumum) { ?>
+                                        <option value="<?= $row_produkumum['idproduk'] ?>"><?= $row_produkumum['namabarang'] ?></option>
                                     <?php } ?>
                                 <?php }else{?>
                                         <option disabled>Data Produk Tidak Tersedia</option>
                                 <?php } ?>
                             </select>
                         </div>
-                        <div class="col-4"><button type="button" class="btn btn-warning" onclick="generateLink()">Generate Link</button></div>
+                        <div class="col-4"><button type="button" class="btn btn-warning" onclick="generateLinkUmum()">Generate Link</button></div>
+                    </div>
+                    <div class="row my-2">
+                        <div class="col-8">
+                            <select class="form-control selectpicker" id="selectProdukAndalan" data-live-search="true">
+                                <option selected disabled>Pilih Produk Pendukung</option>
+                                <?php if(isset($produkandalan)){ ?>
+                                    <?php foreach ($produkandalan as $row_produkandalan) { ?>
+                                        <option value="<?= $row_produkandalan['idproduk'] ?>"><?= $row_produkandalan['namabarang'] ?></option>
+                                    <?php } ?>
+                                <?php }else{?>
+                                        <option disabled>Data Produk Tidak Tersedia</option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div class="col-4"><button type="button" class="btn btn-warning" onclick="generateLinkAndalan()">Generate Link</button></div>
                     </div>
                 </div>
             </div>
@@ -59,11 +74,50 @@
     
     <script>
         $(function () {
-            $('#selectProduk').selectpicker();
+            $('#selectProdukAndalan').selectpicker();
+            $('#selectProdukUmum').selectpicker();
         });
         
-        function generateLink(){
-            var idproduk = $("#selectProduk").val();
+        function generateLinkAndalan(){
+            var idproduk = $('#selectProdukAndalan').val();
+            if (idproduk) {
+                // GET BY IDPRODUK FROM API
+                
+                var settings = {
+                    "url": "https://api-reta.id/reta-api/Produk/GetProdukbyId/"+idproduk,
+                    "method": "GET",
+                    "timeout": 0,
+                    "headers": {
+                        "Authorization": "Basic YWtiYXI6d2lyYWlzeQ=="
+                    }
+                };
+
+                $.ajax(settings).done(function (response) {
+                    if(response.status == true){
+                        // Promp alert
+                        var alert = prompt("Berikut link detail produk yang anda pilih", `https://shop.reta.co.id/product-detail/${response.idproduk}`);
+                    }else{
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+
+                        Toast.fire({
+                            icon: 'error',
+                            title: '&nbsp;Generate Link Produk Gagal!'
+                        })
+                    }
+                });
+            } else {
+                alert('Silahkan isi field yang tersedia terlebih dahulu.');
+            }
+        }
+
+        function generateLinkUmum(){
+            var idproduk = $('#selectProdukUmum').val();
+            console.log(idproduk);
             if (idproduk) {
                 // GET BY IDPRODUK FROM API
                 

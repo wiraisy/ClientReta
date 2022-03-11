@@ -40,7 +40,7 @@ class ModelChat extends CI_Model {
                 }
             }
         } else {
-            $output .= '<div class="text">No messages are available. Once you send message they will appear here.</div>';
+            $output .= '<div class="text" style="height: 100%;">No messages are available. Once you send message they will appear here.</div>';
         }
         echo $output;
     }

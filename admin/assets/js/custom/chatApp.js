@@ -1,6 +1,18 @@
 const usersList = document.querySelector(".users-list");
+let xhr = new XMLHttpRequest();
+xhr.open("GET", "chat/getAllUsers", true);
+xhr.onload = () => {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+            let data = xhr.response;
+            usersList.innerHTML = data;
+        }
+    }
+}
+xhr.send();
 
-const interval = setInterval(() => {
+// Refresh User
+function refreshUser() {
     let xhr = new XMLHttpRequest();
     xhr.open("GET", "chat/getAllUsers", true);
     xhr.onload = () => {
@@ -12,14 +24,65 @@ const interval = setInterval(() => {
         }
     }
     xhr.send();
-}, 3000);
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000
+    });
+    Toast.fire({
+        icon: 'success',
+        title: '&nbsp;Refresh User Berhasil'
+    })
+}
+
+
+// Refresh Chat
+function refreshChat(custid) {
+    var xhrnew = new XMLHttpRequest();
+    xhrnew.open("POST", "chat/getmessage", true);
+    xhrnew.onload = () => {
+        if (xhrnew.readyState === XMLHttpRequest.DONE) {
+            if (xhrnew.status === 200) {
+                let data = xhrnew.response;
+                chatApp.innerHTML = data;
+            }
+        }
+    }
+    xhrnew.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhrnew.send("incoming_id=" + custid);
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000
+    });
+    Toast.fire({
+        icon: 'success',
+        title: '&nbsp;Refresh Chat Berhasil'
+    })
+}
 
 function openMessage(custid) {
     const headerInfoUser = document.querySelector(".headerInfoUser");
     const chatApp = document.querySelector("#chatApp");
+    const idcustomer = custid;
 
+    $(this).removeClass("active");
+    $(this).addClass("active");
+
+    $('.headerInfoUser').empty();
+    $('.chatApp').empty();
     $('.footerChat').empty();
-    $('.footerChat').append(`<form action="#" class="typing-area"><input type="hidden" name="custid" id="custid" value="${custid}"><input type="text" name="message" id="input-field" placeholder="Write a message..." autocomplete="off"><button id="sendBtn" class="chatbox__send--footer"><i class="fab fa-telegram-plane"></i></button></form>`);
+
+    $('.footerChat').append(`<form action="#" class="typing-area input-group mb-0"><input type="hidden" name="custid" id="custid" value="${custid}"><button id="sendBtn" class="input-group-prepend"><i class="fa fa-send"></i></button><input name="message" id="input-field" type="text" class="form-control" autocomplete="off" placeholder="Enter text here..."></form>`);
+
+    const form = document.querySelector(".typing-area"),
+        inputField = document.getElementById("input-field"),
+        sendBtn = document.getElementById("sendBtn"),
+        userlist = document.getElementById(`userChat${custid}`),
+        chatBox = document.getElementById("chatApp");
 
     // Get Information User
     let xhrUser = new XMLHttpRequest();
@@ -35,10 +98,22 @@ function openMessage(custid) {
     xhrUser.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhrUser.send("incoming_id=" + custid);
 
-    const form = document.querySelector(".typing-area"),
-        inputField = document.getElementById("input-field"),
-        sendBtn = document.getElementById("sendBtn"),
-        chatBox = document.getElementById("chatApp");
+    // Get Message
+    var xhrMessage = new XMLHttpRequest();
+    xhrMessage.open("POST", "chat/getmessage", true);
+    xhrMessage.onload = () => {
+        if (xhrMessage.readyState === XMLHttpRequest.DONE) {
+            if (xhrMessage.status === 200) {
+                let data = xhrMessage.response;
+                chatApp.innerHTML = data;
+                if (!chatBox.classList.contains("active")) {
+                    scrollToBottom();
+                }
+            }
+        }
+    }
+    xhrMessage.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhrMessage.send("incoming_id=" + custid);
 
     // Preventing frorm Refresh Browser
     form.onsubmit = (e) => {
@@ -64,25 +139,6 @@ function openMessage(custid) {
         }
     }
 
-    // Get Message
-    setInterval(() => {
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", "chat/getmessage", true);
-        xhr.onload = () => {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    let data = xhr.response;
-                    chatApp.innerHTML = data;
-                    if (!chatBox.classList.contains("active")) {
-                        scrollToBottom();
-                    }
-                }
-            }
-        }
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhr.send("incoming_id=" + custid);
-    }, 500);
-
     // Kirim Pesan
     sendBtn.onclick = () => {
         let xhr = new XMLHttpRequest();
@@ -97,10 +153,27 @@ function openMessage(custid) {
         }
         let formData = new FormData(form);
         xhr.send(formData);
+
+        var xhrnew = new XMLHttpRequest();
+        xhrnew.open("POST", "chat/getmessage", true);
+        xhrnew.onload = () => {
+            if (xhrnew.readyState === XMLHttpRequest.DONE) {
+                if (xhrnew.status === 200) {
+                    let data = xhrnew.response;
+                    chatApp.innerHTML = data;
+                    if (!chatBox.classList.contains("active")) {
+                        scrollToBottom();
+                    }
+                }
+            }
+        }
+        xhrnew.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhrnew.send("incoming_id=" + custid);
     }
 
     function scrollToBottom() {
         chatBox.scrollTop = chatBox.scrollHeight;
     }
+
 
 };

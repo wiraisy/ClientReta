@@ -39,9 +39,23 @@
     <!-- DataTables -->
     <script src="<?= base_url() ?>assets/js/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="<?= base_url() ?>assets/js/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <!-- Toast -->
+    <script src="<?= base_url() ?>assets/js/toastr/toastr.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <!-- Custom Alert Delete -->
+    <script src="<?= base_url() ?>assets/js/custom/deleteAlert.js"></script>
     <script>
         $(document).ready(function() {
             $('#datatable-basic').DataTable( {
+                "pagingType": "numbers",
+                "ordering": false
+            } );
+            $('#datatable-superadmin').DataTable( {
+                "pagingType": "numbers",
+                "ordering": false
+            } );
+            $('#datatable-admin').DataTable( {
                 "pagingType": "numbers",
                 "ordering": false
             } );

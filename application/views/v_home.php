@@ -8,12 +8,15 @@
         font-weight: normal!important;
     }
     .carousel-control-prev{
-        left: -60px;
+        left: -100px;
         top: -50px;
     }
     .carousel-control-next{
-        right: -60px;
+        right: -100px;
         top: -50px;
+    }
+    .carousel-control-prev-resp, .carousel-control-next-resp{
+        display: none;
     }
     .fa-chevron-left , .fa-chevron-right{
         color: #dc3545;
@@ -80,6 +83,12 @@
             width: 100px; /* You can set the dimensions to whatever you want */
             height: 100px;
         }
+        .carousel-control-prev , .carousel-control-next{
+            display: none;
+        }
+        .carousel-control-prev-resp, .carousel-control-next-resp{
+            display: initial;
+        }
     }
 </style>
     <div class="section">
@@ -115,7 +124,7 @@
             </div>
             <div class="card mt-2">
                 <div class="card-body bg-gradient-pink" style="color: white;">
-                    <label for="pilih-produk">Pesan Produk Andalan</label>
+                    <label for="pilih-produk">Pesan Produk Pendukung</label>
                     <select class="form-control selectpicker" name="selectPesananAndalan" id="selectPesananAndalan" data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;">
                         <option selected disabled>Pilih produk yang anda inginkan</option>
                         <?php if($produkandalan){ ?>
@@ -123,7 +132,7 @@
                                 <option value="<?= $row_produkandalan['kodeid'] ?>" class="<?= $this->session->userdata('data_user_reta')['data']['custid'] ?>"><?= $row_produkandalan['namabarang'] ?></option>
                             <?php } ?>
                         <?php }else{?>
-                                <option disabled>Data Produk Andalan Tidak Tersedia</option>
+                                <option disabled>Data Produk Pendukung Tidak Tersedia</option>
                         <?php } ?>
                     </select>
                 </div>
@@ -151,7 +160,7 @@
                             if ($produkandalan) {
                                 foreach ($produkandalan as $row_produkandalan){
                                     if($rowCount % $numOfCols == 0) { ?> 
-                                        <div class="carousel-item py-5 <?= ($rowCount == 0) ? 'active' : ''?>">
+                                        <div class="carousel-item py-2 <?= ($rowCount == 0) ? 'active' : ''?>">
                                             <div class="row"> <?php } $rowCount++; ?>  
                                                 <div class="col-md-3 col-6 text-center carousel-produk">
                                                     <?php 
@@ -177,9 +186,9 @@
                                                         curl_close($curl);
                                                         $src = 'data:image/png;base64,'.base64_encode($response).'';
                                                     ?>
-                                                    <img src="<?= $src; ?>" alt="Rounded image" class="img-fluid rounded img-produk-sebelum">
+                                                    <img src="<?= $src; ?>" onclick="window.open('<?= base_url() ?>product-detail/<?= $row_produkandalan['idproduk'] ?>');" alt="Rounded image" class="img-fluid rounded img-produk-sebelum">
                                                     <br>
-                                                    <small class="d-block text-uppercase font-weight-bold mb-4 title-product-car"><a href="<?= base_url() ?>product-detail/<?= $row_produkandalan['idproduk'] ?>" class="title-produk-sebelum"><?= $row_produkandalan['namabarang'] ?></a>
+                                                    <small class="d-block text-uppercase font-weight-bold mb-4 title-product-car"><a href="<?= base_url() ?>product-detail/<?= $row_produkandalan['idproduk'] ?>" target="_blanks" class="title-produk-sebelum"><?= $row_produkandalan['namabarang'] ?></a>
                                                     <br>
                                                     Rp. <?= number_format($row_produkandalan['hargajual'],2,',','.') ?>
                                                     </small>
@@ -192,15 +201,25 @@
                                 </div>
                             <?php } ?>
                     </div>
+                    <?php if (count($produkandalan) > 4) { ?>
+                        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+                            <span aria-hidden="true"><i class="fas fa-chevron-left"></i></span>
+                        </a>
+                        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+                            <span aria-hidden="true"><i class="fas fa-chevron-right"></i></span>
+                        </a>
+                    <?php } ?>
                 </div>
-                <?php if (count($produkandalan) > 4) { ?>
-                    <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-                        <span aria-hidden="true"><i class="fas fa-chevron-left"></i></span>
-                    </a>
-                    <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-                        <span aria-hidden="true"><i class="fas fa-chevron-right"></i></span>
-                    </a>
-                <?php } ?>
+                    <?php if (count($produkandalan) > 4) { ?>
+                        <div class="text-center">
+                            <a class="carousel-control-prev-resp mx-2" href="#myCarousel" role="button" data-slide="prev">
+                                <span aria-hidden="true"><i class="fas fa-chevron-left"></i></span>
+                            </a>
+                            <a class="carousel-control-next-resp mx-2" href="#myCarousel" role="button" data-slide="next">
+                                <span aria-hidden="true"><i class="fas fa-chevron-right"></i></span>
+                            </a>
+                        </div>
+                    <?php } ?>
             </div>
         </div>
     </div>

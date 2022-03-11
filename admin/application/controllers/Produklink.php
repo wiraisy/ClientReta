@@ -11,14 +11,19 @@ class Produklink extends MY_Controller {
 		}
 
 		// Get Data From API
-		$url = 'http://api-reta.id/reta-api/Produk/GetAllProdukbyFilterandPagination';
+		$url = 'https://api-reta.id/reta-api/Produk/getallprodukbykategori/UMUM/true';
         $method = 'GET';
-        $dataproduk = $this->SendRequest($url, $method);
+        $produkumum = $this->SendRequest($url, $method);
+
+		$url = 'https://api-reta.id/reta-api/Produk/getallprodukbykategori/ANDALAN/true';
+        $method = 'GET';
+        $produkandalan = $this->SendRequest($url, $method);
 
 		$data['title'] = "Produk Link";
-		$data['dataproduk'] = $dataproduk;
+		$data['produkumum'] = $produkumum;
+		$data['produkandalan'] = $produkandalan;
 
-		$this->load->view('includes/header');
+		($this->session->userdata('data_admin_reta')['rule'] == 'superadmin') ? $this->load->view('includes/header') : $this->load->view('includes/headeradmin') ;
 		$this->load->view('v_produklink', $data);
 		$this->load->view('includes/footer');
 	}

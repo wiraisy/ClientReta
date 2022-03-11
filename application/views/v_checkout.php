@@ -29,12 +29,14 @@
         vertical-align: middle;
     }
     [type="radio"]:checked,
-    [type="radio"]:not(:checked) {
+    [type="radio"]:not(:checked), [type="checkbox"]:checked,
+    [type="checkbox"]:not(:checked) {
         position: absolute;
         left: -9999px;
     }
     [type="radio"]:checked + label,
-    [type="radio"]:not(:checked) + label
+    [type="radio"]:not(:checked) + label ,[type="checkbox"]:checked + label,
+    [type="checkbox"]:not(:checked) + label
     {
         position: relative;
         padding-left: 28px;
@@ -44,7 +46,8 @@
         color: #666;
     }
     [type="radio"]:checked + label:before,
-    [type="radio"]:not(:checked) + label:before {
+    [type="radio"]:not(:checked) + label:before, [type="checkbox"]:checked + label:before,
+    [type="checkbox"]:not(:checked) + label:before {
         content: '';
         position: absolute;
         left: 0;
@@ -56,7 +59,8 @@
         background: #fff;
     }
     [type="radio"]:checked + label:after,
-    [type="radio"]:not(:checked) + label:after {
+    [type="radio"]:not(:checked) + label:after, [type="checkbox"]:checked + label:after,
+    [type="checkbox"]:not(:checked) + label:after {
         content: '';
         width: 12px;
         height: 12px;
@@ -68,12 +72,12 @@
         -webkit-transition: all 0.2s ease;
         transition: all 0.2s ease;
     }
-    [type="radio"]:not(:checked) + label:after {
+    [type="radio"]:not(:checked) + label:after, [type="checkbox"]:not(:checked) + label:after {
         opacity: 0;
         -webkit-transform: scale(0);
         transform: scale(0);
     }
-    [type="radio"]:checked + label:after {
+    [type="radio"]:checked + label:after, [type="checkbox"]:checked + label:after {
         opacity: 1;
         -webkit-transform: scale(1);
         transform: scale(1);
@@ -94,6 +98,8 @@
             <span aria-hidden="true">×</span>
             </button>
         </div>
+
+        <!-- Section Alamat Pengiriman -->
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -168,6 +174,8 @@
         </div>
     </div>
     <br>
+
+    <!-- Section Product Checkout -->
     <div class="container section-cart-checkout">
         <?php if($datacart){ ?>
             <input type="hidden" value="<?php 
@@ -211,65 +219,69 @@
                             <div class="number my-4">
                                 <input class="mx-2" id="qty-<?= $row['kodeid'] ?>" type="number" value="<?= $row['jumlah'] ?>" disabled/>
                             </div>
-                            <div class="buttonaksi" style="display: flex;">
-                                <a data-toggle="modal" data-target="#updateQty<?= $row['kodeid'] ?>" type="button" class="btn btn-success btn-sm mt-1"><i class="fa fa-pencil"></i><span> Edit Jumlah</span></a>
-                                <!-- Modal -->
-                                <div class="modal fade" id="updateQty<?= $row['kodeid'] ?>" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-scrollable" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="editModalLabel">Update Jumlah Produk <strong><?= $row['namabarang'] ?></strong> </h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form action="<?= base_url('transaksi/updateQty'); ?>" method="POST" >
-                                                    <div class="form-group text-center">
-                                                        <input type="hidden" name="kodeid" value="<?= $row['kodeid'] ?>">
-                                                        <input type="number" class="form-control" name="jumlah" min="1" style="width: 80%;" required>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-success">Save</button>
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                    </div>
-                                                </form>
+                            <div class="row" style="width: 40%;">
+                                <div class="col-md-6">
+                                    <a data-toggle="modal" data-target="#updateQty<?= $row['kodeid'] ?>" type="button" class="btn btn-success btn-sm mt-1"><i class="fa fa-pencil"></i><span> Edit Jumlah</span></a>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="updateQty<?= $row['kodeid'] ?>" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="editModalLabel">Update Jumlah Produk <strong><?= $row['namabarang'] ?></strong> </h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="<?= base_url('transaksi/updateQty'); ?>" method="POST" >
+                                                        <div class="form-group text-center">
+                                                            <input type="hidden" name="kodeid" value="<?= $row['kodeid'] ?>">
+                                                            <input type="number" class="form-control" name="jumlah" min="1" style="width: 80%;" required>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="submit" class="btn btn-success">Save</button>
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <button class="btn btn-danger btn-sm mt-1" id="remove-<?= $row['kodeid'] ?>"><i class="fa fa-trash"></i><span> Hapus dari Keranjang</span></button>
-                                <script>
-                                    $(`#remove-<?= $row['kodeid'] ?>`).click(function() {
-                                        var xhr = new XMLHttpRequest();
-                                        xhr.onreadystatechange = function() {
-                                            if (xhr.readyState == 4) {
-                                                if (xhr.status == 200) {
-                                                    JSON.parse(xhr.responseText);
+                                <div class="col-md-6">
+                                    <button class="btn btn-danger btn-sm mt-1" id="remove-<?= $row['kodeid'] ?>"><i class="fa fa-trash"></i><span> Hapus dari Keranjang</span></button>
+                                    <script>
+                                        $(`#remove-<?= $row['kodeid'] ?>`).click(function() {
+                                            var xhr = new XMLHttpRequest();
+                                            xhr.onreadystatechange = function() {
+                                                if (xhr.readyState == 4) {
+                                                    if (xhr.status == 200) {
+                                                        JSON.parse(xhr.responseText);
+                                                    }
                                                 }
-                                            }
-                                        };
-                                        xhr.open("DELETE", "https://api-reta.id/reta-api/Penjualan/removedetailfromcart/<?= $this->session->userdata('data_user_reta')['data']['custid'] ?>/<?= $row['kodeid'] ?>");
-                                        xhr.setRequestHeader("Authorization", "Basic YWtiYXI6d2lyYWlzeQ==");
-                                        xhr.send();
-                                        $(`#<?= $row['kodeid'] ?>`).remove();
-                                        location.reload();
-                                        alert("Produk dihapus dari keranjang.");
-                                        var settingscart = {
-                                            "url": "https://api-reta.id/reta-api/Penjualan/lihatcart/<?= $this->session->userdata('data_user_reta')['data']['custid'] ?>",
-                                            "method": "GET",
-                                            "timeout": 0,
-                                            "async": false,
-                                            "headers": {
-                                                "Authorization": "Basic YWtiYXI6d2lyYWlzeQ=="
-                                            },
-                                        };
-                                        var datacart = $.ajax(settingscart).done(function(response) {
-                                            return response;
-                                        }).responseJSON;
-                                        document.getElementById('cartProduct').dataset.count = parseInt(datacart.length);
-                                    });
-                                </script>                                    
+                                            };
+                                            xhr.open("DELETE", "https://api-reta.id/reta-api/Penjualan/removedetailfromcart/<?= $this->session->userdata('data_user_reta')['data']['custid'] ?>/<?= $row['kodeid'] ?>");
+                                            xhr.setRequestHeader("Authorization", "Basic YWtiYXI6d2lyYWlzeQ==");
+                                            xhr.send();
+                                            $(`#<?= $row['kodeid'] ?>`).remove();
+                                            location.reload();
+                                            alert("Produk dihapus dari keranjang.");
+                                            var settingscart = {
+                                                "url": "https://api-reta.id/reta-api/Penjualan/lihatcart/<?= $this->session->userdata('data_user_reta')['data']['custid'] ?>",
+                                                "method": "GET",
+                                                "timeout": 0,
+                                                "async": false,
+                                                "headers": {
+                                                    "Authorization": "Basic YWtiYXI6d2lyYWlzeQ=="
+                                                },
+                                            };
+                                            var datacart = $.ajax(settingscart).done(function(response) {
+                                                return response;
+                                            }).responseJSON;
+                                            document.getElementById('cartProduct').dataset.count = parseInt(datacart.length);
+                                        });
+                                    </script>  
+                                </div>                                  
                             </div>
                         </div>
                     </div>
@@ -283,6 +295,8 @@
             </a>
         </div>
         <hr>
+
+        <!-- Section Jasa Ekspedisi -->
         <div class="card border-success mb-3">
             <div class="card-header">Pilih Jasa Ekspedisi</div>
                 <div class="card-body text-success">
@@ -310,6 +324,29 @@
                 <?php } ?>
             </div>
         </div>
+
+        <!-- Section Opsi Asuransi -->
+        <div class="card border-success mb-3">
+            <div class="card-header">Produk Asuransi</div>
+                <div class="card-body text-success">
+                <?php if ($dataAlamat) { ?>
+                    <div class="col-lg-3 col-sm-6 mt-4 mt-md-0">
+                        <!-- Radio buttons -->
+                        <p>
+                            <input type="checkbox" id="asuransi" name="asuransi" value="5000"/>
+                            <label for="asuransi">Rp. 5000</label>
+                        </p>
+                    </div>
+                <?php }else{ ?>
+                    <div class="container text-center">
+                        <h5>Mohon isi alamat pengiriman anda terlebih dahulu.</h5>
+                    </div>
+                </div>
+                <?php } ?>
+            </div>
+        </div>
+
+        <!-- Section All Detail Cost -->
             <table style="width: 100%;">
                 <tr>
                     <th colspan="2" class="text-center">Rincian Biaya</th>
@@ -345,8 +382,13 @@
                 </tr>
                 <tr>
                     <td class="text-right"><h5>Biaya Pengiriman</h5></td>
-                    <td class="pl-4"><h5 id="costPengiriman"></h5></td>
+                    <td class="pl-4"><h5 id="costPengiriman">Rp. -</h5></td>
                     <input type="hidden" class="costDeliver">
+                </tr>
+                <tr>
+                    <td class="text-right"><h5>Biaya Asuransi</h5></td>
+                    <td class="pl-4"><h5 id="costAsuransi">Rp. -</h5></td>
+                    <input type="hidden" class="costAsuransi" value="0">
                 </tr>
             </table>
         <?php } else{ ?>
@@ -356,26 +398,51 @@
             </div>
         <?php } ?>
         
+        <!-- Section Post Penjualan -->
             <nav class="navbar fixed-bottom navbar-light bg-white shadow">
                 <div class="container">
                     <h4 id="totalCost"></h4>
                     <input type="hidden" id="namaekspedisi">
+                    <input type="hidden" class="totalCost" value=0>
                     <button type="button" class="btn btn-warning btn-round" id="postPenjualan" onclick="postPenjualan()">Lanjut Bayar</button>
                     <script>
                         function postPenjualan() {
                             const button = document.getElementById('postPenjualan');
                             let checkField = document.getElementById("totalCost").innerHTML;
                             let biayapengiriman = document.getElementsByClassName("costDeliver").value;
+                            let biayaasuransi = document.getElementsByClassName("costAsuransi").value;
                             let idpasien = <?= $this->session->userdata('data_user_reta')['data']['id_pasien'] ?>;
                             let custid = "<?= $this->session->userdata('data_user_reta')['data']['custid'] ?>";
                             let idalamatkirim = <?= ($dataAlamat) ? $dataAlamat[0]['idkirim'] : '' ?>;
                             let namaekspedisi = document.getElementById("namaekspedisi").value;
 
-                            if (checkField == "") {
+                            if (!biayapengiriman) {
+
                                 alert("Alamat Pengiriman, Keranjang, & Jasa Ekspedisi Tidak Boleh Kosong!");
                                 return false;
+
                             } else {
+
                                 button.setAttribute('disabled', '');
+                                
+                                const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'top-end',
+                                    showConfirmButton: false,
+                                    timer: 3000
+                                });
+
+                                Toast.fire({
+                                    icon: 'warning',
+                                    title: '&nbsp;Loading...'
+                                })
+
+                                if (biayaasuransi == undefined) {
+                                    totalpengiriman = parseInt(biayapengiriman);
+                                } else {
+                                    totalpengiriman = parseInt(biayapengiriman) + parseInt(biayaasuransi);
+                                }
+
                                 var settingsKodePenjualan = {
                                     "url": "https://api-reta.id/reta-api/Penjualan/generatekodepenjualan",
                                     "method": "GET",

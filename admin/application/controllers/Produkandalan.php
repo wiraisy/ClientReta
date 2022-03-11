@@ -23,6 +23,28 @@ class Produkandalan extends MY_Controller {
 		$this->load->view('includes/footer');
 	}
 
+	public function index_page($page)
+	{
+		// Check Session
+		if (!$this->session->userdata('isLoggedIn_adminReta')) {
+			return redirect(base_url() . 'login');
+		}
+
+		$pageNumber = (int)$page - 1;
+
+		// Get Data From API
+		$url = 'https://api-reta.id/reta-api/Produk/GetAllProdukbyFilterandPagination?kategori=ANDALAN&pageNumber='.$pageNumber;
+        $method = 'GET';
+        $produk = $this->SendRequest($url, $method);
+
+		$data['title'] = "Produk Andalan";
+		$data['produk'] = $produk;
+
+		$this->load->view('includes/header');
+		$this->load->view('v_produkandalan', $data);
+		$this->load->view('includes/footer');
+	}
+
 	public function update_produk($id_produk){
 		
 		// Check Session
@@ -152,7 +174,7 @@ class Produkandalan extends MY_Controller {
 		list($width, $height, $type, $attr) = getimagesize($_FILES['img-produk']['tmp_name']);
 		
 		// Move uploaded file to a temp location
-		$uploadDir = $_SERVER['DOCUMENT_ROOT'].'/admin/assets/uploads/';
+		$uploadDir = $_SERVER['DOCUMENT_ROOT'].'/ClientReta/admin/assets/uploads/';
 		$uploadFile = $uploadDir . basename($_FILES['img-produk']['name']);
 		if (move_uploaded_file($_FILES['img-produk']['tmp_name'], $uploadFile))
 		{

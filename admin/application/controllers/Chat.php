@@ -16,10 +16,15 @@ class Chat extends CI_Controller {
 		}
 
 		$data['title'] = "Chat";
-
-		$this->load->view('includes/header');
-		$this->load->view('v_chat', $data);
-		$this->load->view('includes/footer');
+		if ($this->session->userdata('data_admin_reta')['rule'] == 'superadmin') {
+			$this->load->view('includes/header');
+			$this->load->view('v_chat', $data);
+			$this->load->view('includes/footer');
+		} else {
+			$this->load->view('includes/headeradmin');
+			$this->load->view('v_chat', $data);
+			$this->load->view('includes/footer');
+		}
 	}
 
 	public function getAllUsers(){

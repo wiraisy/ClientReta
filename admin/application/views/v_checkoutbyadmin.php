@@ -29,12 +29,14 @@
         vertical-align: middle;
     }
     [type="radio"]:checked,
-    [type="radio"]:not(:checked) {
+    [type="radio"]:not(:checked),[type="checkbox"]:checked,
+    [type="checkbox"]:not(:checked) {
         position: absolute;
         left: -9999px;
     }
     [type="radio"]:checked + label,
-    [type="radio"]:not(:checked) + label
+    [type="radio"]:not(:checked) + label, [type="checkbox"]:checked + label,
+    [type="checkbox"]:not(:checked) + label
     {
         position: relative;
         padding-left: 28px;
@@ -44,7 +46,8 @@
         color: #666;
     }
     [type="radio"]:checked + label:before,
-    [type="radio"]:not(:checked) + label:before {
+    [type="radio"]:not(:checked) + label:before, [type="checkbox"]:checked + label:before,
+    [type="checkbox"]:not(:checked) + label:before {
         content: '';
         position: absolute;
         left: 0;
@@ -56,7 +59,8 @@
         background: #fff;
     }
     [type="radio"]:checked + label:after,
-    [type="radio"]:not(:checked) + label:after {
+    [type="radio"]:not(:checked) + label:after, [type="checkbox"]:checked + label:after,
+    [type="checkbox"]:not(:checked) + label:after {
         content: '';
         width: 12px;
         height: 12px;
@@ -68,12 +72,12 @@
         -webkit-transition: all 0.2s ease;
         transition: all 0.2s ease;
     }
-    [type="radio"]:not(:checked) + label:after {
+    [type="radio"]:not(:checked) + label:after, [type="checkbox"]:not(:checked) + label:after {
         opacity: 0;
         -webkit-transform: scale(0);
         transform: scale(0);
     }
-    [type="radio"]:checked + label:after {
+    [type="radio"]:checked + label:after, [type="checkbox"]:checked + label:after {
         opacity: 1;
         -webkit-transform: scale(1);
         transform: scale(1);
@@ -116,6 +120,8 @@
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
+
+                    <!-- Section Alamat Pengiriman -->
                     <div class="row">
                         <div class="col-8">Alamat Pengiriman:
                             <br>
@@ -187,6 +193,8 @@
                         </div>
                     </div>
                     <br>
+
+                    <!-- Section Product Checkout -->
                     <div class="container section-cart-checkout">
                         <?php if($datacart){ ?>
                             <input type="hidden" value="<?php 
@@ -291,6 +299,8 @@
                             </a>
                         </div>
                         <hr>
+
+                        <!-- Section Jasa Ekspedisi -->
                         <div class="card border-success mb-3">
                             <div class="card-header">Pilih Jasa Ekspedisi</div>
                                 <div class="card-body text-success">
@@ -318,6 +328,29 @@
                                 <?php } ?>
                             </div>
                         </div>
+
+                        <!-- Section Opsi Asuransi -->
+                        <div class="card border-success mb-3">
+                            <div class="card-header">Produk Asuransi</div>
+                                <div class="card-body text-success">
+                                <?php if ($dataAlamat) { ?>
+                                    <div class="col-lg-3 col-sm-6 mt-4 mt-md-0">
+                                        <!-- Radio buttons -->
+                                        <p>
+                                            <input type="checkbox" id="asuransi" name="asuransi" value="5000"/>
+                                            <label for="asuransi">Rp. 5000</label>
+                                        </p>
+                                    </div>
+                                <?php }else{ ?>
+                                    <div class="container text-center">
+                                        <h5>Mohon isi alamat pengiriman anda terlebih dahulu.</h5>
+                                    </div>
+                                </div>
+                                <?php } ?>
+                            </div>
+                        </div>
+
+                        <!-- Section All Detail Cost -->
                         <table style="width: 100%;">
                             <tr>
                                 <th colspan="2" class="text-center">Rincian Biaya</th>
@@ -353,37 +386,69 @@
                             </tr>
                             <tr>
                                 <td class="text-right"><h5>Biaya Pengiriman</h5></td>
-                                <td class="pl-4"><h5 id="costPengiriman"></h5></td>
-                                <input type="hidden" class="costDelivery">
+                                <td class="pl-4"><h5 id="costPengiriman">Rp. -</h5></td>
+                                <input type="hidden" class="costDeliver">
+                            </tr>
+                            <tr>
+                                <td class="text-right"><h5>Biaya Asuransi</h5></td>
+                                <td class="pl-4"><h5 id="costAsuransi">Rp. -</h5></td>
+                                <input type="hidden" class="costAsuransi" value="0">
                             </tr>
                         </table>
                         <?php } else{ ?>
                             <div class="text-center">
                                 <h2>Anda belum menambahkan produk ke dalam keranjang anda.</h2>
-                                <a href="<?= base_url() ?>" class="btn btn-info btn-round mt-3">Beli Produk</a>
+                                <a href="<?= base_url() ?>order-by-admin" class="btn btn-info btn-round mt-3">Beli Produk</a>
                             </div>
                         <?php } ?>
+
+                        <!-- Section Post Penjualan -->
                             <div class="row">
                                 <div class="col-md-6 text-left">
                                     <h4 id="totalCost"></h4>
                                 </div>
-                                <div class="col-md-6 text-right"><input type="hidden" id="namaekspedisi">
+                                <div class="col-md-6 text-right">
+                                    <input type="hidden" id="namaekspedisi">
+                                    <input type="hidden" class="totalCost" value=0>
                                     <button type="button" class="btn btn-warning btn-round" id="postPenjualan" onclick="postPenjualan()">Lanjut Bayar</button>
                                     <script>
                                         function postPenjualan() {
                                             const button = document.getElementById('postPenjualan');
                                             let checkField = document.getElementById("totalCost").innerHTML;
-                                            let biayapengiriman = document.getElementsByClassName("costDelivery").value;
+                                            let biayaasuransi = document.getElementsByClassName("costAsuransi").value;
+                                            let biayapengiriman = document.getElementsByClassName("costDeliver").value;
                                             let idpasien = <?= $dataPasien['id_pasien'] ?>;
                                             let custid = "<?= $dataPasien['custid'] ?>";
                                             let idalamatkirim = <?= ($dataAlamat) ? $dataAlamat[0]['idkirim'] : '' ?>;
                                             let namaekspedisi = document.getElementById("namaekspedisi").value;
 
-                                            if (checkField == "") {
+                                            if (!biayapengiriman) {
+
                                                 alert("Alamat Pengiriman, Keranjang, & Jasa Ekspedisi Tidak Boleh Kosong!");
                                                 return false;
+
                                             } else {
+
                                                 button.setAttribute('disabled', '');
+
+                                                const Toast = Swal.mixin({
+                                                    toast: true,
+                                                    position: 'top-end',
+                                                    showConfirmButton: false,
+                                                    timer: 3000
+                                                });
+
+                                                Toast.fire({
+                                                    icon: 'warning',
+                                                    title: '&nbsp;Loading...'
+                                                })
+
+                                                if (biayaasuransi == undefined) {
+                                                    totalpengiriman = parseInt(biayapengiriman);
+                                                } else {
+                                                    totalpengiriman = parseInt(biayapengiriman) + parseInt(biayaasuransi);
+                                                }
+
                                                 var settingsKodePenjualan = {
                                                     "url": "https://api-reta.id/reta-api/Penjualan/generatekodepenjualan",
                                                     "method": "GET",
@@ -430,7 +495,7 @@
                                                 var emptyCart = $.ajax(settingsEmpty).done(function (resEmpty) {
                                                     return resEmpty;
                                                 });
-                                                // Alert Berhasil
+                                                location.href = "<?= base_url() ?>payment-by-admin/"+responsePost.idpenjualan;
                                             }
                                         }
                                     </script>

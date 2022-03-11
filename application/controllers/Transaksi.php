@@ -126,19 +126,32 @@ class Transaksi extends MY_Controller {
 		}
 
         // Get Data Penjualan Pasien
-		$url = 'https://api-reta.id/reta-api/Penjualan/getpenjualanbyid/'.$idpenjualan.'sortBy=tanggalpenjualan';
+		$url = 'https://api-reta.id/reta-api/Penjualan/getpenjualanbyid/'.$idpenjualan;
         $method = 'GET';
         $datapenjualan = $this->SendRequest($url, $method);
 
-		$custid = $this->session->userdata('data_user_reta')['data']['custid'];
+		$url = 'https://api-reta.id/reta-api/Penjualan/getBuktibayarexist?idpenjualan='.$idpenjualan;
+        $method = 'GET';
+        $databukti = $this->SendRequest($url, $method);
 
-        $data['dataChatPasien'] =$this->ModelChat->get_user($custid);
-        $data['barTitle'] = "Payment";
-		$data['datapenjualan'] = $datapenjualan;
+		if ($datapenjualan['status'] === 500 || $databukti == true) {
+			$data['barTitle'] = "Payment";
+			$data['databukti'] = $databukti;
 
-        $this->load->view('includes/header', $data);
-		$this->load->view('v_payment', $data);
-        $this->load->view('includes/footer');
+			$this->load->view('includes/header', $data);
+			$this->load->view('v_penjualankosong', $data);
+			$this->load->view('includes/footer');
+		} else {
+			$custid = $this->session->userdata('data_user_reta')['data']['custid'];
+	
+			$data['dataChatPasien'] =$this->ModelChat->get_user($custid);
+			$data['barTitle'] = "Payment";
+			$data['datapenjualan'] = $datapenjualan;
+	
+			$this->load->view('includes/header', $data);
+			$this->load->view('v_payment', $data);
+			$this->load->view('includes/footer');
+		}
 	}
 
 	public function updateQty(){
@@ -181,11 +194,48 @@ class Transaksi extends MY_Controller {
 		redirect('checkout');
 	}
 	
-	public function expired(){
-        $data['barTitle'] = "Payment Expired";
+	public function uploadBukti(){
+		$kodetransaksi = $this->input->post('kodetransaksi', true);
+		$filename = $_FILES['fileBuktiBayar']['tmp_name'];
+		list($width, $height, $type, $attr) = getimagesize($_FILES['fileBuktiBayar']['tmp_name']);
 
-        $this->load->view('includes/header', $data);
-		$this->load->view('v_expired');
-        $this->load->view('includes/footer');
+		$uploadDir = $_SERVER['DOCUMENT_ROOT'].'/ClientReta/assets/uploads/';
+		$uploadFile = $uploadDir . basename($_FILES['fileBuktiBayar']['name']);
+
+		if (move_uploaded_file($_FILES['fileBuktiBayar']['tmp_name'], $uploadFile))
+		{
+			// Execute remote upload
+			$curl = curl_init();
+			curl_setopt_array($curl, array(
+			  CURLOPT_URL => 'https://api-reta.id/reta-api/Penjualan/uploadbuktibayarbykodetransaksi/'.$kodetransaksi,
+			  CURLOPT_RETURNTRANSFER => true,
+			  CURLOPT_ENCODING => '',
+			  CURLOPT_MAXREDIRS => 10,
+			  CURLOPT_TIMEOUT => 0,
+			  CURLOPT_SSL_VERIFYHOST => 0,
+			  CURLOPT_SSL_VERIFYPEER => 0,
+			  CURLOPT_FOLLOWLOCATION => true,
+			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			  CURLOPT_CUSTOMREQUEST => 'POST',
+			  CURLOPT_POSTFIELDS => array('file'=> new CURLFILE($uploadFile, 'image/jpg')),
+			  CURLOPT_HTTPHEADER => array(
+				'Content-Type: multipart/form-data',
+				'Accept: */*',
+				'Authorization: Basic YWtiYXI6d2lyYWlzeQ=='
+			  ),
+			));
+			$response = curl_exec($curl);
+			curl_close($curl);			
+
+			// Now delete local temp file
+			unlink($uploadFile);
+			// die(var_dump($response));
+		}
+		else
+		{
+			echo "Possible file upload attack!\n";
+		}
+
+		redirect(base_url() . 'my-transaction');
 	}
 }

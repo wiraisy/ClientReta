@@ -33,6 +33,34 @@
         color: blue;
         cursor: pointer;
     }
+    #pagination-custom {
+        margin: 0;
+        padding: 0;
+        text-align: center
+    }
+    #pagination-custom li {
+        display: inline
+    }
+    #pagination-custom li a {
+        display: inline-block;
+        text-decoration: none;
+        padding: 5px 10px;
+        color: #000
+    }
+
+    /* Active and Hoverable Pagination */
+    #pagination-custom li a {
+        border-radius: 5px;
+        -webkit-transition: background-color 0.3s;
+        transition: background-color 0.3s;
+    }
+    #pagination-custom li a.active {
+        background-color: #f3a4b5;
+        color: #fff
+    }
+    #pagination-custom li a:hover:not(.active) {
+        background-color: #ddd;
+    } 
 </style>    
     
     <div class="header bg-pink pb-6">
@@ -66,6 +94,21 @@
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
+                    </div>
+                    <!-- Pagination -->
+                    <div class="paging-section my-2">
+                        <ul id="pagination-custom">
+                            <?php if($produk['pageable']['pageNumber'] != 0): ?>
+                            <li><a class="" href="<?= base_url() ?>produk-umum/<?=  $produk['pageable']['pageNumber'] ?>">«</a></li>
+                            <?php endif; ?>
+                            <?php for ($i=1; $i <= $produk['totalPages']; $i++) {  ?>
+                                <li><a href="<?= base_url() ?>produk-umum/<?= $i ?>" class="<?= ($produk['pageable']['pageNumber'] == $i-1) ? 'active' : '' ?>"><?= $i ?></a></li>
+                            <?php } ?>
+                            <?php $pageNow = $produk['pageable']['pageNumber'] + 1;
+                            if($pageNow != $produk['totalPages']): ?>
+                            <li><a href="<?= base_url() ?>produk-umum/<?=  $produk['pageable']['pageNumber'] + 2 ?>">»</a></li>
+                            <?php endif; ?>
+                        </ul> 
                     </div>
                     <!-- Produk -->
                     <div class="container scrollable-content">

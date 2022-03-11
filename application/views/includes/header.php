@@ -34,6 +34,9 @@
   <!-- Select -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 
+  <!-- Toast -->
+  <link rel="stylesheet" href="<?= base_url() ?>assets/js/toastr/toastr.min.css">
+    
   <!--   JS Files   -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   <script src="<?= base_url() ?>assets/js/core/jquery.min.js"></script>

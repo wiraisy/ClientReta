@@ -11,11 +11,16 @@ class Admin extends MY_Controller {
 		}
 
 		// Get Data From API
-		$url = 'https://api-reta.id/reta-api/UserAdminAPI/getalluseradmin';
+		$url = 'https://api-reta.id/reta-api/UserAdminAPI/getalladminbyrule/superadmin';
+        $method = 'GET';
+        $datasuperadmin = $this->SendRequest($url, $method);
+
+		$url = 'https://api-reta.id/reta-api/UserAdminAPI/getalladminbyrule/admin';
         $method = 'GET';
         $datadmin = $this->SendRequest($url, $method);
 
 		$data['title'] = "Data Admin";
+		$data['datasuperadmin'] = $datasuperadmin;
 		$data['datadmin'] = $datadmin;
 
 		$this->load->view('includes/header');
@@ -32,7 +37,7 @@ class Admin extends MY_Controller {
 
         $username = $this->input->post('username', true);
         $password = $this->input->post('password', true);
-		$rule = $this->input->post('rule', true);
+		$rule = $_POST['rule'];
         
         $curl = curl_init();
 

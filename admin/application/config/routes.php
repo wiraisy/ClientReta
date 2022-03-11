@@ -59,7 +59,7 @@ $route['pemesanan'] = 'pemesanan';
 // Order By Admin
 $route['ordey-by-admin'] = 'pemesanan/orderByAdmin';
 $route['checkout-by-admin'] = 'pemesanan/checkout';
-$route['payment-by-admin'] = 'pemesanan/payment';
+$route['payment-by-admin/(:num)'] = 'pemesanan/payment/$1';
 $route['payment-expired'] = 'pemesanan/expired';
 
 // Chat
@@ -74,10 +74,12 @@ $route['order-by-admin/checkout/(:num)/(:any)'] = 'pemesanan/checkout/$1/$2';
 
 // Produk Umum
 $route['produk-umum'] = 'produkumum';
+$route['produk-umum/(:num)'] = 'produkumum/index_page/$1';
 $route['update-produk-umum/(:num)'] = 'produkumum/update_produk/$1';
 
 // Produk Andalan
 $route['produk-andalan'] = 'produkandalan';
+$route['produk-andalan/(:num)'] = 'produkandalan/index_page/$1';
 $route['update-produk-andalan/(:num)'] = 'produkandalan/update_produk/$1';
 
 // Import Data
@@ -85,5 +87,7 @@ $route['import-data'] = 'import';
 
 // Export Data
 $route['export-data'] = 'export';
+$route['export-master'] = 'export/export_rule_admin';
+
 // Auth
 $route['login'] = 'auth/login';

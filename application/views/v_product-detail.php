@@ -62,7 +62,7 @@
                             <p>Rp. <?= $detailproduk['hargajual'] ?></p>
                         </div>
                         <div class="col-md-4">
-                            <button type="button" class="btn btn-success btn-sm">Andalan</button>
+                            <button type="button" class="btn btn-success btn-sm">Produk Pendukung</button>
                         </div>
                     </div>
                     <hr>

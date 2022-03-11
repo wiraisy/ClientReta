@@ -55,10 +55,10 @@
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                <?php if($datapasien['content']){ 
+                                <?php if($datapasien){ 
                                         $i = 1;
                                         ?>
-                                            <?php foreach ($datapasien['content'] as $row) { 
+                                            <?php foreach ($datapasien as $row) { 
                                                 ?>
                                                 <tr>
                                                     <td><?= $i; ?></td>

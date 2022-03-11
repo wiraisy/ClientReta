@@ -122,7 +122,7 @@
         </div>
         <div class="navbar-inner">
             <div class="collapse navbar-collapse menuSideNav" id="sidenav-collapse-main">
-                <h5>Menu Admin</h5>
+                <h5>Menu SuperAdmin</h5>
                 <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="<?= site_url() ?>">
@@ -240,7 +240,7 @@
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="<?= site_url('chat') ?>" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link" href="<?= site_url('chat') ?>" role="button">
                     <i class="fas fa-comment-dots"></i>
                     </a>
                     <!-- <div class="dropdown-menu dropdown-menu-xl  dropdown-menu-right  py-0 overflow-hidden">

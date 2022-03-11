@@ -60,14 +60,29 @@ class Profil extends MY_Controller {
 
 		$id_pasien = $this->session->userdata('data_user_reta')['data']['id_pasien'];
 
-		$url = 'https://api-reta.id/reta-api/Penjualan/getallpenjualanfilter?id_pasien='.$id_pasien;
+		// Status Belum Bayar
+		$url = 'https://api-reta.id/reta-api/Penjualan/getallpenjualanfilter?id_pasien='.$id_pasien.'&status=BELUM_DIBAYAR';
         $method = 'GET';
-        $dataPenjualan = $this->SendRequest($url, $method);
+        $dataBelumBayar = $this->SendRequest($url, $method);
+
+		// Status Telah Bayar
+		$url = 'https://api-reta.id/reta-api/Penjualan/getallpenjualanfilter?id_pasien='.$id_pasien.'&status=DIBAYAR';
+        $method = 'GET';
+        $dataDibayar = $this->SendRequest($url, $method);
+
+		// Status Dikirim
+		$url = 'https://api-reta.id/reta-api/Penjualan/getallpenjualanfilter?id_pasien='.$id_pasien.'&status=DIKIRIM';
+        $method = 'GET';
+        $dataDikirim = $this->SendRequest($url, $method);
+
+
 		$custid = $this->session->userdata('data_user_reta')['data']['custid'];
 
         $data['dataChatPasien'] =$this->ModelChat->get_user($custid);
         $data['barTitle'] = "My Transaction";
-		$data['dataPenjualan'] = $dataPenjualan;
+		$data['dataBelumBayar'] = $dataBelumBayar;
+		$data['dataDibayar'] = $dataDibayar;
+		$data['dataDikirim'] = $dataDikirim;
 
         $this->load->view('includes/header', $data);
 		$this->load->view('v_pesanan', $data);
@@ -136,5 +151,27 @@ class Profil extends MY_Controller {
 		curl_close($curlDelete);
 
 		redirect(base_url() . 'profil/info_akun');
+	}
+
+	public function batalPesan($idpenjualan){
+		$curl = curl_init();
+		curl_setopt_array($curl, array(
+		CURLOPT_URL => 'https://api-reta.id/reta-api/Penjualan/HapusPenjualanbyid/'.(int)$idpenjualan,
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => '',
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_SSL_VERIFYHOST => 0,
+		CURLOPT_SSL_VERIFYPEER => 0,
+		CURLOPT_TIMEOUT => 0,
+		CURLOPT_FOLLOWLOCATION => true,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => 'DELETE',
+		CURLOPT_HTTPHEADER => array(
+			'Authorization: Basic YWtiYXI6d2lyYWlzeQ=='
+		),
+		));
+		$response = curl_exec($curl);
+		curl_close($curl);
+		redirect(base_url() . '/my-transaction');
 	}
 }

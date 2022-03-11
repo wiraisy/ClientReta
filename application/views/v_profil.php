@@ -13,6 +13,7 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-12"><label class="labels">Nama</label><input type="text" class="form-control" disabled="true" placeholder="Masukkan Nama" value="<?= $this->session->userdata('data_user_reta')['data']['custnama'] ?>"></div>
+                        <div class="col-md-12"><label class="labels">Customer ID</label><input type="text" class="form-control" disabled="true" placeholder="Masukkan Customer ID" value="<?= $this->session->userdata('data_user_reta')['data']['custid'] ?>"></div>
                         <div class="col-md-12"><label class="labels">Nomer Ponsel</label><input type="text" class="form-control" disabled="true" placeholder="Masukkan No. Hp" value="<?= $this->session->userdata('data_user_reta')['data']['hp1'] ?>"></div>
                         <div class="col-md-12"><label class="labels">Alamat</label><input type="text" class="form-control" disabled="true" placeholder="Masukkan Alamat" value="<?= $this->session->userdata('data_user_reta')['data']['alamat'] ?>"></div>
                         <div class="col-md-12"><label class="labels">Tanggal Lahir</label><input type="text" class="form-control" disabled="true" placeholder="Masukkan Tanggal Lahir" value="<?= date("d-M-Y", ((int)$this->session->userdata('data_user_reta')['data']['tgllahir']/1000) ); ?>"></div>

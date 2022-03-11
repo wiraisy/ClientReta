@@ -11,7 +11,7 @@ class Pasien extends MY_Controller {
 		}
 
 		// Get Data From API
-		$url = 'https://api-reta.id/reta-api/PasienAPI/listfilterpasien';
+		$url = 'https://api-reta.id/reta-api/PasienAPI/getallpasien';
         $method = 'GET';
         $datapasien = $this->SendRequest($url, $method);
 
