@@ -176,6 +176,7 @@ class Produkumum extends MY_Controller {
 		$uploadFile = $uploadDir . basename($_FILES['img-produk']['name']);
 
 		var_dump($uploadDir);
+		die();
 
 		if (move_uploaded_file($_FILES['img-produk']['tmp_name'], $uploadFile))
 		{
@@ -211,7 +212,6 @@ class Produkumum extends MY_Controller {
 		{
 			echo "Possible file upload attack!\n";
 		}
-		die();
 		redirect('produkumum');
 	}
 }
