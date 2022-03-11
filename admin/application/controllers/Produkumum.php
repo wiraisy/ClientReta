@@ -172,10 +172,10 @@ class Produkumum extends MY_Controller {
 		list($width, $height, $type, $attr) = getimagesize($_FILES['img-produk']['tmp_name']);
 		
 		// Move uploaded file to a temp location
-		$uploadDir = $_SERVER['DOCUMENT_ROOT'].'/admin/assets/uploads/';
+		$uploadDir = 'uploads/';
 		$uploadFile = $uploadDir . basename($_FILES['img-produk']['name']);
 
-		var_dump($uploadDir);
+		var_dump($uploadFile);
 
 		if (move_uploaded_file($_FILES['img-produk']['tmp_name'], $uploadFile))
 		{
