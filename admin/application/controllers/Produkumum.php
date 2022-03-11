@@ -172,7 +172,7 @@ class Produkumum extends MY_Controller {
 		list($width, $height, $type, $attr) = getimagesize($_FILES['img-produk']['tmp_name']);
 		
 		// Move uploaded file to a temp location
-		$uploadDir = $_SERVER['DOCUMENT_ROOT'].'/admin/assets/uploads/';
+		$uploadDir = base_url().'/admin/assets/uploads/';
 		$uploadFile = $uploadDir . basename($_FILES['img-produk']['name']);
 
 		var_dump($uploadDir);
@@ -203,7 +203,7 @@ class Produkumum extends MY_Controller {
 			// $response = curl_exec($curl);
 			// curl_close($curl);
 			// // Now delete local temp file
-			// unlink($uploadFile);
+			unlink($uploadFile);
 			// die(var_dump($response));
 			echo "test";
 		}
