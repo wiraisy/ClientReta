@@ -175,8 +175,6 @@ class Produkumum extends MY_Controller {
 		$uploadDir = $_SERVER['DOCUMENT_ROOT'].'/admin/assets/uploads/';
 		$uploadFile = $uploadDir . basename($_FILES['img-produk']['name']);
 
-		var_dump($uploadFile);
-
 		if (move_uploaded_file($_FILES['img-produk']['tmp_name'], $uploadFile))
 		{
 			// Execute remote upload
@@ -205,13 +203,12 @@ class Produkumum extends MY_Controller {
 			// // Now delete local temp file
 			unlink($uploadFile);
 			// die(var_dump($response));
-			echo "test";
+			// echo "test";
 		}
 		else
 		{
 			echo "Possible file upload attack!\n";
 		}
-		die();
 		redirect('produkumum');
 	}
 }
