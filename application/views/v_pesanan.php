@@ -4,6 +4,10 @@
         height: 200px;
         object-fit: cover;
     }
+    .bukti-img > img {
+        width: 100%; 
+        object-fit: cover;
+    }
     @media screen and (max-width: 768px) {
         .product-img > img {
             width: 100px; /* You can set the dimensions to whatever you want */
