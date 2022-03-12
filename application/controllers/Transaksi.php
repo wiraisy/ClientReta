@@ -199,7 +199,7 @@ class Transaksi extends MY_Controller {
 		$filename = $_FILES['fileBuktiBayar']['tmp_name'];
 		list($width, $height, $type, $attr) = getimagesize($_FILES['fileBuktiBayar']['tmp_name']);
 
-		$uploadDir = $_SERVER['DOCUMENT_ROOT'].'/ClientReta/assets/uploads/';
+		$uploadDir = $_SERVER['DOCUMENT_ROOT'].'/assets/uploads/';
 		$uploadFile = $uploadDir . basename($_FILES['fileBuktiBayar']['name']);
 
 		if (move_uploaded_file($_FILES['fileBuktiBayar']['tmp_name'], $uploadFile))
