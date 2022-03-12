@@ -15,11 +15,6 @@ class Auth extends MY_Controller {
 
 	public function index()
 	{
-		// Check Session
-		if ($this->session->userdata('isLoggedIn_userReta')) {
-			return redirect(base_url());
-		}
-
         $data['barTitle'] = "SHOP";
 
 		$this->load->view('v_prelogin', $data);
