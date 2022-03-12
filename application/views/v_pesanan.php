@@ -258,8 +258,51 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <button class="btn btn-info btn-sm mt-2" disabled>Telah Divalidasi</button>
+                                        <a data-toggle="modal" data-target="#lihatBukti<?= $row['idpenjualan'] ?>" type="button" class="btn btn-info btn-sm mt-2">Lihat Bukti Pembayaran</button>
                                     </td>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="lihatBukti<?= $row['idpenjualan']; ?>" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="addModalLabel">Bukti Pembayaran</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="bukti-img text-center">
+                                                        <?php 
+                                                            $curlBukti = curl_init();
+                                                            curl_setopt_array($curlBukti, array(
+                                                            CURLOPT_URL => 'https://api-reta.id/reta-api/Penjualan/loadBuktibyidpenjualan?idpenjualan='.$row['idpenjualan'],
+                                                            CURLOPT_RETURNTRANSFER => true,
+                                                            CURLOPT_ENCODING => '',
+                                                            CURLOPT_MAXREDIRS => 10,
+                                                            CURLOPT_TIMEOUT => 0,
+                                                            CURLOPT_SSL_VERIFYHOST => 0,
+                                                            CURLOPT_SSL_VERIFYPEER => 0,
+                                                            CURLOPT_FOLLOWLOCATION => true,
+                                                            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                                                            CURLOPT_CUSTOMREQUEST => 'GET',
+                                                            CURLOPT_HTTPHEADER => array(
+                                                                'Authorization: Basic YWtiYXI6d2lyYWlzeQ=='
+                                                            ),
+                                                            ));
+                                                            $responseBukti = curl_exec($curlBukti);
+                                                            
+                                                            curl_close($curlBukti);
+                                                            $src = 'data:image/jpg;base64,'.base64_encode($responseBukti).'';
+                                                        ?>
+                                                        <img src="<?= $src ?>" class="rounded">
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </tr>
                             <?php } ?>
                         <?php } else { ?>
