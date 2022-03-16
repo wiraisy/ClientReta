@@ -52,7 +52,7 @@
   <?php }
   ?>
 <body>
-    <section class="section section-shaped section-xxl" style="height: 100vh">
+    <section class="section section-shaped section-xxl">
         <div class="shape shape-style-1 bg-gradient-pink">
           <span></span>
           <span></span>

@@ -20,9 +20,6 @@ class Product extends MY_Controller {
         $method = 'GET';
         $detailproduk = $this->SendRequest($url, $method);	
 		
-		$custid = $this->session->userdata('data_user_reta')['data']['custid'];
-
-        $data['dataChatPasien'] =$this->ModelChat->get_user($custid);
         $data['barTitle'] = "Detail Products";
 		$data['detailproduk'] = $detailproduk;
 

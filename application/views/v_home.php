@@ -89,6 +89,9 @@
         .carousel-control-prev-resp, .carousel-control-next-resp{
             display: initial;
         }
+        .product-detail h4{
+            margin-top: 15px;
+        }
     }
 </style>
     <div class="section">
@@ -102,8 +105,15 @@
             <div class="card">
                 <div class="card-body bg-gradient-pink" style="color: white;">
                     <label for="pilih-produk">Pesan Produk Anda Sebelumnya</label>
-                    <select class="form-control selectpicker" id="selectPesananSebelum" data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;">
-                        <option selected disabled>Fitur ini belum tersedia</option>
+                    <select class="form-control selectpicker" name="selectPesananSebelum" id="selectPesananSebelum" data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;">
+                        <option selected disabled>Pilih produk yang anda inginkan</option>
+                        <?php if($produksebelumnya){ ?>
+                            <?php foreach ($produksebelumnya as $row_produksebelumnya) { ?>
+                                <option value="<?= $row_produksebelumnya['kodeid'] ?>" class="<?= $this->session->userdata('data_user_reta')['data']['custid'] ?>"><?= $row_produksebelumnya['namabarang'] ?></option>
+                            <?php } ?>
+                        <?php }else{?>
+                                <option disabled>Data Produk Umum Tidak Tersedia</option>
+                        <?php } ?>
                     </select>
                 </div>
             </div>  

@@ -74,7 +74,7 @@
                                 <div class="pl-2">
                                     <div class="number my-4">
                                         <span class="counter-minus minus counter">-</span>
-                                        <input class="mx-2" id="qty" min="1" type="number" value="1"/>
+                                        <input class="mx-2" id="qty" min="1" max="4" type="number" value="1"/>
                                         <span class="counter-plus plus counter">+</span>
                                     </div>
                                     <script>
@@ -89,7 +89,9 @@
 
                                         $(`.plus`).click(function() {
                                             var $input = $(this).parent().find('input');
-                                            $input.val(parseInt($input.val()) + 1);
+                                            var countplus = parseInt($input.val()) + 1;
+                                            countplus = countplus > 4 ? 4 : countplus;
+                                            $input.val(countplus);
                                             $input.change();
                                             return false;
                                         });

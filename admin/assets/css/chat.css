@@ -19,7 +19,12 @@
     left: 0;
     top: 0;
     padding: 0px 20px;
-    z-index: 7
+    z-index: 7;
+}
+
+.chat-app .people-list ul {
+    overflow-y: auto;
+    height: 650px;
 }
 
 .chat-app .chat {

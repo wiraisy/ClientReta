@@ -15,7 +15,13 @@ class Home extends MY_Controller {
 			return redirect(base_url() . 'auth');
 		}
 
+		$idpasien = $this->session->userdata('data_user_reta')['data']['id_pasien'];
+
 		// Get Data From API
+		$url = 'https://api-reta.id/reta-api/PenjualanDetail/getallprodukbyidpasien?idpasien='.$idpasien;
+        $method = 'GET';
+        $produksebelumnya = $this->SendRequest($url, $method);
+
 		$url = 'https://api-reta.id/reta-api/Produk/getallprodukbykategori/UMUM/true';
         $method = 'GET';
         $produkumum = $this->SendRequest($url, $method);
@@ -24,12 +30,10 @@ class Home extends MY_Controller {
         $method = 'GET';
         $produkandalan = $this->SendRequest($url, $method);
 
-		$custid = $this->session->userdata('data_user_reta')['data']['custid'];
-
-        $data['dataChatPasien'] =$this->ModelChat->get_user($custid);
         $data['barTitle'] = "Buy Products";
 		$data['produkumum'] = $produkumum;
 		$data['produkandalan'] = $produkandalan;
+		$data['produksebelumnya'] = $produksebelumnya;
 
         $this->load->view('includes/header', $data);
 		$this->load->view('v_home', $data);

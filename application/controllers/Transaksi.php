@@ -44,7 +44,6 @@ class Transaksi extends MY_Controller {
 		$response = curl_exec($curl);
 		$dataProvinsi = json_decode($response, true);
 
-        $data['dataChatPasien'] =$this->ModelChat->get_user($custid);
         $data['barTitle'] = "Checkout";
 		$data['datacart'] = $datacart;
 		$data['dataAlamat'] = $dataAlamat;
@@ -97,25 +96,6 @@ class Transaksi extends MY_Controller {
 		$response = curl_exec($curlPost);
 		curl_close($curlPost);
 
-		$curlDelete = curl_init();
-		curl_setopt_array($curlDelete, array(
-		CURLOPT_URL => 'https://api-reta.id/reta-api/AlamatKirimAPI/HapusAlamat/'.$idAlamatKirim,
-		CURLOPT_RETURNTRANSFER => true,
-		CURLOPT_ENCODING => '',
-		CURLOPT_MAXREDIRS => 10,
-		CURLOPT_TIMEOUT => 0,
-		CURLOPT_SSL_VERIFYHOST => 0,
-		CURLOPT_SSL_VERIFYPEER => 0,
-		CURLOPT_FOLLOWLOCATION => true,
-		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-		CURLOPT_CUSTOMREQUEST => 'DELETE',
-		CURLOPT_HTTPHEADER => array(
-			'Authorization: Basic YWtiYXI6d2lyYWlzeQ=='
-		),
-		));
-		$responseDelete = curl_exec($curlDelete);
-		curl_close($curlDelete);
-
 		redirect(base_url() . 'transaksi/checkout');
 	}
 
@@ -142,9 +122,6 @@ class Transaksi extends MY_Controller {
 			$this->load->view('v_penjualankosong', $data);
 			$this->load->view('includes/footer');
 		} else {
-			$custid = $this->session->userdata('data_user_reta')['data']['custid'];
-	
-			$data['dataChatPasien'] =$this->ModelChat->get_user($custid);
 			$data['barTitle'] = "Payment";
 			$data['datapenjualan'] = $datapenjualan;
 	

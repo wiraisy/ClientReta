@@ -32,7 +32,7 @@ $(document).ready(function() {
             var harga = formatRupiah(produkdetail.hargajual, 'Rp. ');
 
             // Append Element List Pesanan
-            let listPesanan = $(`<div class="form-group ${selected_opt}"><div class="row align-items-center bg-secondary mt-2 py-4"><div class="col-md-4 product-img text-center"><img id="img-${selected_opt}" class="rounded  "></div><div class="col-md-8 product-detail"><h4><strong>${produkdetail.namabarang}</strong></h4><h5>Harga : ${harga}</h5><div class="number my-4"><span class="counter-minus minus-${selected_opt} counter">-</span><input class="mx-2" id="qty-${selected_opt}" type="number" value="1"/><span class="counter-plus plus-${selected_opt} counter">+</span></div><button type="button" class="btn btn-success btn-sm mt-1" id="addToCart-${selected_opt}"><i class="fa fa-cart-plus" style="color: green;"></i><span> Add to Cart</span></button><button type="button" class="btn btn-danger btn-sm mt-1" id="remove-${selected_opt}"><i class="fa fa-trash"></i><span> Remove From List</span></button></div></div></div>`);
+            let listPesanan = $(`<div class="form-group ${selected_opt}"><div class="row align-items-center bg-secondary mt-2 py-4"><div class="col-md-4 product-img text-center"><img id="img-${selected_opt}" class="rounded  "></div><div class="col-md-8 product-detail"><h4><strong>${produkdetail.namabarang}</strong></h4><h5>Harga : ${harga}</h5><div class="number my-4"><span class="counter-minus minus-${selected_opt} counter">-</span><input class="mx-2" id="qty-${selected_opt}" type="number"  min="1" max="4" value="1"/><span class="counter-plus plus-${selected_opt} counter">+</span></div><button type="button" class="btn btn-success btn-sm mt-1" id="addToCart-${selected_opt}"><i class="fa fa-cart-plus" style="color: green;"></i><span> Add to Cart</span></button><button type="button" class="btn btn-danger btn-sm mt-1" id="remove-${selected_opt}"><i class="fa fa-trash"></i><span> Remove From List</span></button></div></div></div>`);
 
             // Format Rupiah
             function formatRupiah(angka, prefix) {
@@ -126,7 +126,9 @@ $(document).ready(function() {
 
             $(`.plus-${selected_opt}`).click(function() {
                 var $input = $(this).parent().find('input');
-                $input.val(parseInt($input.val()) + 1);
+                var countplus = parseInt($input.val()) + 1;
+                countplus = countplus > 4 ? 4 : countplus;
+                $input.val(countplus);
                 $input.change();
                 return false;
             });
@@ -171,7 +173,7 @@ $(document).ready(function() {
             var harga = formatRupiah(produkdetail.hargajual, 'Rp. ');
 
             // Append Element List Pesanan
-            let listPesanan = $(`<div class="form-group ${selected_opt}"><div class="row align-items-center bg-secondary mt-2 py-4"><div class="col-md-4 product-img text-center"><img id="img-${selected_opt}" class="rounded  "></div><div class="col-md-8 product-detail"><h4><strong>${produkdetail.namabarang}</strong></h4><h5>Harga : ${harga}</h5><div class="number my-4"><span class="counter-minus minus-${selected_opt} counter">-</span><input class="mx-2" id="qty-${selected_opt}" type="number" value="1"/><span class="counter-plus plus-${selected_opt} counter">+</span></div><button type="button" class="btn btn-success btn-sm mt-1" id="addToCart-${selected_opt}"><i class="fa fa-cart-plus" style="color: green;"></i><span> Add to Cart</span></button><button type="button" class="btn btn-danger btn-sm mt-1" id="remove-${selected_opt}"><i class="fa fa-trash"></i><span> Remove From List</span></button></div></div></div>`);
+            let listPesanan = $(`<div class="form-group ${selected_opt}"><div class="row align-items-center bg-secondary mt-2 py-4"><div class="col-md-4 product-img text-center"><img id="img-${selected_opt}" class="rounded  "></div><div class="col-md-8 product-detail"><h4><strong>${produkdetail.namabarang}</strong></h4><h5>Harga : ${harga}</h5><div class="number my-4"><span class="counter-minus minus-${selected_opt} counter">-</span><input class="mx-2" id="qty-${selected_opt}" type="number" min="1" max="4" value="1"/><span class="counter-plus plus-${selected_opt} counter">+</span></div><button type="button" class="btn btn-success btn-sm mt-1" id="addToCart-${selected_opt}"><i class="fa fa-cart-plus" style="color: green;"></i><span> Add to Cart</span></button><button type="button" class="btn btn-danger btn-sm mt-1" id="remove-${selected_opt}"><i class="fa fa-trash"></i><span> Remove From List</span></button></div></div></div>`);
 
             // Format Rupiah
             function formatRupiah(angka, prefix) {
@@ -265,7 +267,9 @@ $(document).ready(function() {
 
             $(`.plus-${selected_opt}`).click(function() {
                 var $input = $(this).parent().find('input');
-                $input.val(parseInt($input.val()) + 1);
+                var countplus = parseInt($input.val()) + 1;
+                countplus = countplus > 4 ? 4 : countplus;
+                $input.val(countplus);
                 $input.change();
                 return false;
             });

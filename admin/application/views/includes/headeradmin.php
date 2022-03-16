@@ -148,6 +148,12 @@
                     <span class="nav-link-text">Order By Admin</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= site_url('produk-link') ?>">
+                    <i class="fa fa-link text-pink"></i>
+                    <span class="nav-link-text">Produk Link</span>
+                    </a>
+                </li>
                 </ul>
                 <hr>
                 <div style="text-align: center;">

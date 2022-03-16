@@ -39,9 +39,6 @@ class Profil extends MY_Controller {
 		$response = curl_exec($curl);
 		$dataProvinsi = json_decode($response, true);
 
-		$custid = $this->session->userdata('data_user_reta')['data']['custid'];
-
-        $data['dataChatPasien'] =$this->ModelChat->get_user($custid);
         $data['barTitle'] = "My Profile";
 		$data['dataAlamat'] = $dataAlamat;
 		$data['dataProvinsi'] = $dataProvinsi;
@@ -75,10 +72,6 @@ class Profil extends MY_Controller {
         $method = 'GET';
         $dataDikirim = $this->SendRequest($url, $method);
 
-
-		$custid = $this->session->userdata('data_user_reta')['data']['custid'];
-
-        $data['dataChatPasien'] =$this->ModelChat->get_user($custid);
         $data['barTitle'] = "My Transaction";
 		$data['dataBelumBayar'] = $dataBelumBayar;
 		$data['dataDibayar'] = $dataDibayar;

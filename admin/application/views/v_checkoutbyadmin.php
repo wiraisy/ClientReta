@@ -123,11 +123,18 @@
 
                     <!-- Section Alamat Pengiriman -->
                     <div class="row">
-                        <div class="col-8">Alamat Pengiriman:
+                        <div class="col-8">Alamat Pengiriman (<?= $dataPasien['custnama'] ?>, No.Hp : <?= $dataPasien['hp1'] ?>) :
                             <br>
                             <?php if ($dataAlamat) { ?>
-                                <input type="hidden" id="idKotaPengiriman" value="<?= $dataAlamat[0]['idkabupaten'] ?>">
-                                <?= $dataPasien['custnama'] ?>, No.Hp : <?= $dataPasien['hp1'] ?>, <?= $dataAlamat[0]['alamat'] ?> ,  <?= $dataAlamat[0]['kabupaten'] ?>, <?= $dataAlamat[0]['propinsi'] ?> 
+                                <select class="form-control mt-2" name="alamatHistory" id="alamatHistory">
+                                <?php if($dataAlamat){ ?>
+                                    <?php foreach ($dataAlamat as $row_alamat) { ?>
+                                        <option value="<?= $row_alamat['idkabupaten'] ?>"><?= $row_alamat['alamat'] ?> ,  <?= $row_alamat['kabupaten'] ?>, <?= $row_alamat['propinsi'] ?></option>
+                                    <?php } ?>
+                                <?php }else{?>
+                                        <option disabled>Data History Alamat Tidak Tersedia</option>
+                                <?php } ?>
+                            </select>
                             <?php } else { ?>
                                 Anda belum mengatur alamat pengiriman , <strong>tambah/ubah</strong> alamat pengiriman melalui tombol disamping.
                             <?php } ?>
@@ -211,7 +218,7 @@
                                                 $curl = curl_init();
 
                                                 curl_setopt_array($curl, array(
-                                                CURLOPT_URL => 'https://api-reta.id/reta-api/Produk/getImagebykodeid/'.$row['kodeid'],
+                                                CURLOPT_URL => 'https://api-reta.id/reta-api/Produk/getproductimagebykodeid/'.$row['kodeid'],
                                                 CURLOPT_RETURNTRANSFER => true,
                                                 CURLOPT_ENCODING => '',
                                                 CURLOPT_MAXREDIRS => 10,
@@ -329,27 +336,6 @@
                             </div>
                         </div>
 
-                        <!-- Section Opsi Asuransi -->
-                        <div class="card border-success mb-3">
-                            <div class="card-header">Produk Asuransi</div>
-                                <div class="card-body text-success">
-                                <?php if ($dataAlamat) { ?>
-                                    <div class="col-lg-3 col-sm-6 mt-4 mt-md-0">
-                                        <!-- Radio buttons -->
-                                        <p>
-                                            <input type="checkbox" id="asuransi" name="asuransi" value="5000"/>
-                                            <label for="asuransi">Rp. 5000</label>
-                                        </p>
-                                    </div>
-                                <?php }else{ ?>
-                                    <div class="container text-center">
-                                        <h5>Mohon isi alamat pengiriman anda terlebih dahulu.</h5>
-                                    </div>
-                                </div>
-                                <?php } ?>
-                            </div>
-                        </div>
-
                         <!-- Section All Detail Cost -->
                         <table style="width: 100%;">
                             <tr>
@@ -390,9 +376,11 @@
                                 <input type="hidden" class="costDeliver">
                             </tr>
                             <tr>
-                                <td class="text-right"><h5>Biaya Asuransi</h5></td>
-                                <td class="pl-4"><h5 id="costAsuransi">Rp. -</h5></td>
-                                <input type="hidden" class="costAsuransi" value="0">
+                                <td colspan="2">
+                                    <div class="alert alert-light text-center" role="alert">
+                                        Biaya pengiriman diatas termasuk biaya asuransi jaminan produk .
+                                    </div>
+                                </td>
                             </tr>
                         </table>
                         <?php } else{ ?>
@@ -415,11 +403,10 @@
                                         function postPenjualan() {
                                             const button = document.getElementById('postPenjualan');
                                             let checkField = document.getElementById("totalCost").innerHTML;
-                                            let biayaasuransi = document.getElementsByClassName("costAsuransi").value;
                                             let biayapengiriman = document.getElementsByClassName("costDeliver").value;
                                             let idpasien = <?= $dataPasien['id_pasien'] ?>;
                                             let custid = "<?= $dataPasien['custid'] ?>";
-                                            let idalamatkirim = <?= ($dataAlamat) ? $dataAlamat[0]['idkirim'] : '' ?>;
+                                            let idalamatkirim = <?= ($dataAlamat) ? $dataAlamat[0]['idkirim'] : 'undefined' ?>;
                                             let namaekspedisi = document.getElementById("namaekspedisi").value;
 
                                             if (!biayapengiriman) {
@@ -441,13 +428,7 @@
                                                 Toast.fire({
                                                     icon: 'warning',
                                                     title: '&nbsp;Loading...'
-                                                })
-
-                                                if (biayaasuransi == undefined) {
-                                                    totalpengiriman = parseInt(biayapengiriman);
-                                                } else {
-                                                    totalpengiriman = parseInt(biayapengiriman) + parseInt(biayaasuransi);
-                                                }
+                                                });
 
                                                 var settingsKodePenjualan = {
                                                     "url": "https://api-reta.id/reta-api/Penjualan/generatekodepenjualan",

@@ -155,25 +155,6 @@ class Pemesanan extends MY_Controller {
 		$response = curl_exec($curlPost);
 		curl_close($curlPost);
 
-		$curlDelete = curl_init();
-		curl_setopt_array($curlDelete, array(
-		CURLOPT_URL => 'https://api-reta.id/reta-api/AlamatKirimAPI/HapusAlamat/'.$idAlamatKirim,
-		CURLOPT_RETURNTRANSFER => true,
-		CURLOPT_ENCODING => '',
-		CURLOPT_MAXREDIRS => 10,
-		CURLOPT_TIMEOUT => 0,
-		CURLOPT_SSL_VERIFYHOST => 0,
-		CURLOPT_SSL_VERIFYPEER => 0,
-		CURLOPT_FOLLOWLOCATION => true,
-		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-		CURLOPT_CUSTOMREQUEST => 'DELETE',
-		CURLOPT_HTTPHEADER => array(
-			'Authorization: Basic YWtiYXI6d2lyYWlzeQ=='
-		),
-		));
-		$responseDelete = curl_exec($curlDelete);
-		curl_close($curlDelete);
-
 		redirect(base_url() . 'order-by-admin/checkout/'.$id_pasien.'/'.$custid);
 	}
 

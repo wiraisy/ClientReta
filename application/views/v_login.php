@@ -53,7 +53,7 @@
   ?>
 <body>
   <!--pink-->
-  <section class="section section-shaped section-xxl" style="height: 100vh">
+  <section class="section section-shaped section-xxl">
     <div class="shape shape-style-1 bg-gradient-pink">
       <span></span>
       <span></span>
@@ -64,7 +64,7 @@
       <span></span>
       <span></span>
     </div>
-    <div class="container pt-lg-4">
+    <div class="container py-lg-4">
       <div class="row justify-content-center">
         <div class="col-lg-5">
           <div class="card bg-secondary shadow border-0">

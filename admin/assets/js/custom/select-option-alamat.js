@@ -24,11 +24,16 @@ $(document).ready(function() {
         document.getElementById("selectKota").removeChild(document.getElementById("selectKota").firstElementChild);
     });
 
+    $('#alamatHistory').change(function() {
+        $('input[type=radio][name=jasaEkspedisi]').prop("checked", false);
+        document.getElementsByClassName("costDeliver").value = null;
+    });
+
     // Get cost pengiriman
     $('input[type=radio][name=jasaEkspedisi]').change(function() {
         var jasaEkspedisi = this.value;
         let weight = document.getElementById('countAllQty').value;
-        let idkota = document.getElementById('idKotaPengiriman').value;
+        let idkota = document.getElementById('alamatHistory').value;
         var data = {
             "origin": "41",
             "destination": idkota,
@@ -49,7 +54,7 @@ $(document).ready(function() {
         var response = $.ajax(settings).done(function(response) {
             return response;
         }).responseJSON;
-        console.log(response.rajaongkir.results[0])
+
         var ongkosKirim;
         if (jasaEkspedisi == 'pos') {
             ongkosKirim = response.rajaongkir.results[0].costs[1].cost[0].value;
@@ -66,17 +71,12 @@ $(document).ready(function() {
         }
 
         // Set Price in View
-        document.getElementById('costPengiriman').innerHTML = formatRupiah(ongkosKirim, 'Rp. ');
+        document.getElementById('costPengiriman').innerHTML = formatRupiah(parseInt(ongkosKirim) + 5000, 'Rp. ');
         document.getElementsByClassName("costDeliver").value = parseInt(ongkosKirim);
 
         // Set Total Cost
-        if (document.getElementsByClassName("costAsuransi").value == undefined) {
-            var totalPenjualan = parseInt(ongkosKirim) + parseInt(document.getElementById('subTotal').value);
-            document.getElementById('totalCost').innerHTML = formatRupiah(totalPenjualan, 'Rp. ');
-        } else {
-            var totalPenjualan = parseInt(ongkosKirim) + parseInt(document.getElementById('subTotal').value) + parseInt(document.getElementsByClassName("costAsuransi").value);
-            document.getElementById('totalCost').innerHTML = formatRupiah(totalPenjualan, 'Rp. ');
-        }
+        var totalPenjualan = parseInt(ongkosKirim) + parseInt(document.getElementById('subTotal').value);
+        document.getElementById('totalCost').innerHTML = formatRupiah(parseInt(totalPenjualan) + 5000, 'Rp. ');
 
         function formatRupiah(angka, prefix) {
             var number_string = angka.toString().replace(/[^,\d]/g, ''),
@@ -97,44 +97,44 @@ $(document).ready(function() {
     });
 
     // Tambah Biaya Asuransi
-    $('input[type=checkbox][name=asuransi]').change(function() {
-        let costAsuransi = document.getElementById('costAsuransi');
-        let costAsuransiInput = document.getElementsByClassName("costAsuransi");
-        let subTotal = document.getElementById('subTotal').value;
-        let costDeliver = document.getElementsByClassName("costDeliver").value;
+    // $('input[type=checkbox][name=asuransi]').change(function() {
+    //     let costAsuransi = document.getElementById('costAsuransi');
+    //     let costAsuransiInput = document.getElementsByClassName("costAsuransi");
+    //     let subTotal = document.getElementById('subTotal').value;
+    //     let costDeliver = document.getElementsByClassName("costDeliver").value;
 
-        if ($(this).prop('checked') == true) {
-            costAsuransi.innerHTML = 'Rp. 5000';
-            costAsuransiInput.value = 5000;
-        } else {
-            costAsuransi.innerHTML = 'Rp. -';
-            costAsuransiInput.value = 0;
-        }
+    //     if ($(this).prop('checked') == true) {
+    //         costAsuransi.innerHTML = 'Rp. 5000';
+    //         costAsuransiInput.value = 5000;
+    //     } else {
+    //         costAsuransi.innerHTML = 'Rp. -';
+    //         costAsuransiInput.value = 0;
+    //     }
 
-        if (costDeliver == undefined) {
-            totalPenjualan = parseInt(subTotal) + parseInt(costAsuransiInput.value);
-            document.getElementById('totalCost').innerHTML = formatRupiah(totalPenjualan, 'Rp. ');
-        } else {
-            totalPenjualan = parseInt(subTotal) + parseInt(costDeliver) + parseInt(costAsuransiInput.value);
-            document.getElementById('totalCost').innerHTML = formatRupiah(totalPenjualan, 'Rp. ');
-        }
+    //     if (costDeliver == undefined) {
+    //         totalPenjualan = parseInt(subTotal) + parseInt(costAsuransiInput.value);
+    //         document.getElementById('totalCost').innerHTML = formatRupiah(totalPenjualan, 'Rp. ');
+    //     } else {
+    //         totalPenjualan = parseInt(subTotal) + parseInt(costDeliver) + parseInt(costAsuransiInput.value);
+    //         document.getElementById('totalCost').innerHTML = formatRupiah(totalPenjualan, 'Rp. ');
+    //     }
 
-        function formatRupiah(angka, prefix) {
-            var number_string = angka.toString().replace(/[^,\d]/g, ''),
-                split = number_string.split(','),
-                sisa = split[0].length % 3,
-                rupiah = split[0].substr(0, sisa),
-                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+    //     function formatRupiah(angka, prefix) {
+    //         var number_string = angka.toString().replace(/[^,\d]/g, ''),
+    //             split = number_string.split(','),
+    //             sisa = split[0].length % 3,
+    //             rupiah = split[0].substr(0, sisa),
+    //             ribuan = split[0].substr(sisa).match(/\d{3}/gi);
 
-            // tambahkan titik jika yang di input sudah menjadi angka ribuan
-            if (ribuan) {
-                separator = sisa ? '.' : '';
-                rupiah += separator + ribuan.join('.');
-            }
+    //         // tambahkan titik jika yang di input sudah menjadi angka ribuan
+    //         if (ribuan) {
+    //             separator = sisa ? '.' : '';
+    //             rupiah += separator + ribuan.join('.');
+    //         }
 
-            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
-            return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
-        }
-    });
+    //         rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+    //         return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+    //     }
+    // });
 
 });

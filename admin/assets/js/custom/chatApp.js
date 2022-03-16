@@ -28,11 +28,11 @@ function refreshUser() {
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
-        timer: 2000
+        timer: 4000
     });
     Toast.fire({
         icon: 'success',
-        title: '&nbsp;Refresh User Berhasil'
+        title: '&nbsp;Mohon tunggu sebentar...'
     })
 }
 
@@ -56,11 +56,11 @@ function refreshChat(custid) {
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
-        timer: 2000
+        timer: 4000
     });
     Toast.fire({
         icon: 'success',
-        title: '&nbsp;Refresh Chat Berhasil'
+        title: '&nbsp;Mohon tunggu sebentar...'
     })
 }
 
@@ -83,6 +83,10 @@ function openMessage(custid) {
         sendBtn = document.getElementById("sendBtn"),
         userlist = document.getElementById(`userChat${custid}`),
         chatBox = document.getElementById("chatApp");
+
+    function scrollToBottom() {
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
 
     // Get Information User
     let xhrUser = new XMLHttpRequest();
@@ -127,6 +131,7 @@ function openMessage(custid) {
 
     chatBox.onmouseleave = () => {
         chatBox.classList.remove("active");
+        chatBox.scrollTop = chatBox.scrollHeight;
     }
 
     // Waktu ada inputan,button send aktif
@@ -154,12 +159,12 @@ function openMessage(custid) {
         let formData = new FormData(form);
         xhr.send(formData);
 
-        var xhrnew = new XMLHttpRequest();
-        xhrnew.open("POST", "chat/getmessage", true);
-        xhrnew.onload = () => {
-            if (xhrnew.readyState === XMLHttpRequest.DONE) {
-                if (xhrnew.status === 200) {
-                    let data = xhrnew.response;
+        var xhrnew2 = new XMLHttpRequest();
+        xhrnew2.open("POST", "chat/getmessage", true);
+        xhrnew2.onload = () => {
+            if (xhrnew2.readyState === XMLHttpRequest.DONE) {
+                if (xhrnew2.status === 200) {
+                    let data = xhrnew2.response;
                     chatApp.innerHTML = data;
                     if (!chatBox.classList.contains("active")) {
                         scrollToBottom();
@@ -167,13 +172,8 @@ function openMessage(custid) {
                 }
             }
         }
-        xhrnew.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhrnew.send("incoming_id=" + custid);
+        xhrnew2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhrnew2.send("incoming_id=" + custid);
     }
-
-    function scrollToBottom() {
-        chatBox.scrollTop = chatBox.scrollHeight;
-    }
-
 
 };
