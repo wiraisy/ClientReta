@@ -52,6 +52,7 @@
                 </div>
                 <div class="col-md-12"><label class="labels">Nama</label><input type="text" id="nama" class="form-control" placeholder="Masukkan Nama Anda" value=""></div>
                     <div class="col-md-12"><label class="labels">Nomer Ponsel</label><input type="text" id="nohp" class="form-control" placeholder="Masukkan No. Hp Anda" value=""></div>
+                    <div class="col-md-12"><label class="labels">Nomer KTP</label><input type="text" id="noktp" class="form-control" placeholder="Masukkan No. KTP Anda" value=""></div>
                     <div class="col-md-12"><label class="labels">Alamat</label><input type="text" id="alamat" class="form-control" placeholder="Masukkan Alamat Anda" value=""></div>
                     <div class="col-md-12"><label class="labels">Tanggal Lahir</label><input type="text" id="ttl" class="form-control" placeholder="Masukkan Tanggal Lahir Anda" value=""></div>
                     <div class="col-md-12"><label class="labels">Jenis Kelamin</label><input type="text" id="jeniskelamin" class="form-control" placeholder="Masukkan Jenis Kelamin Anda" value=""></div>
@@ -103,10 +104,11 @@
         $(`#daftarBtn`).click(function() {
             var nama = document.getElementById("nama").value;
             var nohp = document.getElementById("nohp").value
+            var noktp = document.getElementById("noktp").value
             var ttl = document.getElementById("ttl").value
             var alamat = document.getElementById("alamat").value
             var jeniskelamin = document.getElementById("jeniskelamin").value
-            document.getElementById("datapendaftar").value = "Hai Admin, saya ingin mendaftar sebagai member Reta dengan data pribadi sebagai berikut :\nNama : "+nama+"\nNo. HP : "+nohp+"\nAlamat : "+alamat+"\nTTL : "+ttl+"\nJenis Kelamin : "+jeniskelamin;
+            document.getElementById("datapendaftar").value = "Hai Admin, saya ingin mendaftar sebagai member Reta dengan data pribadi sebagai berikut :\nNama : "+nama+"\nNo. HP : "+nohp+"\nNo. KTP : "+noktp+"\nAlamat : "+alamat+"\nTTL : "+ttl+"\nJenis Kelamin : "+jeniskelamin;
         });
         // Send WhatsApp Message
         function sendWhatsApp(){
