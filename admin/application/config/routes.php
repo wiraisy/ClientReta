@@ -76,11 +76,13 @@ $route['order-by-admin/checkout/(:num)/(:any)'] = 'pemesanan/checkout/$1/$2';
 $route['produk-umum'] = 'produkumum';
 $route['produk-umum/(:num)'] = 'produkumum/index_page/$1';
 $route['update-produk-umum/(:num)'] = 'produkumum/update_produk/$1';
+$route['produk-umum/search'] = 'produkumum/search';
 
 // Produk Andalan
 $route['produk-andalan'] = 'produkandalan';
 $route['produk-andalan/(:num)'] = 'produkandalan/index_page/$1';
 $route['update-produk-andalan/(:num)'] = 'produkandalan/update_produk/$1';
+$route['produk-andalan/search'] = 'produkandalan/search';
 
 // Import Data
 $route['import-data'] = 'import';

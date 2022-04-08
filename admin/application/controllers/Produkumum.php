@@ -23,6 +23,28 @@ class Produkumum extends MY_Controller {
 		$this->load->view('includes/footer');
 	}
 
+	public function search()
+	{
+		// Check Session
+		if (!$this->session->userdata('isLoggedIn_adminReta')) {
+			return redirect(base_url() . 'login');
+		}
+
+		$kodeid = $this->input->post('kodeid', true);
+
+		// Get Data From API
+		$url = 'https://api-reta.id/reta-api/Produk/GetProdukbykodeid/'.$kodeid;
+        $method = 'GET';
+        $produk = $this->SendRequest($url, $method);
+
+		$data['title'] = "Produk Umum";
+		$data['produk'] = ($produk != NULL) ? $produk : $kodeid ;
+
+		$this->load->view('includes/header');
+		($produk != NULL) ? $this->load->view('v_produksearchresult', $data) : $this->load->view('v_produknotfound', $data) ;
+		$this->load->view('includes/footer');
+	}
+
 	public function index_page($page)
 	{	
 		// Check Session

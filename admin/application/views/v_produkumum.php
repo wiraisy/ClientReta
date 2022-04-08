@@ -95,21 +95,18 @@
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <!-- Pagination -->
-                    <div class="paging-section my-2">
-                        <ul id="pagination-custom">
-                            <?php if($produk['pageable']['pageNumber'] != 0): ?>
-                            <li><a class="" href="<?= base_url() ?>produk-umum/<?=  $produk['pageable']['pageNumber'] ?>">«</a></li>
-                            <?php endif; ?>
-                            <?php for ($i=1; $i <= $produk['totalPages']; $i++) {  ?>
-                                <li><a href="<?= base_url() ?>produk-umum/<?= $i ?>" class="<?= ($produk['pageable']['pageNumber'] == $i-1) ? 'active' : '' ?>"><?= $i ?></a></li>
-                            <?php } ?>
-                            <?php $pageNow = $produk['pageable']['pageNumber'] + 1;
-                            if($pageNow != $produk['totalPages']): ?>
-                            <li><a href="<?= base_url() ?>produk-umum/<?=  $produk['pageable']['pageNumber'] + 2 ?>">»</a></li>
-                            <?php endif; ?>
-                        </ul> 
-                    </div>
+                    <!-- Search Bar -->
+                    <form action="<?= base_url('produk-andalan/search') ?>" method="POST" class="text-center">
+                        <div class="p-1 rounded rounded-pill shadow-sm mb-4" style="width: 40%;margin: auto;background-color: #efa4b445;">
+                            <div class="input-group">
+                            <input type="search" name="kodeid" placeholder="Search by Kode ID Produk..." aria-describedby="button-addon1" class="form-control border-0 rounded-pill" style="background: transparent;" autocomplete="off">
+                            <div class="input-group-append">
+                                <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
+                            </div>
+                            </div>
+                        </div>
+                    </form>
+                    <hr>
                     <!-- Produk -->
                     <div class="container scrollable-content">
                         <div class="row">
@@ -241,6 +238,21 @@
                                 </div>
                             <?php } ?>
                         </div>
+                    </div>
+                    <!-- Pagination -->
+                    <div class="paging-section mt-5">
+                        <ul id="pagination-custom">
+                            <?php if($produk['pageable']['pageNumber'] != 0): ?>
+                            <li><a class="" href="<?= base_url() ?>produk-umum/<?=  $produk['pageable']['pageNumber'] ?>">«</a></li>
+                            <?php endif; ?>
+                            <?php for ($i=1; $i <= $produk['totalPages']; $i++) {  ?>
+                                <li><a href="<?= base_url() ?>produk-umum/<?= $i ?>" class="<?= ($produk['pageable']['pageNumber'] == $i-1) ? 'active' : '' ?>"><?= $i ?></a></li>
+                            <?php } ?>
+                            <?php $pageNow = $produk['pageable']['pageNumber'] + 1;
+                            if($pageNow != $produk['totalPages']): ?>
+                            <li><a href="<?= base_url() ?>produk-umum/<?=  $produk['pageable']['pageNumber'] + 2 ?>">»</a></li>
+                            <?php endif; ?>
+                        </ul> 
                     </div>
                 </div>
             </div>

@@ -73,7 +73,7 @@
                 <img src="<?= base_url() ?>assets/logo-300x167.png" width="200; alt="centered image">
                 <br>
                 <br>
-                <medium>Silahkan masukkan nomor Handphone anda yang terdaftar sebagai member di Reta Beauty Clinic</medium>
+                <medium>Silahkan masukkan nomor Handphone dan KTP anda yang terdaftar sebagai member di Reta Beauty Clinic</medium>
               </div>
               <form method="POST" action="<?= base_url() ?>auth/loginmember">
                 <div class="form-group mb-3">
@@ -81,7 +81,15 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-mobile-button"></i></span>
                     </div>
-                    <input class="form-control" placeholder="62xxxxxxxxx" name="hp1" type="number" required>
+                    <input class="form-control" placeholder="Masukkan Nomor Handphone" name="hp1" type="number" required>
+                  </div>
+                </div>
+                <div class="form-group mb-3">
+                  <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-badge"></i></span>
+                    </div>
+                    <input class="form-control" placeholder="Masukkan Nomor KTP" name="noktp" type="text" required>
                   </div>
                 </div>
                 <div class="form-group mb-3">  
@@ -89,7 +97,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-key-25"></i></span>
                     </div>
-                    <input class="form-control" name="password" placeholder="password" type="text" required>
+                    <input class="form-control" name="password" placeholder="Masukkan Password" type="text" required>
                   </div>
                 </div>  
                 </div>
