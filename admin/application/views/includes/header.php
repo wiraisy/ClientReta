@@ -36,7 +36,9 @@
   <link rel="stylesheet" href="<?= base_url(); ?>/assets/js/select2/css/select2.min.css">
 
   <!-- Select -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css"> -->
+  <link rel="stylesheet" href="<?= base_url(); ?>/assets/js/bootstrap-select/css/bootstrap-select.css">  
+  <link rel="stylesheet" href="<?= base_url(); ?>/assets/js/bootstrap-select/css/bootstrap-select.min.css">  
 
   <!-- Magnific PopUp -->
   <link rel="stylesheet" href="<?= base_url(); ?>/assets/js/magnific-popup/magnific-popup.css">  
