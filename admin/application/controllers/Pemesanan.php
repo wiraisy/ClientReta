@@ -59,7 +59,7 @@ class Pemesanan extends MY_Controller {
 		$data['produkandalan'] = $produkandalan;
 		$data['datamember'] = $datamember;
 
-		die(var_dump($datamember));
+		// die(var_dump($datamember));
 
 		($this->session->userdata('data_admin_reta')['rule'] == 'superadmin') ? $this->load->view('includes/header') : $this->load->view('includes/headeradmin') ;
 		$this->load->view('v_orderbyadmin', $data);
