@@ -16,6 +16,8 @@
 <!-- Core -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<!-- Select -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 <script src="<?= base_url() ?>assets/vendor/js-cookie/js.cookie.js"></script>
 <script src="<?= base_url() ?>assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
 <script src="<?= base_url() ?>assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
@@ -30,9 +32,6 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <!-- Select2 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.0/js/bootstrap-select.js"></script>
-<!-- Select -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script> -->
-<script src="<?= base_url() ?>assets/js/bootstrap-select/js/bootstrap-select.js"></script>
 <!-- Custom Alert Delete -->
 <script src="<?= base_url() ?>assets/js/custom/alertDelete.js"></script>
 <!-- Active Menu on SideNav -->
