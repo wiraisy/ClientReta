@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class Welcome extends MY_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -18,8 +18,18 @@ class Welcome extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
-	public function index()
+	public function index($page, $pageSize)
 	{
-		$this->load->view('welcome_message');
+		$pageNumber = (int)$page - 1;
+		$url = 'https://api-reta.id/reta-api/PasienAPI/listfilterpasien?pageNumber='.$pageNumber.'&pageSize='.$pageSize;
+        $method = 'GET';
+        $datapasien = $this->SendRequest($url, $method);
+
+		$data['title'] = "Data Pasien";
+		$data['datapasien'] = $datapasien;
+
+		$this->load->view('includes/header');
+		$this->load->view('welcome_message', $data);
+		$this->load->view('includes/footer');
 	}
 }

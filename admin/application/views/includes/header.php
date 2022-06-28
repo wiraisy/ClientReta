@@ -44,6 +44,13 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   <script src="<?= base_url() ?>assets/js/core/jquery.min.js"></script>
 
+    <!-- DataTables -->
+    <script src="<?= base_url() ?>assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="<?= base_url() ?>assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    
+    <!-- Select2 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.0/js/bootstrap-select.js"></script>
+
   <style>
     ::-webkit-scrollbar {
         width: 5px;

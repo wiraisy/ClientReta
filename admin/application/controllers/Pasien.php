@@ -10,8 +10,8 @@ class Pasien extends MY_Controller {
 			return redirect(base_url() . 'login');
 		}
 
-		// Get Data From API
-		$url = 'https://api-reta.id/reta-api/PasienAPI/getallpasien';
+
+		$url = 'https://api-reta.id/reta-api/PasienAPI/listfilterpasien';
         $method = 'GET';
         $datapasien = $this->SendRequest($url, $method);
 
@@ -20,6 +20,52 @@ class Pasien extends MY_Controller {
 
 		$this->load->view('includes/header');
 		$this->load->view('v_pasien', $data);
+		$this->load->view('includes/footer');
+	}
+
+	public function index_page()
+	{
+		// Check Session
+		if (!$this->session->userdata('isLoggedIn_adminReta')) {
+			return redirect(base_url() . 'login');
+		}
+
+
+		$page = $this->input->post('pageNumber', true);
+		$pageSize = $this->input->post('pageSize', true);
+
+		$pageNumber = (int)$page - 1;
+		$url = 'https://api-reta.id/reta-api/PasienAPI/listfilterpasien?pageNumber='.$pageNumber.'&pageSize='.$pageSize;
+        $method = 'GET';
+        $datapasien = $this->SendRequest($url, $method);
+
+		$data['title'] = "Data Pasien";
+		$data['datapasien'] = $datapasien;
+
+		$this->load->view('includes/header');
+		$this->load->view('v_pasien', $data);
+		$this->load->view('includes/footer');
+	}
+
+	public function search_pasien()
+	{
+		// Check Session
+		if (!$this->session->userdata('isLoggedIn_adminReta')) {
+			return redirect(base_url() . 'login');
+		}
+
+		$custid = $this->input->post('custid', true);
+
+		// Get Data From API
+		$url = 'https://api-reta.id/reta-api/PasienAPI/listfilterpasien?custid='.$custid;
+        $method = 'GET';
+        $datapasien = $this->SendRequest($url, $method);
+
+		$data['title'] = "Data Pasien";
+		$data['datapasien'] = ($datapasien['content']) ? $datapasien : $custid ;
+
+		$this->load->view('includes/header');
+		($datapasien['content']) ? $this->load->view('v_pasienresult', $data) : $this->load->view('v_pasiennotfound', $data) ;
 		$this->load->view('includes/footer');
 	}
 

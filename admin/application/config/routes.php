@@ -93,3 +93,7 @@ $route['export-master'] = 'export/export_rule_admin';
 
 // Auth
 $route['login'] = 'auth/login';
+
+// Pasien
+$route['pasien-pageable'] = 'pasien/index_page';
+$route['search-pasien'] = 'pasien/search_pasien';

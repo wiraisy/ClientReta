@@ -50,39 +50,10 @@
                                     <button type="submit" class="btn btn-success">Cari</button>
 								</form>
 							</div>
-							<div class="col-md-6">
-								<h3 class="mb-0">PENGATURAN TABEL :</h3>
-								<form action="<?= base_url("pasien-pageable") ?>" method="POST">
-									<div class="form-group row mb-1">
-										<label for="pageSize" class="col-sm-4 col-form-label">Show Entries :</label>
-										<div class="col-sm-8">
-											<select class="form-control selectpicker" name="pageSize" id="selectSize" data-live-search="true">
-												<option value="10">10</option>
-												<option value="25">25</option>
-												<option value="50">50</option>
-												<option value="100">100</option>
-											</select>
-										</div>
-									</div>
-									<div class="form-group row mb-1">
-										<label for="pageNumber" class="col-sm-4 col-form-label">Spesific Page :</label>
-										<div class="col-sm-8">
-											<select class="form-control selectpicker" name="pageNumber" id="selectPage" data-live-search="true" >
-												<?php if(isset($datapasien)){ ?>
-													<?php for ($i=1; $i <= $datapasien['totalPages']; $i++) {  ?>
-														<option value="<?= $i ?>"><?= $i ?></option>
-													<?php } ?>
-												<?php }else{?>
-														<option disabled>Data Page Unavailable</option>
-												<?php } ?>
-											</select>
-										</div>
-									</div>
-                                    <button type="submit" class="btn btn-success">Simpan</button>
-								</form>
+							<div class="col-md-6 d-flex align-items-center justify-content-end">
+                                <a href="<?= base_url("pasien/1/10") ?>" class="btn btn-secondary">Kembali ke Modul Pasien</a>
 							</div>
 						</div>
-						<p class="mb-0">Showing <?= $datapasien['pageable']['pageSize'] ?> Entries on Page <?= $datapasien['pageable']['pageNumber'] + 1 ?></p>
 						<hr>
                         <!-- Tabel Admin-->
                         <div class="table-responsive">

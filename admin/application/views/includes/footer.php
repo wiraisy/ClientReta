@@ -25,13 +25,8 @@
 <script src="<?= base_url() ?>assets/js/argon.js?v=1.2.0"></script>
 <!-- Toast -->
 <script src="<?= base_url() ?>assets/js/toastr/toastr.min.js"></script>
-<!-- DataTables -->
-<script src="<?= base_url() ?>assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="<?= base_url() ?>assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
 <!-- SweetAlert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<!-- Select2 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.0/js/bootstrap-select.js"></script>
 <!-- Custom Alert Delete -->
 <script src="<?= base_url() ?>assets/js/custom/alertDelete.js"></script>
 <!-- Active Menu on SideNav -->
