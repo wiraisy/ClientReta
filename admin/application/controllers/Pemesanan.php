@@ -37,14 +37,30 @@ class Pemesanan extends MY_Controller {
 	public function orderByAdmin()
 	{
 		// Check Session
-		if (!$this->session->userdata('isLoggedIn_adminReta')) {
-			return redirect(base_url() . 'login');
-		}
 
+		$data['title'] = "Pemesanan Oleh Admin";
+
+		($this->session->userdata('data_admin_reta')['rule'] == 'superadmin') ? $this->load->view('includes/header') : $this->load->view('includes/headeradmin') ;
+		$this->load->view('v_caripasien_oba', $data);
+		$this->load->view('includes/footer');
+	}
+
+	public function orderByAdminNextStage()
+	{
+		// Check Session
+		
+		$keyword = $this->input->post('keyword');
+		$searchby = $this->input->post('searchby');
+
+		if ($searchby === "custid") {
+			$url_pasien = 'https://api-reta.id/reta-api/PasienAPI/listfilterpasien?custid='.$keyword;
+		} else {
+			$url_pasien = 'https://api-reta.id/reta-api/PasienAPI/listfilterpasien?custnama='.strtoupper($keyword);
+		}
+		
 		// Get Data From API
-		$url = 'https://api-reta.id/reta-api/PasienAPI/getallpasien';
         $method = 'GET';
-        $datamember = $this->SendRequest($url, $method);
+        $datamember = $this->SendRequest($url_pasien, $method);
 
 		$url = 'https://api-reta.id/reta-api/Produk/getallprodukbykategori/UMUM/true';
         $method = 'GET';
@@ -57,9 +73,41 @@ class Pemesanan extends MY_Controller {
 		$data['title'] = "Pemesanan Oleh Admin";
 		$data['produkumum'] = $produkumum;
 		$data['produkandalan'] = $produkandalan;
-		$data['datamember'] = $datamember;
+		$data['datapasien'] = $datamember;
+		$data['url_pasien'] = $url_pasien;
 
-		// die(var_dump($datamember));
+		($this->session->userdata('data_admin_reta')['rule'] == 'superadmin') ? $this->load->view('includes/header') : $this->load->view('includes/headeradmin') ;
+		$this->load->view('v_orderbyadmin', $data);
+		$this->load->view('includes/footer');
+	}
+
+	public function orderByAdminPageable()
+	{
+		// Check Session
+		
+		$url_pasien = $this->input->post('url_pasien', true);
+		$page = $this->input->post('pageNumber', true);
+		$pageSize = $this->input->post('pageSize', true);
+
+		$pageNumber = (int)$page - 1;
+		$urlpasien =  $url_pasien.'&pageNumber='.$pageNumber.'&pageSize='.$pageSize;
+		// Get Data From API
+        $method = 'GET';
+        $datamember = $this->SendRequest($urlpasien, $method);
+
+		$url = 'https://api-reta.id/reta-api/Produk/getallprodukbykategori/UMUM/true';
+        $method = 'GET';
+        $produkumum = $this->SendRequest($url, $method);
+
+		$url = 'https://api-reta.id/reta-api/Produk/getallprodukbykategori/ANDALAN/true';
+        $method = 'GET';
+        $produkandalan = $this->SendRequest($url, $method);
+
+		$data['title'] = "Pemesanan Oleh Admin";
+		$data['produkumum'] = $produkumum;
+		$data['produkandalan'] = $produkandalan;
+		$data['datapasien'] = $datamember;
+		$data['url_pasien'] = $url_pasien;
 
 		($this->session->userdata('data_admin_reta')['rule'] == 'superadmin') ? $this->load->view('includes/header') : $this->load->view('includes/headeradmin') ;
 		$this->load->view('v_orderbyadmin', $data);

@@ -70,6 +70,8 @@ $route['produk-link'] = 'produklink';
 
 // Order by Admin
 $route['order-by-admin'] = 'pemesanan/orderByAdmin';
+$route['order-detail'] = 'pemesanan/orderByAdminNextStage';
+$route['order-detail-pageable'] = 'pemesanan/orderByAdminPageable';
 $route['order-by-admin/checkout/(:num)/(:any)'] = 'pemesanan/checkout/$1/$2';
 
 // Produk Umum

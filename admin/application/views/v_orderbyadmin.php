@@ -2,6 +2,9 @@
     .btn-remove:hover{
         cursor: pointer;
     }
+    .disable-btn:hover{
+        cursor: not-allowed!important;
+    }
     .bootstrap-select button{
         background: white!important;
         text-transform: inherit!important;
@@ -86,36 +89,134 @@
                         </button>
                     </div>
                     <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3 class="">PENGATURAN TABEL :</h3>
+                            <form action="<?= base_url("order-detail-pageable") ?>" method="POST">
+                                <input type="hidden" name="url_pasien" value="<?= $url_pasien ?>">
+                                <div class="form-group row mb-1">
+                                    <label for="pageSize" class="col-sm-4 col-form-label">Show Entries :</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control selectpicker" name="pageSize" id="selectSize" data-live-search="true">
+                                            <option value="<?= $datapasien['pageable']['pageSize'] ?>" selected><?= $datapasien['pageable']['pageSize'] ?></option>
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-1">
+                                    <label for="pageNumber" class="col-sm-4 col-form-label">Spesific Page :</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control selectpicker" name="pageNumber" id="selectPage" data-live-search="true" >
+                                        <option value="<?= $datapasien['pageable']['pageNumber'] + 1 ?>" selected><?= $datapasien['pageable']['pageNumber'] + 1 ?></option>
+                                            <?php if(isset($datapasien)){ ?>
+                                                <?php for ($i=1; $i <= $datapasien['totalPages']; $i++) {  ?>
+                                                    <option value="<?= $i ?>"><?= $i ?></option>
+                                                <?php } ?>
+                                            <?php }else{?>
+                                                    <option disabled>Data Page Unavailable</option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-success">Simpan</button>
+                            </form>
+                        </div>
+                        <div class="col-md-6 d-flex align-items-center justify-content-end">
+                            <a href="<?= base_url("order-by-admin") ?>" class="btn btn-success">Cari Pasien Lain</a>
+                        </div>
+                    </div>
                     <form enctype="multipart/form-data" id="create-listing-form" method="POST">
                         <!-- Step 1 -->
                         <div class="container-fluid create container" id="step-1">
-                            <h3>Pilih Pasien :</h3>
-                            <select class="form-control selectpicker" id="selectMember" data-live-search="true" >
-                                <option selected disabled>Pilih Pasien</option>
-                                <?php if(isset($datamember)){ ?>
-                                    <?php foreach ($datamember as $row_member) { ?>
-                                        <option value="<?= $row_member['id_pasien'] ?>"><?= $row_member['custid'] ?> - <?= $row_member['custnama'] ?> - <?= $row_member['gender1'] ?> - <?= $row_member['kota'] ?></option>
-                                    <?php } ?>
-                                <?php }else{?>
-                                        <option disabled>Data Pasien Tidak Tersedia</option>
-                                <?php } ?>
-                            </select>
+                            <!-- Save CustID Temporary -->
                             <input type="hidden" id="tempCustId">
-                            <div style="text-align: right;">
-                                <button type="button" onclick="validateForm1();" class="btn btn-success mt-4">Next</button>
+                            <!-- DataTable Result -->
+                            <div class="d-flex align-items-end justify-content-between mt-4">
+                                <p class="mb-0">Showing <?= $datapasien['pageable']['pageSize'] ?> Entries on Page <?= $datapasien['pageable']['pageNumber'] + 1 ?></p>
                             </div>
-                            <script>
-                                function validateForm1() {
-                                    if (!$('#selectMember').val()) {
-                                        alert("Silahkan Pilih Pasien!");
-                                        return false;
-                                    } else {
-                                        $('#step-1').hide();
-                                        $('#step-2').show();   
-                                    }
-                                }
-                            </script>
+						    <hr>
+                            <!-- Tabel Admin-->
+                            <div class="table-responsive">
+                                <table class="table datatable table-flush" id="datatable-pasien">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama</th>
+                                            <th>Customer ID</th>
+                                            <th>No. KTP</th>
+                                            <th>No. Telepon</th>
+                                            <th>Email</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama</th>
+                                            <th>Customer ID</th>
+                                            <th>No. KTP</th>
+                                            <th>No. Telepon</th>
+                                            <th>Email</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    <?php if($datapasien){ 
+                                            $i = 1;
+                                            ?>
+                                                <?php foreach ($datapasien['content'] as $row) { 
+                                                    ?>
+                                                    <tr>
+                                                        <td><?= $i; ?></td>
+                                                        <td><?= $row['custnama']; ?></td>
+                                                        <td><?= $row['custid']; ?></td>
+                                                        <td><?= $row['noktp']; ?></td>
+                                                        <td><?= $row['hp1']; ?></td>
+                                                        <td><?= $row['email']; ?></td>
+                                                        <td>
+                                                            <!-- Button Pilih Pasien -->
+                                                            <input type="hidden" id="CustId" value="<?= $row['custid']; ?>">
+                                                            <button type="button" onclick="validateForm1();" class="btn btn-success btn-sm">Pilih</button>
+                                                            <script>
+                                                                function validateForm1() {
+                                                                        var custid = document.getElementById('CustId').value;
+                                                                        var settingscart = {
+                                                                            "url": "https://api-reta.id/reta-api/Penjualan/lihatcart/"+custid,
+                                                                            "method": "GET",
+                                                                            "timeout": 0,
+                                                                            "async": false,
+                                                                            "headers": {
+                                                                                "Authorization": "Basic YWtiYXI6d2lyYWlzeQ=="
+                                                                            },
+                                                                        };
+                                                                        var datacart = $.ajax(settingscart).done(function(response) {
+                                                                            return response;
+                                                                        }).responseJSON;
+                                                                        
+                                                                        document.getElementById('countCart').dataset.count = parseInt(datacart.length);
+                                                                        document.getElementById('tempCustId').value = custid;
+
+                                                                    // Next Step
+                                                                    $('#step-1').hide();
+                                                                    $('#step-2').show();   
+                                                                }
+                                                            </script>
+                                                        </td>
+                                                    </tr>
+                                                <?php $i++; } ?>
+                                            <?php  }else{?>
+                                                <tr>
+                                                    <td colspan="7" style="text-align:center;"><p style="color:grey;font-size:18px;">Data Belum Tersedia</p></td>
+                                                </tr>
+                                            <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
+
                         <!-- Step 2 -->
                         <div class="container-fluid create container" style="display: none;" id="step-2">
                             <div class="card mt-2">
@@ -184,41 +285,22 @@
     <!-- Custom JS -->
     <script src="<?= base_url() ?>assets/js/custom/select-option-pesanan.js"></script>
     
-    <script>
-        $('#selectMember').change(function() {
-            let id_pasien = $(this).val();
-            var settingsPasien = {
-                "url": "https://api-reta.id/reta-api/PasienAPI/cariberdasarkanid/"+id_pasien,
-                "method": "GET",
-                "timeout": 0,
-                "async" : false,
-                "headers": {
-                    "Authorization": "Basic YWtiYXI6d2lyYWlzeQ=="
-                },
-            };
+    <script>    
+        $(document).ready(function() {
+            $('#datatable-pasien').DataTable( {
+                paging: false,
+                info: false,
+            } );
+        } );
 
-            var custid = $.ajax(settingsPasien).done(function (res) {
-                return res;
-            }).responseJSON.custid;
-            var settingscart = {
-                "url": "https://api-reta.id/reta-api/Penjualan/lihatcart/"+custid,
-                "method": "GET",
-                "timeout": 0,
-                "async": false,
-                "headers": {
-                    "Authorization": "Basic YWtiYXI6d2lyYWlzeQ=="
-                },
-            };
-            var datacart = $.ajax(settingscart).done(function(response) {
-                return response;
-            }).responseJSON;
-            document.getElementById('countCart').dataset.count = parseInt(datacart.length);
-            document.getElementById('tempCustId').value = custid;
+        $(function () {
+            $('#selectPage').selectpicker();
+            $('#selectSize').selectpicker();
         });
     </script>
+
     <script>
         $(function () {
-            $('#selectMember').selectpicker();
             $('#selectPesananUmum').selectpicker();
             $('#selectPesananAndalan').selectpicker();
         });

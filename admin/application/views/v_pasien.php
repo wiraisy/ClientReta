@@ -5,6 +5,9 @@
         font-weight: normal!important;
 		color: #8898aa!important;
     }
+    .disable-btn:hover{
+        cursor: not-allowed!important;
+    }
 </style>
 <div class="header bg-pink pb-6">
         <div class="container-fluid">
@@ -57,6 +60,7 @@
 										<label for="pageSize" class="col-sm-4 col-form-label">Show Entries :</label>
 										<div class="col-sm-8">
 											<select class="form-control selectpicker" name="pageSize" id="selectSize" data-live-search="true">
+                                                <option value="<?= $datapasien['pageable']['pageSize'] ?>" selected><?= $datapasien['pageable']['pageSize'] ?></option>
 												<option value="10">10</option>
 												<option value="25">25</option>
 												<option value="50">50</option>
@@ -68,6 +72,7 @@
 										<label for="pageNumber" class="col-sm-4 col-form-label">Spesific Page :</label>
 										<div class="col-sm-8">
 											<select class="form-control selectpicker" name="pageNumber" id="selectPage" data-live-search="true" >
+                                            <option value="<?= $datapasien['pageable']['pageNumber'] + 1 ?>" selected><?= $datapasien['pageable']['pageNumber'] + 1 ?></option>
 												<?php if(isset($datapasien)){ ?>
 													<?php for ($i=1; $i <= $datapasien['totalPages']; $i++) {  ?>
 														<option value="<?= $i ?>"><?= $i ?></option>
@@ -82,7 +87,21 @@
 								</form>
 							</div>
 						</div>
-						<p class="mb-0">Showing <?= $datapasien['pageable']['pageSize'] ?> Entries on Page <?= $datapasien['pageable']['pageNumber'] + 1 ?></p>
+                        <div class="d-flex align-items-end justify-content-between mt-4">
+						    <p class="mb-0">Showing <?= $datapasien['pageable']['pageSize'] ?> Entries on Page <?= $datapasien['pageable']['pageNumber'] + 1 ?></p>
+                            <div class="d-flex">
+                                <form id="previous" action="<?= base_url("pasien-pageable") ?>" method="POST">
+                                    <input type="hidden" name="pageSize" value="<?= $datapasien['pageable']['pageSize'] ?>">
+                                    <input type="hidden" name="pageNumber" value="<?= $datapasien['pageable']['pageNumber'] ?>">
+                                    <button <?= ($datapasien['pageable']['pageNumber'] != 0) ? '' : 'disabled' ?> class="btn btn-danger <?= ($datapasien['pageable']['pageNumber'] != 0) ? '' : 'disable-btn' ?>"><span><i class="fas fa-angle-left"></i></span> Previous</a>
+                                </form>
+                                <form id="next" action="<?= base_url("pasien-pageable") ?>" method="POST">
+                                    <input type="hidden" name="pageSize" value="<?= $datapasien['pageable']['pageSize'] ?>">
+                                    <input type="hidden" name="pageNumber" value="<?= $datapasien['pageable']['pageNumber'] + 2 ?>">
+                                    <button <?= ($datapasien['pageable']['pageNumber'] != $datapasien['totalPages']) ? '' : 'disabled' ?> class="btn btn-danger <?= ($datapasien['pageable']['pageNumber'] != $datapasien['totalPages']) ? '' : 'disable-btn' ?> ml-2">Next <span><i class="fas fa-angle-right"></i></span></a>
+                                </form>
+                            </div>
+                        </div>
 						<hr>
                         <!-- Tabel Admin-->
                         <div class="table-responsive">
@@ -303,17 +322,17 @@
         </div>   
 
 
-		<script>
-$(document).ready(function() {
-    $('#datatable-pasien').DataTable( {
-        paging: false,
-        info: false,
+<script>
+    $(document).ready(function() {
+        $('#datatable-pasien').DataTable( {
+            paging: false,
+            info: false,
+        } );
     } );
-} );
 
-$(function () {
-            $('#selectPage').selectpicker();
-			$('#selectSize').selectpicker();
-        });
+    $(function () {
+        $('#selectPage').selectpicker();
+        $('#selectSize').selectpicker();
+    });
 </script>
 
