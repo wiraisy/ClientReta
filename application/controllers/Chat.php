@@ -108,6 +108,7 @@ class Chat extends MY_Controller {
         $url = 'https://api-reta.id/reta-api/MessageAPI/getallmessagebyincomingid/'.$outgoing_id;
 		$method = 'GET';
 		$res = $this->SendRequest($url, $method);
+        sort($res);
 
         $output = "";
         $srcImage = base_url()."assets/user.png";
