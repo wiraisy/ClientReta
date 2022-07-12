@@ -66,33 +66,6 @@ function deleteChat(iduserchat) {
 };
 
 
-// Refresh Chat
-function refreshChat(custid) {
-    var xhrnew = new XMLHttpRequest();
-    xhrnew.open("POST", "chat/getmessage", true);
-    xhrnew.onload = () => {
-        if (xhrnew.readyState === XMLHttpRequest.DONE) {
-            if (xhrnew.status === 200) {
-                let data = xhrnew.response;
-                chatApp.innerHTML = data;
-            }
-        }
-    }
-    xhrnew.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhrnew.send("incoming_id=" + custid);
-
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 4000
-    });
-    Toast.fire({
-        icon: 'success',
-        title: '&nbsp;Mohon tunggu sebentar...'
-    })
-}
-
 function openMessage(custid) {
     const headerInfoUser = document.querySelector(".headerInfoUser");
     const chatApp = document.querySelector("#chatApp");

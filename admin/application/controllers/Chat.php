@@ -41,7 +41,7 @@ class Chat extends MY_Controller {
 				$url = 'https://api-reta.id/reta-api/MessageAPI/getallmessagebyincomingid/'.$incoming_id;
 				$method = 'GET';
 				$resultmsg = $this->SendRequest($url, $method);
-                $resmsg = end($resultmsg);
+                $resmsg = current($resultmsg);
                 $lastmsg = ($resmsg) ? strlen($resmsg['msg']) > 20 ? substr($resmsg['msg'],0,20)."..." : $resmsg['msg'] : '-';
                 $output .= "<li class='clearfix' id='userChat{$row['namaa']}' onclick=openMessage('{$row['namaa']}')><img src='{$srcImage}' alt='avatar'><div class='about'><div class='name'>".$row['namaa']."</div><div class='custid'>".$lastmsg."</div></div></li>";
             }
@@ -67,7 +67,7 @@ class Chat extends MY_Controller {
 		
 		$srcImage = base_url()."assets/user.png";
         $header = "";
-		$header .= "<div class='row'><div class='col-lg-6 d-flex align-items-center'><img src='".$srcImage."' alt='avatar'><div class='chat-about'><h3 class='mb-0'>".$res_user['namaa']."</h3></div></div><div class='col-lg-6 text-right d-flex align-items-center justify-content-end'><i class='fa fa-sync refresh-chat' onclick=refreshChat('".$incoming_id."')></i><i class='fa fa-trash delete-chat' onclick=deleteChat('".$iduserchat."')></i></div></div>";
+		$header .= "<div class='row'><div class='col-lg-6 d-flex align-items-center'><img src='".$srcImage."' alt='avatar'><div class='chat-about'><h3 class='mb-0'>".$res_user['namaa']."</h3></div></div><div class='col-lg-6 text-right d-flex align-items-center justify-content-end'><i class='fa fa-trash delete-chat' onclick=deleteChat('".$iduserchat."')></i></div></div>";
 
 		echo $header;
 	}
