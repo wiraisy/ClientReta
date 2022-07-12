@@ -43,11 +43,15 @@
 }
 
 .refresh-chat {
-    display: flex;
-    align-items: center;
-    justify-content: right;
     font-size: 18px;
     color: #f5869e;
+    cursor: pointer;
+}
+
+.delete-chat {
+    margin-left:10px;
+    font-size: 18px;
+    color: #ff0000;
     cursor: pointer;
 }
 

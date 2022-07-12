@@ -37,6 +37,9 @@ class Pemesanan extends MY_Controller {
 	public function orderByAdmin()
 	{
 		// Check Session
+		if (!$this->session->userdata('isLoggedIn_adminReta')) {
+			return redirect(base_url() . 'login');
+		}
 
 		$data['title'] = "Pemesanan Oleh Admin";
 
@@ -48,6 +51,9 @@ class Pemesanan extends MY_Controller {
 	public function orderByAdminNextStage()
 	{
 		// Check Session
+		if (!$this->session->userdata('isLoggedIn_adminReta')) {
+			return redirect(base_url() . 'login');
+		}
 		
 		$keyword = $this->input->post('keyword');
 		$searchby = $this->input->post('searchby');
@@ -84,6 +90,9 @@ class Pemesanan extends MY_Controller {
 	public function orderByAdminPageable()
 	{
 		// Check Session
+		if (!$this->session->userdata('isLoggedIn_adminReta')) {
+			return redirect(base_url() . 'login');
+		}
 		
 		$url_pasien = $this->input->post('url_pasien', true);
 		$page = $this->input->post('pageNumber', true);

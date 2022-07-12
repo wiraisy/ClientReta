@@ -13,8 +13,7 @@
             </div>
         </div>
         <div class="chatbox__messages " id="chatbox__messages">
-            <div id="chat-box">
-            </div>
+            <div id="chat-box"></div>
         </div>
         <div class="chatbox__footer">
             <form action="#" class="typing-area">

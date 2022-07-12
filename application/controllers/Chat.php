@@ -24,6 +24,55 @@ class Chat extends MY_Controller {
     public function insertChat(){
         $custid = $_POST['custid'];
         $message = $_POST['message'];
+
+        // Check Apakah Data User Ada di Api Chat
+        $curl_check = curl_init();
+        curl_setopt_array($curl_check, array(
+        CURLOPT_URL => "https://api-reta.id/reta-api/MessageAPI/getallmessagebyincomingid/".$custid,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_SSL_VERIFYHOST => 0,
+        CURLOPT_SSL_VERIFYPEER => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "GET",
+        CURLOPT_HTTPHEADER => array(
+            'Accept: application/json',
+            'Authorization: Basic YWtiYXI6d2lyYWlzeQ=='
+        ),
+        ));
+
+        $response_check = curl_exec($curl_check);
+        curl_close($curl_check);
+        $res_check = json_decode($response_check, true);
+
+        if (!$res_check) {
+            // Register User to API Chat
+            $curl_reg = curl_init();
+            curl_setopt_array($curl_reg, array(
+            CURLOPT_URL => 'https://api-reta.id/reta-api/MessageAPI/registeruser/'.$custid,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_SSL_VERIFYHOST => 0,
+            CURLOPT_SSL_VERIFYPEER => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json',
+                'Accept: */*',
+                'Authorization: Basic YWtiYXI6d2lyYWlzeQ=='
+            ),
+            ));
+
+            $reg = curl_exec($curl_reg);
+            curl_close($curl_reg);
+        }
+
         
         $curl = curl_init();
 		curl_setopt_array($curl, array(
@@ -38,10 +87,9 @@ class Chat extends MY_Controller {
 		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 		CURLOPT_CUSTOMREQUEST => 'POST',
 		CURLOPT_POSTFIELDS =>'{
-		"incoming_msg_id": "ADMINCS",
-		"msg": "'.$message.'",
-		"msg_id": 0,
-		"outgoing_msg_id": "'.$custid.'"
+            "incoming_msg_id": "ADMINCS",
+            "msg": "'.$message.'",
+            "outgoing_msg_id": "'.$custid.'"
 		}',
 		CURLOPT_HTTPHEADER => array(
 			'Content-Type: application/json',

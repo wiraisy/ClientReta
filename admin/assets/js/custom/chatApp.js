@@ -37,6 +37,35 @@ function refreshUser() {
 }
 
 
+function deleteChat(iduserchat) {
+    Swal.fire({
+        title: "Hapus Pesan ?",
+        text: "Aksi ini tidak dapat dikembalikan",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Delete!",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var xhrdel = new XMLHttpRequest();
+            xhrdel.open("POST", "chat/deleteChat", true);
+            xhrdel.onload = () => {
+                if (xhrdel.readyState === XMLHttpRequest.DONE) {
+                    if (xhrdel.status === 200) {
+                        let data = xhrdel.response;
+                        console.log(data);
+                    }
+                }
+            }
+            xhrdel.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhrdel.send("incoming_id=" + iduserchat);
+            window.location.reload();
+        }
+    });
+};
+
+
 // Refresh Chat
 function refreshChat(custid) {
     var xhrnew = new XMLHttpRequest();
@@ -175,5 +204,4 @@ function openMessage(custid) {
         xhrnew2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhrnew2.send("incoming_id=" + custid);
     }
-
 };

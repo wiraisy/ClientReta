@@ -28,7 +28,7 @@ class Chat extends MY_Controller {
 	}
 
 	public function getAllUsers(){
-		$url = 'https://api-reta.id/reta-api/MessageAPI/getallusermessage';
+		$url = 'https://api-reta.id/reta-api/MessageAPI/getalluserchat';
 		$method = 'GET';
 		$alluser = $this->SendRequest($url, $method);
 		
@@ -37,13 +37,13 @@ class Chat extends MY_Controller {
 
 		if (!empty($alluser)) {
             foreach($alluser as $row){
-                $incoming_id = $row['custid'];
+                $incoming_id = $row['namaa'];
 				$url = 'https://api-reta.id/reta-api/MessageAPI/getallmessagebyincomingid/'.$incoming_id;
 				$method = 'GET';
 				$resultmsg = $this->SendRequest($url, $method);
                 $resmsg = end($resultmsg);
                 $lastmsg = ($resmsg) ? strlen($resmsg['msg']) > 20 ? substr($resmsg['msg'],0,20)."..." : $resmsg['msg'] : '-';
-                $output .= "<li class='clearfix' id='userChat{$row['custid']}' onclick=openMessage('{$row['custid']}')><img src='{$srcImage}' alt='avatar'><div class='about'><div class='name'>".$row['name']."</div><div class='custid'>".$lastmsg."</div></div></li>";
+                $output .= "<li class='clearfix' id='userChat{$row['namaa']}' onclick=openMessage('{$row['namaa']}')><img src='{$srcImage}' alt='avatar'><div class='about'><div class='name'>".$row['namaa']."</div><div class='custid'>".$lastmsg."</div></div></li>";
             }
         }else{
             $output .= "No users are available to chat";
@@ -54,13 +54,20 @@ class Chat extends MY_Controller {
 	public function getbyUser(){
 		$incoming_id = $_POST['incoming_id'];
 
-		$url = 'https://api-reta.id/reta-api/MessageAPI/getusermassagebycustid/'.$incoming_id;
+		$url = 'https://api-reta.id/reta-api/MessageAPI/getalluserchat/';
+		$method = 'GET';
+		$res = $this->SendRequest($url, $method);
+
+		$test = array_search($incoming_id, array_column($res, 'namaa'));
+		$iduserchat = $res[$test]['iduserchat'];
+
+		$url = 'https://api-reta.id/reta-api/MessageAPI/getuserchatbyid/'.$iduserchat;
 		$method = 'GET';
 		$res_user = $this->SendRequest($url, $method);
 		
 		$srcImage = base_url()."assets/user.png";
         $header = "";
-		$header .= "<div class='row'><div class='col-lg-6'><img src='".$srcImage."' alt='avatar'><div class='chat-about'><h3 class='mb-0'>".$res_user['name']."</h3><small>".$res_user['custid']."</small></div></div><div class='col-lg-6 text-right refresh-chat' onclick=refreshChat('".$incoming_id."')><i class='fa fa-sync'></i></div></div>";
+		$header .= "<div class='row'><div class='col-lg-6 d-flex align-items-center'><img src='".$srcImage."' alt='avatar'><div class='chat-about'><h3 class='mb-0'>".$res_user['namaa']."</h3></div></div><div class='col-lg-6 text-right d-flex align-items-center justify-content-end'><i class='fa fa-sync refresh-chat' onclick=refreshChat('".$incoming_id."')></i><i class='fa fa-trash delete-chat' onclick=deleteChat('".$iduserchat."')></i></div></div>";
 
 		echo $header;
 	}
@@ -71,6 +78,7 @@ class Chat extends MY_Controller {
 		$url = 'https://api-reta.id/reta-api/MessageAPI/getallmessagebyincomingid/'.$incoming_id;
 		$method = 'GET';
 		$res_msg = $this->SendRequest($url, $method);
+		sort($res_msg);
 
 		$output = "";
         $srcImage = base_url()."assets/user.png";
@@ -108,7 +116,6 @@ class Chat extends MY_Controller {
 		CURLOPT_POSTFIELDS =>'{
 		"incoming_msg_id": "'.$custid.'",
 		"msg": "'.$message.'",
-		"msg_id": 0,
 		"outgoing_msg_id": "ADMINCS"
 		}',
 		CURLOPT_HTTPHEADER => array(
@@ -120,6 +127,15 @@ class Chat extends MY_Controller {
 
 		$response = curl_exec($curl);
 		curl_close($curl);
+	}
+
+	public function deleteChat(){
+		$iduserchat = $_POST['incoming_id'];
+		
+		$url = 'https://api-reta.id/reta-api/MessageAPI/deleteuserchatbyid/'.$iduserchat;
+		$method = 'GET';
+		$res_msg = $this->SendRequest($url, $method);
+
 	}
 
 }
